@@ -1,21 +1,3042 @@
 {
- "source": "seed",
+ "source": "Rebrickable",
  "generated": "2026-09-27",
  "series": [
-  {"id": "ninjago", "name": "Ninjago", "items": [
-   {"code": "891725", "name": "", "year": null, "img": ""},
-   {"code": "891731", "name": "", "year": null, "img": ""},
-   {"code": "892070", "name": "", "year": null, "img": ""}
-  ]},
-  {"id": "starwars", "name": "Star Wars", "items": [
-   {"code": "911832", "name": "", "year": null, "img": ""},
-   {"code": "911839", "name": "", "year": null, "img": ""},
-   {"code": "911952", "name": "", "year": null, "img": ""}
-  ]},
-  {"id": "dc", "name": "DC", "items": [
-   {"code": "211223", "name": "", "year": null, "img": ""},
-   {"code": "211804", "name": "", "year": null, "img": ""},
-   {"code": "211902", "name": "", "year": null, "img": ""}
-  ]}
+  {
+   "id": "ninjago",
+   "name": "Ninjago",
+   "items": [
+    {
+     "code": "891501",
+     "name": "Kai",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/891501-1.jpg"
+    },
+    {
+     "code": "891502",
+     "name": "Krait",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/891502-1.jpg"
+    },
+    {
+     "code": "891503",
+     "name": "Cole",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/891503-1.jpg"
+    },
+    {
+     "code": "891504",
+     "name": "Weapon Rack",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/891504-1.jpg"
+    },
+    {
+     "code": "891505",
+     "name": "Jay",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/891505-1.jpg"
+    },
+    {
+     "code": "891506",
+     "name": "Ming",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/891506-1.jpg"
+    },
+    {
+     "code": "891507",
+     "name": "Zane",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/891507-1.jpg"
+    },
+    {
+     "code": "891508",
+     "name": "Anacondrai Hideout",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/891508-1.jpg"
+    },
+    {
+     "code": "891609",
+     "name": "Kai",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891609-1.jpg"
+    },
+    {
+     "code": "891610",
+     "name": "Clouse",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891610-1.jpg"
+    },
+    {
+     "code": "891611",
+     "name": "Cole",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891611-1.jpg"
+    },
+    {
+     "code": "891612",
+     "name": "Sqiffy",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891612-1.jpg"
+    },
+    {
+     "code": "891613",
+     "name": "Kai's Dragon",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891613-1.jpg"
+    },
+    {
+     "code": "891614",
+     "name": "Cyren",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891614-1.jpg"
+    },
+    {
+     "code": "891615",
+     "name": "Jay",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891615-1.jpg"
+    },
+    {
+     "code": "891616",
+     "name": "Bucko",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891616-1.jpg"
+    },
+    {
+     "code": "891617",
+     "name": "Zane",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891617-1.jpg"
+    },
+    {
+     "code": "891618",
+     "name": "Ronin",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891618-1.jpg"
+    },
+    {
+     "code": "891619",
+     "name": "Pirate's Fighter",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891619-1.jpg"
+    },
+    {
+     "code": "891620",
+     "name": "Nya",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/891620-1.jpg"
+    },
+    {
+     "code": "891721",
+     "name": "Jay",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891721-1.jpg"
+    },
+    {
+     "code": "891722",
+     "name": "Cole",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891722-1.jpg"
+    },
+    {
+     "code": "891723",
+     "name": "Kai",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891723-1.jpg"
+    },
+    {
+     "code": "891724",
+     "name": "Zane",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891724-1.jpg"
+    },
+    {
+     "code": "891725",
+     "name": "Lloyd",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891725-1.jpg"
+    },
+    {
+     "code": "891726",
+     "name": "Vermillion Warrior",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891726-1.jpg"
+    },
+    {
+     "code": "891727",
+     "name": "Cole",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891727-1.jpg"
+    },
+    {
+     "code": "891728",
+     "name": "Stone Swordsman",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891728-1.jpg"
+    },
+    {
+     "code": "891729",
+     "name": "Kai",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891729-1.jpg"
+    },
+    {
+     "code": "891730",
+     "name": "Nindroid",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891730-1.jpg"
+    },
+    {
+     "code": "891731",
+     "name": "Zane",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891731-1.jpg"
+    },
+    {
+     "code": "891732",
+     "name": "Chen",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/891732-1.jpg"
+    },
+    {
+     "code": "891833",
+     "name": "Jay",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891833-1.jpg"
+    },
+    {
+     "code": "891834",
+     "name": "Lloyd",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891834-1.jpg"
+    },
+    {
+     "code": "891835",
+     "name": "Sawyer",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891835-1.jpg"
+    },
+    {
+     "code": "891836",
+     "name": "Scooter",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891836-1.jpg"
+    },
+    {
+     "code": "891837",
+     "name": "Nya",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891837-1.jpg"
+    },
+    {
+     "code": "891838",
+     "name": "Buffer",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891838-1.jpg"
+    },
+    {
+     "code": "891839",
+     "name": "Cole",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891839-1.jpg"
+    },
+    {
+     "code": "891840",
+     "name": "Jet Jack",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891840-1.jpg"
+    },
+    {
+     "code": "891841",
+     "name": "Talon",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891841-1.jpg"
+    },
+    {
+     "code": "891842",
+     "name": "Kai",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891842-1.jpg"
+    },
+    {
+     "code": "891843",
+     "name": "Samurai X",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891843-1.jpg"
+    },
+    {
+     "code": "891844",
+     "name": "Nitro",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/891844-1.jpg"
+    },
+    {
+     "code": "891945",
+     "name": "Young Wu",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891945-1.jpg"
+    },
+    {
+     "code": "891946",
+     "name": "Jay",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891946-1.jpg"
+    },
+    {
+     "code": "891947",
+     "name": "Heavy Metal",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891947-1.jpg"
+    },
+    {
+     "code": "891948",
+     "name": "Iron Baron",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891948-1.jpg"
+    },
+    {
+     "code": "891949",
+     "name": "Lloyd",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891949-1.jpg"
+    },
+    {
+     "code": "891950",
+     "name": "Daddy No Legs",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891950-1.jpg"
+    },
+    {
+     "code": "891951",
+     "name": "Nya",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891951-1.jpg"
+    },
+    {
+     "code": "891952",
+     "name": "Blizzard Samurai",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891952-1.jpg"
+    },
+    {
+     "code": "891953",
+     "name": "Cole",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891953-1.jpg"
+    },
+    {
+     "code": "891954",
+     "name": "Pyro Whipper",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891954-1.jpg"
+    },
+    {
+     "code": "891955",
+     "name": "Kai",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891955-1.jpg"
+    },
+    {
+     "code": "891956",
+     "name": "Blizzard Samurai",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891956-1.jpg"
+    },
+    {
+     "code": "891957",
+     "name": "Zane",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891957-1.jpg"
+    },
+    {
+     "code": "891958",
+     "name": "Jay",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/891958-1.jpg"
+    },
+    {
+     "code": "892059",
+     "name": "Kai",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892059-1.jpg"
+    },
+    {
+     "code": "892060",
+     "name": "Lloyd",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892060-1.jpg"
+    },
+    {
+     "code": "892061",
+     "name": "Ice Emperor",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892061-1.jpg"
+    },
+    {
+     "code": "892062",
+     "name": "Cole",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892062-1.jpg"
+    },
+    {
+     "code": "892063",
+     "name": "Nya",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892063-1.jpg"
+    },
+    {
+     "code": "892064",
+     "name": "Jay",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892064-1.jpg"
+    },
+    {
+     "code": "892065",
+     "name": "Zane",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892065-1.jpg"
+    },
+    {
+     "code": "892066",
+     "name": "Lloyd",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892066-1.jpg"
+    },
+    {
+     "code": "892067",
+     "name": "Kai",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892067-1.jpg"
+    },
+    {
+     "code": "892068",
+     "name": "Richie",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892068-1.jpg"
+    },
+    {
+     "code": "892069",
+     "name": "Jay",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892069-1.jpg"
+    },
+    {
+     "code": "892070",
+     "name": "Murt",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892070-1.jpg"
+    },
+    {
+     "code": "892071",
+     "name": "Cole",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/892071-1.jpg"
+    },
+    {
+     "code": "892172",
+     "name": "Lloyd",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892172-1.jpg"
+    },
+    {
+     "code": "892173",
+     "name": "Zane",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892173-1.jpg"
+    },
+    {
+     "code": "892174",
+     "name": "Skull Sorcerer",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892174-1.jpg"
+    },
+    {
+     "code": "892175",
+     "name": "Jay",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892175-1.jpg"
+    },
+    {
+     "code": "892176",
+     "name": "Thunder Keeper",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892176-1.jpg"
+    },
+    {
+     "code": "892177",
+     "name": "Kai",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892177-1.jpg"
+    },
+    {
+     "code": "892178",
+     "name": "Poulerik",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892178-1.jpg"
+    },
+    {
+     "code": "892179",
+     "name": "Lloyd",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892179-1.jpg"
+    },
+    {
+     "code": "892180",
+     "name": "Cole",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892180-1.jpg"
+    },
+    {
+     "code": "892181",
+     "name": "Jay",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892181-1.jpg"
+    },
+    {
+     "code": "892182",
+     "name": "Maaray Guard",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892182-1.jpg"
+    },
+    {
+     "code": "892183",
+     "name": "Nya",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892183-1.jpg"
+    },
+    {
+     "code": "892184",
+     "name": "Scuba Kai",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/892184-1.jpg"
+    },
+    {
+     "code": "892285",
+     "name": "Benthomaar",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892285-1.jpg"
+    },
+    {
+     "code": "892286",
+     "name": "Lloyd",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892286-1.jpg"
+    },
+    {
+     "code": "892287",
+     "name": "Glutinous",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892287-1.jpg"
+    },
+    {
+     "code": "892288",
+     "name": "Scuba Zane",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892288-1.jpg"
+    },
+    {
+     "code": "892289",
+     "name": "Jay",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892289-1.jpg"
+    },
+    {
+     "code": "892290",
+     "name": "Cole",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892290-1.jpg"
+    },
+    {
+     "code": "892291",
+     "name": "Golden Dragon Kai",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892291-1.jpg"
+    },
+    {
+     "code": "892292",
+     "name": "Lloyd",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892292-1.jpg"
+    },
+    {
+     "code": "892293",
+     "name": "Golden Dragon Zane",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892293-1.jpg"
+    },
+    {
+     "code": "892294",
+     "name": "Overlord",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892294-1.jpg"
+    },
+    {
+     "code": "892295",
+     "name": "Golden Cole",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892295-1.jpg"
+    },
+    {
+     "code": "892296",
+     "name": "Vengestone Guard",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892296-1.jpg"
+    },
+    {
+     "code": "892297",
+     "name": "Golden Oni Lloyd",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/892297-1.jpg"
+    },
+    {
+     "code": "892302",
+     "name": "Golden Dragon Jay",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892302-1.jpg"
+    },
+    {
+     "code": "892303",
+     "name": "Vangelis",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892303-1.jpg"
+    },
+    {
+     "code": "892304",
+     "name": "Golden Dragon Cole",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892304-1.jpg"
+    },
+    {
+     "code": "892305",
+     "name": "Aspheera",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892305-1.jpg"
+    },
+    {
+     "code": "892306",
+     "name": "Zane",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892306-1.jpg"
+    },
+    {
+     "code": "892307",
+     "name": "Garmadon",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892307-1.jpg"
+    },
+    {
+     "code": "892308",
+     "name": "Kai",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892308-1.jpg"
+    },
+    {
+     "code": "892309",
+     "name": "Lord Ras",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892309-1.jpg"
+    },
+    {
+     "code": "892310",
+     "name": "Arin",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892310-1.jpg"
+    },
+    {
+     "code": "892311",
+     "name": "Imperium Claw Hunter",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892311-1.jpg"
+    },
+    {
+     "code": "892312",
+     "name": "Sora",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892312-1.jpg"
+    },
+    {
+     "code": "892313",
+     "name": "Lloyd",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892313-1.jpg"
+    },
+    {
+     "code": "892401",
+     "name": "Zane",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/892401-1.jpg"
+    },
+    {
+     "code": "892402",
+     "name": "Wolf Mask Warrior",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892402-1.jpg"
+    },
+    {
+     "code": "892403",
+     "name": "Jay",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892403-1.jpg"
+    },
+    {
+     "code": "892404",
+     "name": "Imperium Commander",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892404-1.jpg"
+    },
+    {
+     "code": "892405",
+     "name": "Kai",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892405-1.jpg"
+    },
+    {
+     "code": "892406",
+     "name": "Lloyd",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892406-1.jpg"
+    },
+    {
+     "code": "892407",
+     "name": "Spirit of the Temple",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892407-1.jpg"
+    },
+    {
+     "code": "892408",
+     "name": "Cole",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892408-1.jpg"
+    },
+    {
+     "code": "892409",
+     "name": "Lord Ras",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892409-1.jpg"
+    },
+    {
+     "code": "892410",
+     "name": "Zane",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892410-1.jpg"
+    },
+    {
+     "code": "892411",
+     "name": "Wolf Hunter",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892411-1.jpg"
+    },
+    {
+     "code": "892412",
+     "name": "Nya with Trident",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892412-1.jpg"
+    },
+    {
+     "code": "892413",
+     "name": "Jay",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892413-1.jpg"
+    },
+    {
+     "code": "892501",
+     "name": "Lloyd",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/892501-1.jpg"
+    },
+    {
+     "code": "892502",
+     "name": "Lord Ras",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892502-1.jpg"
+    },
+    {
+     "code": "892503",
+     "name": "Jay",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892503-1.jpg"
+    },
+    {
+     "code": "892504",
+     "name": "Morro",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892504-1.jpg"
+    },
+    {
+     "code": "892505",
+     "name": "Zane",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892505-1.jpg"
+    },
+    {
+     "code": "892506",
+     "name": "Arin",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892506-1.jpg"
+    },
+    {
+     "code": "892507",
+     "name": "Kai with Golden Dragon",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892507-1.jpg"
+    },
+    {
+     "code": "892508",
+     "name": "Lloyd",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892508-1.jpg"
+    },
+    {
+     "code": "892509",
+     "name": "Spectral Dragonian Warrior",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892509-1.jpg"
+    },
+    {
+     "code": "892510",
+     "name": "Nokt",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892510-1.jpg"
+    },
+    {
+     "code": "892511",
+     "name": "Kai",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892511-1.jpg"
+    },
+    {
+     "code": "892512",
+     "name": "Cole",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892512-1.jpg"
+    },
+    {
+     "code": "892513",
+     "name": "Frak",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/892513-1.jpg"
+    }
+   ]
+  },
+  {
+   "id": "starwars",
+   "name": "Star Wars",
+   "items": [
+    {
+     "code": "911506",
+     "name": "Snowspeeder",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/911506-1.jpg"
+    },
+    {
+     "code": "911508",
+     "name": "Slave One",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/911508-1.jpg"
+    },
+    {
+     "code": "911509",
+     "name": "Imperial Shooter",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/911509-1.jpg"
+    },
+    {
+     "code": "911510",
+     "name": "Star Destroyer & TIE Fighter",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/911510-1.jpg"
+    },
+    {
+     "code": "911511",
+     "name": "Jedi Weapon Stand",
+     "year": 2015,
+     "img": "https://cdn.rebrickable.com/media/sets/911511-1.jpg"
+    },
+    {
+     "code": "911608",
+     "name": "Landspeeder",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/911608-1.jpg"
+    },
+    {
+     "code": "911609",
+     "name": "Naboo Starfighter",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/911609-1.jpg"
+    },
+    {
+     "code": "911610",
+     "name": "Probe Droid",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/911610-1.jpg"
+    },
+    {
+     "code": "911611",
+     "name": "AAT",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/911611-1.jpg"
+    },
+    {
+     "code": "911613",
+     "name": "TIE Bomber",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/911613-1.jpg"
+    },
+    {
+     "code": "911614",
+     "name": "Yoda's Hut",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/911614-1.jpg"
+    },
+    {
+     "code": "911617",
+     "name": "Palpatine's Shuttle",
+     "year": 2016,
+     "img": "https://cdn.rebrickable.com/media/sets/911617-1.jpg"
+    },
+    {
+     "code": "911719",
+     "name": "Kanan Jarrus",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/911719-1.jpg"
+    },
+    {
+     "code": "911721",
+     "name": "Imperial Combat Driver",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/911721-1.jpg"
+    },
+    {
+     "code": "911722",
+     "name": "TIE Advanced",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/911722-1.jpg"
+    },
+    {
+     "code": "911723",
+     "name": "Vulture Droid",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/911723-1.jpg"
+    },
+    {
+     "code": "911726",
+     "name": "Imperial Snowtrooper",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/911726-1.jpg"
+    },
+    {
+     "code": "911727",
+     "name": "Rey's Speeder",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/911727-1.jpg"
+    },
+    {
+     "code": "911729",
+     "name": "Droid Gunship",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/911729-1.jpg"
+    },
+    {
+     "code": "911831",
+     "name": "Kylo Ren's Shuttle",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/911831-1.jpg"
+    },
+    {
+     "code": "911832",
+     "name": "Imperial Shuttle Pilot",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/911832-1.jpg"
+    },
+    {
+     "code": "911833",
+     "name": "Imperial Shuttle",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/911833-1.jpg"
+    },
+    {
+     "code": "911834",
+     "name": "Finn",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/911834-1.jpg"
+    },
+    {
+     "code": "911835",
+     "name": "Dwarf Spider Droid",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/911835-1.jpg"
+    },
+    {
+     "code": "911838",
+     "name": "Probe Droid",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/911838-1.jpg"
+    },
+    {
+     "code": "911839",
+     "name": "Obi-Wan Kenobi",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/911839-1.jpg"
+    },
+    {
+     "code": "911840",
+     "name": "Droideka",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/911840-1.jpg"
+    },
+    {
+     "code": "911842",
+     "name": "Star Destroyer",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/911842-1.jpg"
+    },
+    {
+     "code": "911943",
+     "name": "Luke Skywalker",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911943-1.jpg"
+    },
+    {
+     "code": "911944",
+     "name": "Resistance Bomber",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911944-1.jpg"
+    },
+    {
+     "code": "911945",
+     "name": "Slave I",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911945-1.jpg"
+    },
+    {
+     "code": "911946",
+     "name": "U-Wing",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911946-1.jpg"
+    },
+    {
+     "code": "911947",
+     "name": "IG-88",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911947-1.jpg"
+    },
+    {
+     "code": "911949",
+     "name": "Millennium Falcon",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911949-1.jpg"
+    },
+    {
+     "code": "911951",
+     "name": "First Order Stormtrooper",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911951-1.jpg"
+    },
+    {
+     "code": "911952",
+     "name": "Jedi Interceptor",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911952-1.jpg"
+    },
+    {
+     "code": "911953",
+     "name": "First Order SF TIE Fighter",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911953-1.jpg"
+    },
+    {
+     "code": "911954",
+     "name": "Kylo Ren's TIE Silencer",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/911954-1.jpg"
+    },
+    {
+     "code": "912055",
+     "name": "Snowspeeder",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/912055-1.jpg"
+    },
+    {
+     "code": "912056",
+     "name": "TIE Striker",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/912056-1.jpg"
+    },
+    {
+     "code": "912057",
+     "name": "R2-D2 & MSE-6",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/912057-1.jpg"
+    },
+    {
+     "code": "912058",
+     "name": "Darth Maul's Sith Infiltrator",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/912058-1.jpg"
+    },
+    {
+     "code": "912059",
+     "name": "Elite Praetorian Guard",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/912059-1.jpg"
+    },
+    {
+     "code": "912062",
+     "name": "Stormtrooper",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/912062-1.jpg"
+    },
+    {
+     "code": "912064",
+     "name": "Sith Eternal TIE Dagger",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/912064-1.jpg"
+    },
+    {
+     "code": "912065",
+     "name": "Luke Skywalker",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/912065-1.jpg"
+    },
+    {
+     "code": "912066",
+     "name": "Jedi Interceptor",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/912066-1.jpg"
+    },
+    {
+     "code": "912168",
+     "name": "Mandalorian Warrior",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/912168-1.jpg"
+    },
+    {
+     "code": "912169",
+     "name": "Emperor Palpatine",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/912169-1.jpg"
+    },
+    {
+     "code": "912171",
+     "name": "TIE Bomber",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/912171-1.jpg"
+    },
+    {
+     "code": "912172",
+     "name": "Jedi Starfighter",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/912172-1.jpg"
+    },
+    {
+     "code": "912173",
+     "name": "Rey + BB-8",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/912173-1.jpg"
+    },
+    {
+     "code": "912174",
+     "name": "Sith Trooper",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/912174-1.jpg"
+    },
+    {
+     "code": "912179",
+     "name": "Snowtrooper",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/912179-1.jpg"
+    },
+    {
+     "code": "912281",
+     "name": "Clone Trooper",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/912281-1.jpg"
+    },
+    {
+     "code": "912283",
+     "name": "Tusken Raider",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/912283-1.jpg"
+    },
+    {
+     "code": "912285",
+     "name": "Darth Maul",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/912285-1.jpg"
+    },
+    {
+     "code": "912286",
+     "name": "Mandalorian Warrior",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/912286-1.jpg"
+    },
+    {
+     "code": "912287",
+     "name": "Mandalorian Starfighter",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/912287-1.jpg"
+    },
+    {
+     "code": "912288",
+     "name": "TIE Whisper",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/912288-1.jpg"
+    },
+    {
+     "code": "912289",
+     "name": "Princess Leia",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/912289-1.jpg"
+    },
+    {
+     "code": "912290",
+     "name": "Imperial Light Cruiser",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/912290-1.jpg"
+    },
+    {
+     "code": "912291",
+     "name": "Luke Skywalker",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/912291-1.jpg"
+    },
+    {
+     "code": "912302",
+     "name": "Bo-Katan Kryze",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/912302-1.jpg"
+    },
+    {
+     "code": "912303",
+     "name": "212th Clone Trooper",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/912303-1.jpg"
+    },
+    {
+     "code": "912305",
+     "name": "Obi-Wan Kenobi",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/912305-1.jpg"
+    },
+    {
+     "code": "912307",
+     "name": "Scout Trooper",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/912307-1.jpg"
+    },
+    {
+     "code": "912309",
+     "name": "Stormtrooper",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/912309-1.jpg"
+    },
+    {
+     "code": "912310",
+     "name": "C-3PO and Gonk Droid",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/912310-1.jpg"
+    },
+    {
+     "code": "912311",
+     "name": "TIE Advanced",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/912311-1.jpg"
+    },
+    {
+     "code": "912312",
+     "name": "Yoda's Jedi Starfighter",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/912312-1.jpg"
+    },
+    {
+     "code": "912401",
+     "name": "Mandalorian Pilot",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/912401-1.jpg"
+    },
+    {
+     "code": "912402",
+     "name": "Emperor Palpatine",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912402-1.jpg"
+    },
+    {
+     "code": "912403",
+     "name": "Coruscant Guard",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912403-1.jpg"
+    },
+    {
+     "code": "912404",
+     "name": "Chewbacca",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912404-1.jpg"
+    },
+    {
+     "code": "912407",
+     "name": "501st Specialist",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912407-1.jpg"
+    },
+    {
+     "code": "912408",
+     "name": "Darth Vader",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912408-1.jpg"
+    },
+    {
+     "code": "912409",
+     "name": "Clone Trooper",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912409-1.jpg"
+    },
+    {
+     "code": "912410",
+     "name": "TIE Pilot",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912410-1.jpg"
+    },
+    {
+     "code": "912411",
+     "name": "T-6 Jedi Shuttle",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912411-1.jpg"
+    },
+    {
+     "code": "912412",
+     "name": "The Marauder",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912412-1.jpg"
+    },
+    {
+     "code": "912413",
+     "name": "Inquisitor Transport Scythe",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912413-1.jpg"
+    },
+    {
+     "code": "912501",
+     "name": "Mandalorian Nite Owl",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/912501-1.jpg"
+    },
+    {
+     "code": "912502",
+     "name": "Qui-Gon Jinn",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912502-1.jpg"
+    },
+    {
+     "code": "912503",
+     "name": "Imperial Commando",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912503-1.jpg"
+    },
+    {
+     "code": "912504",
+     "name": "Praetorian Guard",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912504-1.jpg"
+    },
+    {
+     "code": "912507",
+     "name": "Luke Skywalker",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912507-1.jpg"
+    },
+    {
+     "code": "912508",
+     "name": "The Mandalorian",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912508-1.jpg"
+    },
+    {
+     "code": "912509",
+     "name": "Darth Maul",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912509-1.jpg"
+    },
+    {
+     "code": "912510",
+     "name": "Droideka",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912510-1.jpg"
+    },
+    {
+     "code": "912511",
+     "name": "Clone Shock Trooper",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912511-1.jpg"
+    },
+    {
+     "code": "912512",
+     "name": "Rebel U-Wing Starfighter",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912512-1.jpg"
+    },
+    {
+     "code": "912513",
+     "name": "Jango Fett's Starship",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/912513-1.jpg"
+    }
+   ]
+  },
+  {
+   "id": "dc",
+   "name": "DC",
+   "items": [
+    {
+     "code": "211701",
+     "name": "Batman",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/211701-1.jpg"
+    },
+    {
+     "code": "211702",
+     "name": "The Joker",
+     "year": 2017,
+     "img": "https://cdn.rebrickable.com/media/sets/211702-1.jpg"
+    },
+    {
+     "code": "211803",
+     "name": "Batman",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/211803-1.jpg"
+    },
+    {
+     "code": "211804",
+     "name": "Harley Quinn",
+     "year": 2018,
+     "img": "https://cdn.rebrickable.com/media/sets/211804-1.jpg"
+    },
+    {
+     "code": "211901",
+     "name": "Batman",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/211901-1.jpg"
+    },
+    {
+     "code": "211902",
+     "name": "Robin",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/211902-1.jpg"
+    },
+    {
+     "code": "211903",
+     "name": "Superman and Kryptonite",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/211903-1.jpg"
+    },
+    {
+     "code": "211904",
+     "name": "The Flash",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/211904-1.jpg"
+    },
+    {
+     "code": "211905",
+     "name": "The Joker",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/211905-1.jpg"
+    },
+    {
+     "code": "211906",
+     "name": "Armored Batman",
+     "year": 2019,
+     "img": "https://cdn.rebrickable.com/media/sets/211906-1.jpg"
+    },
+    {
+     "code": "212007",
+     "name": "Mr. Freeze",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/212007-1.jpg"
+    },
+    {
+     "code": "212008",
+     "name": "Batman",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/212008-1.jpg"
+    },
+    {
+     "code": "212009",
+     "name": "The Riddler",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/212009-1.jpg"
+    },
+    {
+     "code": "212010",
+     "name": "Batman - Mechanical Arms Backpack",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/212010-1.jpg"
+    },
+    {
+     "code": "212011",
+     "name": "The Joker & Catapult",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/212011-1.jpg"
+    },
+    {
+     "code": "212012",
+     "name": "Shazam!",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/212012-1.jpg"
+    },
+    {
+     "code": "212113",
+     "name": "Batman",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/212113-1.jpg"
+    },
+    {
+     "code": "212114",
+     "name": "Robin",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/212114-1.jpg"
+    },
+    {
+     "code": "212115",
+     "name": "Batgirl",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/212115-1.jpg"
+    },
+    {
+     "code": "212116",
+     "name": "The Joker",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/212116-1.jpg"
+    },
+    {
+     "code": "212117",
+     "name": "The Penguin",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/212117-1.jpg"
+    },
+    {
+     "code": "212118",
+     "name": "Batman",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/212118-1.jpg"
+    },
+    {
+     "code": "212219",
+     "name": "Batmobile",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/212219-1.jpg"
+    },
+    {
+     "code": "212220",
+     "name": "Batman",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/212220-1.jpg"
+    },
+    {
+     "code": "212221",
+     "name": "Robin and Heli-Pack",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/212221-1.jpg"
+    },
+    {
+     "code": "212222",
+     "name": "Batcycle",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/212222-1.jpg"
+    },
+    {
+     "code": "212224",
+     "name": "Batman on Jet Boat",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/212224-1.jpg"
+    },
+    {
+     "code": "212325",
+     "name": "Batcycle",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/212325-1.jpg"
+    },
+    {
+     "code": "212326",
+     "name": "Batman and Batjet",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/212326-1.jpg"
+    },
+    {
+     "code": "212327",
+     "name": "The Joker",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/212327-1.jpg"
+    },
+    {
+     "code": "212330",
+     "name": "Batman",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/212330-1.jpg"
+    },
+    {
+     "code": "212402",
+     "name": "Batman and Jetpack",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/212402-1.jpg"
+    },
+    {
+     "code": "212405",
+     "name": "The Joker and Cash Machine",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/212405-1.jpg"
+    },
+    {
+     "code": "212406",
+     "name": "Batman with Grappling Hook and Batarang",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/212406-1.jpg"
+    },
+    {
+     "code": "212502",
+     "name": "Batcopter",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/212502-1.jpg"
+    },
+    {
+     "code": "212503",
+     "name": "Batman with Wings",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/212503-1.jpg"
+    },
+    {
+     "code": "212504",
+     "name": "Superman",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/212504-1.jpg"
+    },
+    {
+     "code": "212505",
+     "name": "The Joker and Robot",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/212505-1.jpg"
+    },
+    {
+     "code": "212506",
+     "name": "Batgirl",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/212506-1.jpg"
+    }
+   ]
+  },
+  {
+   "id": "marvel",
+   "name": "Marvel",
+   "items": [
+    {
+     "code": "242001",
+     "name": "Spider-Man",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/242001-1.jpg"
+    },
+    {
+     "code": "242002",
+     "name": "Iron Man",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/242002-1.jpg"
+    },
+    {
+     "code": "242003",
+     "name": "Captain Marvel",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/242003-1.jpg"
+    },
+    {
+     "code": "242104",
+     "name": "Venom",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/242104-1.jpg"
+    },
+    {
+     "code": "242105",
+     "name": "Thor",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/242105-1.jpg"
+    },
+    {
+     "code": "242106",
+     "name": "Captain America",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/242106-1.jpg"
+    },
+    {
+     "code": "242107",
+     "name": "War Machine",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/242107-1.jpg"
+    },
+    {
+     "code": "242108",
+     "name": "Iron Spider",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/242108-1.jpg"
+    },
+    {
+     "code": "242109",
+     "name": "Black Widow",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/242109-1.jpg"
+    },
+    {
+     "code": "242210",
+     "name": "Iron Man",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/242210-1.jpg"
+    },
+    {
+     "code": "242211",
+     "name": "Loki",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/242211-1.jpg"
+    },
+    {
+     "code": "242212",
+     "name": "Captain America",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/242212-1.jpg"
+    },
+    {
+     "code": "242213",
+     "name": "War Machine",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/242213-1.jpg"
+    },
+    {
+     "code": "242214",
+     "name": "Spider-Man",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/242214-1.jpg"
+    },
+    {
+     "code": "242215",
+     "name": "Thanos",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/242215-1.jpg"
+    },
+    {
+     "code": "242216",
+     "name": "Carnage",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/242216-1.jpg"
+    },
+    {
+     "code": "242217",
+     "name": "Rescue",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/242217-1.jpg"
+    },
+    {
+     "code": "242316",
+     "name": "Black Panther with Jet",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/242316-1.jpg"
+    },
+    {
+     "code": "242317",
+     "name": "Doctor Strange",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/242317-1.jpg"
+    },
+    {
+     "code": "242318",
+     "name": "Mighty Thor",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/242318-1.jpg"
+    },
+    {
+     "code": "242319",
+     "name": "Groot",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/242319-1.jpg"
+    },
+    {
+     "code": "242320",
+     "name": "Iron Man",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/242320-1.jpg"
+    },
+    {
+     "code": "242321",
+     "name": "Captain Marvel",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/242321-1.jpg"
+    },
+    {
+     "code": "242401",
+     "name": "War Machine",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/242401-1.jpg"
+    },
+    {
+     "code": "242403",
+     "name": "Thor",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/242403-1.jpg"
+    },
+    {
+     "code": "242404",
+     "name": "Rocket Raccoon",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/242404-1.jpg"
+    },
+    {
+     "code": "242405",
+     "name": "Loki",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/242405-1.jpg"
+    },
+    {
+     "code": "242406",
+     "name": "Iron Man",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/242406-1.jpg"
+    },
+    {
+     "code": "242501",
+     "name": "Iron Legion",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/242501-1.jpg"
+    },
+    {
+     "code": "242502",
+     "name": "War Machine",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/242502-1.jpg"
+    },
+    {
+     "code": "242503",
+     "name": "Captain America",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/242503-1.jpg"
+    },
+    {
+     "code": "242504",
+     "name": "Thor with Mjolnir",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/242504-1.jpg"
+    },
+    {
+     "code": "242505",
+     "name": "Black Widow",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/242505-1.jpg"
+    },
+    {
+     "code": "242506",
+     "name": "Captain America",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/242506-1.jpg"
+    }
+   ]
+  },
+  {
+   "id": "jurassic",
+   "name": "Jurassic World",
+   "items": [
+    {
+     "code": "122007",
+     "name": "Owen with Canoe",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/122007-1.jpg"
+    },
+    {
+     "code": "122008",
+     "name": "Create Dino",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/122008-1.jpg"
+    },
+    {
+     "code": "122009",
+     "name": "Vic Hoskins with Buggy",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/122009-1.jpg"
+    },
+    {
+     "code": "122010",
+     "name": "Baby Dino Transport",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/122010-1.jpg"
+    },
+    {
+     "code": "122112",
+     "name": "Dr. Wu's Laboratory",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/122112-1.jpg"
+    },
+    {
+     "code": "122113",
+     "name": "Owen with Helicopter",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/122113-1.jpg"
+    },
+    {
+     "code": "122114",
+     "name": "Owen Grady and Red Motorbike",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/122114-1.jpg"
+    },
+    {
+     "code": "122116",
+     "name": "Sinjin Prescott with Buggy",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/122116-1.jpg"
+    },
+    {
+     "code": "122217",
+     "name": "Raptor and Hideout",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/122217-1.jpg"
+    },
+    {
+     "code": "122219",
+     "name": "Raptor with Breeding Station",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/122219-1.jpg"
+    },
+    {
+     "code": "122220",
+     "name": "Owen with Airboat",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/122220-1.jpg"
+    },
+    {
+     "code": "122221",
+     "name": "Raptor and Nest",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/122221-1.jpg"
+    },
+    {
+     "code": "122222",
+     "name": "Dino-Trap",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/122222-1.jpg"
+    },
+    {
+     "code": "122223",
+     "name": "Owen and Quad",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/122223-1.jpg"
+    },
+    {
+     "code": "122224",
+     "name": "Rainn Delacourt with Raptor",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/122224-1.jpg"
+    },
+    {
+     "code": "122326",
+     "name": "Raptor and Trap",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/122326-1.jpg"
+    },
+    {
+     "code": "122327",
+     "name": "Baby Raptor with Incubator",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/122327-1.jpg"
+    },
+    {
+     "code": "122328",
+     "name": "Owen with Jet Pack and Raptor",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/122328-1.jpg"
+    },
+    {
+     "code": "122330",
+     "name": "Raptor with Big Trap",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/122330-1.jpg"
+    },
+    {
+     "code": "122331",
+     "name": "Owen with Swamp Speeder and Raptor",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/122331-1.jpg"
+    },
+    {
+     "code": "122332",
+     "name": "Wildlife Guard and Raptor",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/122332-1.jpg"
+    },
+    {
+     "code": "122333",
+     "name": "Owen's Mega Motorcycle",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/122333-1.jpg"
+    },
+    {
+     "code": "122334",
+     "name": "Alan Grant and Dino Skeleton",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/122334-1.jpg"
+    },
+    {
+     "code": "122401",
+     "name": "Raptor and Laboratory",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/122401-1.jpg"
+    },
+    {
+     "code": "122402",
+     "name": "Beta and Nest",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/122402-1.jpg"
+    },
+    {
+     "code": "122403",
+     "name": "Owen with Helicopter",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/122403-1.jpg"
+    },
+    {
+     "code": "122404",
+     "name": "Raptor and Laboratory",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/122404-1.jpg"
+    },
+    {
+     "code": "122405",
+     "name": "Raptor and Laboratory Table",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/122405-1.jpg"
+    },
+    {
+     "code": "122407",
+     "name": "Mobile Incubator with Egg",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/122407-1.jpg"
+    },
+    {
+     "code": "122408",
+     "name": "Alan Grant with Buggy",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/122408-1.jpg"
+    },
+    {
+     "code": "122409",
+     "name": "Robert Muldoon and Baby Raptor",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/122409-1.jpg"
+    },
+    {
+     "code": "122501",
+     "name": "Guard and Raptor",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/122501-1.jpg"
+    },
+    {
+     "code": "122502",
+     "name": "Baby Raptor with Transport Cage",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/122502-1.jpg"
+    },
+    {
+     "code": "122503",
+     "name": "Owen with Quad Bike",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/122503-1.jpg"
+    },
+    {
+     "code": "122504",
+     "name": "Raptor Trap",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/122504-1.jpg"
+    },
+    {
+     "code": "122505",
+     "name": "Guard with Jet Pack and Raptor",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/122505-1.jpg"
+    },
+    {
+     "code": "122506",
+     "name": "Raptor Breakout",
+     "year": 2026,
+     "img": "https://cdn.rebrickable.com/media/sets/122506-1.jpg"
+    },
+    {
+     "code": "122508",
+     "name": "Alan Grant and Propeller Boat",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/122508-1.jpg"
+    },
+    {
+     "code": "122509",
+     "name": "Guard with Incubator",
+     "year": 2026,
+     "img": "https://cdn.rebrickable.com/media/sets/122509-1.jpg"
+    }
+   ]
+  },
+  {
+   "id": "minecraft",
+   "name": "Minecraft",
+   "items": [
+    {
+     "code": "662101",
+     "name": "Steve, Zombie and Pig",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/662101-1.jpg"
+    },
+    {
+     "code": "662102",
+     "name": "TNT Launcher and Skeleton",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/662102-1.jpg"
+    },
+    {
+     "code": "662103",
+     "name": "Alex with Ocelot and Sheep",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/662103-1.jpg"
+    },
+    {
+     "code": "662204",
+     "name": "Miner with Creeper and Ores",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/662204-1.jpg"
+    },
+    {
+     "code": "662205",
+     "name": "Steve with Boat and Water Zombie",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/662205-1.jpg"
+    },
+    {
+     "code": "662207",
+     "name": "Steve and Spider",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/662207-1.jpg"
+    },
+    {
+     "code": "662302",
+     "name": "Cave Explorer, Creeper and Slime",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/662302-1.jpg"
+    },
+    {
+     "code": "662303",
+     "name": "Adventurer with Drowned and Axolotl",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/662303-1.jpg"
+    },
+    {
+     "code": "662304",
+     "name": "Ninja, Zombie and TNT Launcher",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/662304-1.jpg"
+    },
+    {
+     "code": "662305",
+     "name": "Nether Adventurer and Enderman",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/662305-1.jpg"
+    },
+    {
+     "code": "662306",
+     "name": "Pillager with Training Dummy",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/662306-1.jpg"
+    },
+    {
+     "code": "662307",
+     "name": "Skeleton with Spider and Spiderweb",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/662307-1.jpg"
+    },
+    {
+     "code": "662308",
+     "name": "Alex, Baby Llama and Bee",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/662308-1.jpg"
+    },
+    {
+     "code": "662309",
+     "name": "Knight with Chest and Anvil",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/662309-1.jpg"
+    },
+    {
+     "code": "662317",
+     "name": "Steve with Armor Stand and Blast Furnace",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662317-1.jpg"
+    },
+    {
+     "code": "662401",
+     "name": "Crystal Knight, Stray and Gun",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662401-1.jpg"
+    },
+    {
+     "code": "662402",
+     "name": "Nether Hero and Strider",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662402-1.jpg"
+    },
+    {
+     "code": "662403",
+     "name": "Zombie with Burning Baby Zombie and TNT",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662403-1.jpg"
+    },
+    {
+     "code": "662404",
+     "name": "Alex with Wolf",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662404-1.jpg"
+    },
+    {
+     "code": "662405",
+     "name": "Netherite Knight and Zombie",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662405-1.jpg"
+    },
+    {
+     "code": "662406",
+     "name": "Golden Knight and Charged Creeper",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662406-1.jpg"
+    },
+    {
+     "code": "662407",
+     "name": "Steve and Mooshroom",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662407-1.jpg"
+    },
+    {
+     "code": "662408",
+     "name": "Witch and Black Cat",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662408-1.jpg"
+    },
+    {
+     "code": "662409",
+     "name": "Hero with Skeleton",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662409-1.jpg"
+    },
+    {
+     "code": "662410",
+     "name": "Cave Explorer and Spider",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662410-1.jpg"
+    },
+    {
+     "code": "662411",
+     "name": "Steve with Bat and TNT",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662411-1.jpg"
+    },
+    {
+     "code": "662412",
+     "name": "Hero with Frog and Slime",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662412-1.jpg"
+    },
+    {
+     "code": "662413",
+     "name": "End Warrior and Shulker",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/662413-1.jpg"
+    },
+    {
+     "code": "662501",
+     "name": "Hero and Phantom",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662501-1.jpg"
+    },
+    {
+     "code": "662502",
+     "name": "Steve with Creeper and TNT",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662502-1.jpg"
+    },
+    {
+     "code": "662503",
+     "name": "Orc Warrior with Baby Hoglin and Magma Cube",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662503-1.jpg"
+    },
+    {
+     "code": "662505",
+     "name": "Diver with Turtle and Treasure Chest",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662505-1.jpg"
+    },
+    {
+     "code": "662506",
+     "name": "Wither Skeleton and Ender Explorer with TNT",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662506-1.jpg"
+    },
+    {
+     "code": "662507",
+     "name": "Enderman Duel",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662507-1.jpg"
+    },
+    {
+     "code": "662508",
+     "name": "Hero with Slime and Creeper",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662508-1.jpg"
+    },
+    {
+     "code": "662509",
+     "name": "Hero with Skeleton and Skeleton Horse",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662509-1.jpg"
+    },
+    {
+     "code": "662510",
+     "name": "Hero with Zombie",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662510-1.jpg"
+    },
+    {
+     "code": "662511",
+     "name": "Hero and Husk",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662511-1.jpg"
+    },
+    {
+     "code": "662512",
+     "name": "Hero and Shulker",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662512-1.jpg"
+    },
+    {
+     "code": "662513",
+     "name": "Pirate with Frog, Slime and Cartography Table",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/662513-1.jpg"
+    }
+   ]
+  },
+  {
+   "id": "city",
+   "name": "City",
+   "items": [
+    {
+     "code": "952001",
+     "name": "Policeman & Motorbike",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952001-1.jpg"
+    },
+    {
+     "code": "952002",
+     "name": "Bobby Brenner and Extinguishing Drone",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952002-1.jpg"
+    },
+    {
+     "code": "952003",
+     "name": "Eddy Erker with Bulldozer",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952003-1.jpg"
+    },
+    {
+     "code": "952005",
+     "name": "Dirk Drifter's First Racing Car",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952005-1.jpg"
+    },
+    {
+     "code": "952008",
+     "name": "Jet-ski",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952008-1.jpg"
+    },
+    {
+     "code": "952009",
+     "name": "Clemmons With Fire Quad",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952009-1.jpg"
+    },
+    {
+     "code": "952010",
+     "name": "Pete Python, Daredevil PI",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952010-1.jpg"
+    },
+    {
+     "code": "952011",
+     "name": "Duke DeTain",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952011-1.jpg"
+    },
+    {
+     "code": "952012",
+     "name": "Scuba Diver",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952012-1.jpg"
+    },
+    {
+     "code": "952016",
+     "name": "Policeman and Robber",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952016-1.jpg"
+    },
+    {
+     "code": "952018",
+     "name": "Harl Hubbs with Tamping Rammer",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952018-1.jpg"
+    },
+    {
+     "code": "952019",
+     "name": "Scuba Diver and Shark",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/952019-1.jpg"
+    },
+    {
+     "code": "952101",
+     "name": "Policeman and Helicopter",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952101-1.jpg"
+    },
+    {
+     "code": "952102",
+     "name": "Builder with Epic Digger",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952102-1.jpg"
+    },
+    {
+     "code": "952103",
+     "name": "Policeman & Motorcycle",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952103-1.jpg"
+    },
+    {
+     "code": "952104",
+     "name": "Firefighter Bob with Equipment",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952104-1.jpg"
+    },
+    {
+     "code": "952105",
+     "name": "Doctor and Patient",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952105-1.jpg"
+    },
+    {
+     "code": "952106",
+     "name": "Sweeper",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952106-1.jpg"
+    },
+    {
+     "code": "952107",
+     "name": "Diver and Crab",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952107-1.jpg"
+    },
+    {
+     "code": "952108",
+     "name": "Stuntman with Quad",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952108-1.jpg"
+    },
+    {
+     "code": "952109",
+     "name": "Police Officer with Dog",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952109-1.jpg"
+    },
+    {
+     "code": "952110",
+     "name": "Larry Jones - The Adventurer",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952110-1.jpg"
+    },
+    {
+     "code": "952111",
+     "name": "Builder and Traffic Light",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952111-1.jpg"
+    },
+    {
+     "code": "952112",
+     "name": "Jessica Sharpe and Lion Cub",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/952112-1.jpg"
+    },
+    {
+     "code": "952201",
+     "name": "Justin Justice's Police Car",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952201-1.jpg"
+    },
+    {
+     "code": "952202",
+     "name": "Pete's Precise's Drill",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952202-1.jpg"
+    },
+    {
+     "code": "952203",
+     "name": "Sam Speedster's Motorcycle",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952203-1.jpg"
+    },
+    {
+     "code": "952204",
+     "name": "Phil Corky's Dump Truck",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952204-1.jpg"
+    },
+    {
+     "code": "952205",
+     "name": "Sally Stardust's Satellite",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952205-1.jpg"
+    },
+    {
+     "code": "952206",
+     "name": "Freddy Fresh's Fire Quad",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952206-1.jpg"
+    },
+    {
+     "code": "952207",
+     "name": "Water Police Water Scooter",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952207-1.jpg"
+    },
+    {
+     "code": "952208",
+     "name": "Carl Confidential's Diving Scooter",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952208-1.jpg"
+    },
+    {
+     "code": "952209",
+     "name": "Allie Aires' Firefighter Jet",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952209-1.jpg"
+    },
+    {
+     "code": "952210",
+     "name": "Robbie Rolla's Steamroller",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952210-1.jpg"
+    },
+    {
+     "code": "952211",
+     "name": "Police Bike",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952211-1.jpg"
+    },
+    {
+     "code": "952212",
+     "name": "Forklift",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/952212-1.jpg"
+    },
+    {
+     "code": "952301",
+     "name": "Fire-Helicopter",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952301-1.jpg"
+    },
+    {
+     "code": "952302",
+     "name": "Police Buggy",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952302-1.jpg"
+    },
+    {
+     "code": "952303",
+     "name": "Lawn mower",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952303-1.jpg"
+    },
+    {
+     "code": "952304",
+     "name": "Duke Detain & Criminal",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952304-1.jpg"
+    },
+    {
+     "code": "952305",
+     "name": "Building Team with Tools",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952305-1.jpg"
+    },
+    {
+     "code": "952306",
+     "name": "Service Car",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952306-1.jpg"
+    },
+    {
+     "code": "952307",
+     "name": "Police-Jet",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952307-1.jpg"
+    },
+    {
+     "code": "952308",
+     "name": "Stunt-Quad",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952308-1.jpg"
+    },
+    {
+     "code": "952309",
+     "name": "Jet-Ski",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952309-1.jpg"
+    },
+    {
+     "code": "952310",
+     "name": "Wheel Loader",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952310-1.jpg"
+    },
+    {
+     "code": "952311",
+     "name": "Deep Sea Diver",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952311-1.jpg"
+    },
+    {
+     "code": "952312",
+     "name": "Arctic Snowmobile",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/952312-1.jpg"
+    },
+    {
+     "code": "952401",
+     "name": "Mini Crane",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952401-1.jpg"
+    },
+    {
+     "code": "952402",
+     "name": "Police Helicopter",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952402-1.jpg"
+    },
+    {
+     "code": "952403",
+     "name": "Cement-Mixer",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952403-1.jpg"
+    },
+    {
+     "code": "952404",
+     "name": "Lawn Mower",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952404-1.jpg"
+    },
+    {
+     "code": "952405",
+     "name": "Astronaut & Robot",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952405-1.jpg"
+    },
+    {
+     "code": "952406",
+     "name": "Diver, Shark and Crab",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952406-1.jpg"
+    },
+    {
+     "code": "952407",
+     "name": "Astronaut with Quad",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952407-1.jpg"
+    },
+    {
+     "code": "952408",
+     "name": "Policeman with Jetboat",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952408-1.jpg"
+    },
+    {
+     "code": "952409",
+     "name": "Fire Buggy",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952409-1.jpg"
+    },
+    {
+     "code": "952410",
+     "name": "Jungle Explorer",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952410-1.jpg"
+    },
+    {
+     "code": "952411",
+     "name": "Astronaut and Radio Station",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952411-1.jpg"
+    },
+    {
+     "code": "952412",
+     "name": "Ice Adventure",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/952412-1.jpg"
+    },
+    {
+     "code": "952501",
+     "name": "Police Officer and Criminal",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952501-1.jpg"
+    },
+    {
+     "code": "952502",
+     "name": "Construction Worker with Rotary Cutter",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952502-1.jpg"
+    },
+    {
+     "code": "952503",
+     "name": "Diver with Robot and Shark",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952503-1.jpg"
+    },
+    {
+     "code": "952504",
+     "name": "Astronaut and Spaceship",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952504-1.jpg"
+    },
+    {
+     "code": "952505",
+     "name": "Firefighter with Water Scooter",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952505-1.jpg"
+    },
+    {
+     "code": "952506",
+     "name": "Firefighter with Bulldozer",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952506-1.jpg"
+    },
+    {
+     "code": "952507",
+     "name": "Policeman with Jetpack",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952507-1.jpg"
+    },
+    {
+     "code": "952508",
+     "name": "Explorer & Hovercraft",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952508-1.jpg"
+    },
+    {
+     "code": "952509",
+     "name": "Tractor",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952509-1.jpg"
+    },
+    {
+     "code": "952510",
+     "name": "Construction Worker with Vibratory Plate",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952510-1.jpg"
+    },
+    {
+     "code": "952511",
+     "name": "Astronaut with Alien and Crystal",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952511-1.jpg"
+    },
+    {
+     "code": "952512",
+     "name": "Snowmobile",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/952512-1.jpg"
+    }
+   ]
+  },
+  {
+   "id": "friends",
+   "name": "Friends",
+   "items": [
+    {
+     "code": "562001",
+     "name": "Cake Decorating Set",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562001-1.jpg"
+    },
+    {
+     "code": "562002",
+     "name": "Olivia's Snack Stand",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562002-1.jpg"
+    },
+    {
+     "code": "562003",
+     "name": "Kitty Chico at Vets",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562003-1.jpg"
+    },
+    {
+     "code": "562004",
+     "name": "Cute Dog",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562004-1.jpg"
+    },
+    {
+     "code": "562005",
+     "name": "Dressing Table",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562005-1.jpg"
+    },
+    {
+     "code": "562006",
+     "name": "Beach Bar",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562006-1.jpg"
+    },
+    {
+     "code": "562007",
+     "name": "Sweet Dolphin",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562007-1.jpg"
+    },
+    {
+     "code": "562008",
+     "name": "Sea Lion",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562008-1.jpg"
+    },
+    {
+     "code": "562009",
+     "name": "Andrea's Magic Show",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562009-1.jpg"
+    },
+    {
+     "code": "562010",
+     "name": "Turtle's Paradise",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562010-1.jpg"
+    },
+    {
+     "code": "562011",
+     "name": "Stephanie's Pizza Bakery",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562011-1.jpg"
+    },
+    {
+     "code": "562012",
+     "name": "Hamster Sled",
+     "year": 2020,
+     "img": "https://cdn.rebrickable.com/media/sets/562012-1.jpg"
+    },
+    {
+     "code": "562101",
+     "name": "Performing Dog",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/562101-1.jpg"
+    },
+    {
+     "code": "562102",
+     "name": "Dressing Table",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/562102-1.jpg"
+    },
+    {
+     "code": "562103",
+     "name": "Cat Grooming Salon",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/562103-1.jpg"
+    },
+    {
+     "code": "562105",
+     "name": "Squirrel's Tree House",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/562105-1.jpg"
+    },
+    {
+     "code": "562106",
+     "name": "Stephanie's Cookie-Kitchen",
+     "year": 2021,
+     "img": "https://cdn.rebrickable.com/media/sets/562106-1.jpg"
+    },
+    {
+     "code": "562201",
+     "name": "Hair Salon",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/562201-1.jpg"
+    },
+    {
+     "code": "562202",
+     "name": "Baby Bunny Playpen",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/562202-1.jpg"
+    },
+    {
+     "code": "562203",
+     "name": "Animal Clinic",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/562203-1.jpg"
+    },
+    {
+     "code": "562204",
+     "name": "Fruit Bar",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/562204-1.jpg"
+    },
+    {
+     "code": "562205",
+     "name": "Poodle Puppy at the Dog Groomer",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/562205-1.jpg"
+    },
+    {
+     "code": "562206",
+     "name": "Pastry Shop",
+     "year": 2022,
+     "img": "https://cdn.rebrickable.com/media/sets/562206-1.jpg"
+    },
+    {
+     "code": "562301",
+     "name": "Cat Tree with Kitten",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/562301-1.jpg"
+    },
+    {
+     "code": "562302",
+     "name": "Bunny at Veterinary Station",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/562302-1.jpg"
+    },
+    {
+     "code": "562303",
+     "name": "Puppy's Doghouse",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/562303-1.jpg"
+    },
+    {
+     "code": "562304",
+     "name": "Surfing with Dolphin",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/562304-1.jpg"
+    },
+    {
+     "code": "562305",
+     "name": "Sushi stand",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/562305-1.jpg"
+    },
+    {
+     "code": "562306",
+     "name": "Cake Kitchen",
+     "year": 2023,
+     "img": "https://cdn.rebrickable.com/media/sets/562306-1.jpg"
+    },
+    {
+     "code": "562402",
+     "name": "Puppy's House",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562402-1.jpg"
+    },
+    {
+     "code": "562403",
+     "name": "Kitten at the Vet",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562403-1.jpg"
+    },
+    {
+     "code": "562404",
+     "name": "Kitten on Karaoke Stage",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562404-1.jpg"
+    },
+    {
+     "code": "562405",
+     "name": "Observatory",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562405-1.jpg"
+    },
+    {
+     "code": "562406",
+     "name": "Puppy's Playground",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562406-1.jpg"
+    },
+    {
+     "code": "562407",
+     "name": "Ice Cream Shop",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562407-1.jpg"
+    },
+    {
+     "code": "562408",
+     "name": "Smoothie Booth",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562408-1.jpg"
+    },
+    {
+     "code": "562409",
+     "name": "Otter's Day at the Beach",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562409-1.jpg"
+    },
+    {
+     "code": "562410",
+     "name": "Cat Grooming",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562410-1.jpg"
+    },
+    {
+     "code": "562411",
+     "name": "Squirrel and the Campfire",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562411-1.jpg"
+    },
+    {
+     "code": "562412",
+     "name": "Apiary",
+     "year": 2024,
+     "img": "https://cdn.rebrickable.com/media/sets/562412-1.jpg"
+    },
+    {
+     "code": "562501",
+     "name": "Puppy",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/562501-1.jpg"
+    },
+    {
+     "code": "562502",
+     "name": "Paisley and Seesaw with Bunny",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/562502-1.jpg"
+    },
+    {
+     "code": "562503",
+     "name": "Ice Cream Shop",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/562503-1.jpg"
+    },
+    {
+     "code": "562504",
+     "name": "Cat Tree with Kitten",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/562504-1.jpg"
+    },
+    {
+     "code": "562505",
+     "name": "Puppy's Stage",
+     "year": 2025,
+     "img": "https://cdn.rebrickable.com/media/sets/562505-1.jpg"
+    },
+    {
+     "code": "562601",
+     "name": "Baking Set and Bunny",
+     "year": 2026,
+     "img": "https://cdn.rebrickable.com/media/sets/562601-1.jpg"
+    }
+   ]
+  }
  ]
 }
