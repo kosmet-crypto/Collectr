@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="collectr-native-api" content="1">
+<meta name="theme-color" content="#101114">
+<title>Collectr</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#101114; --bg2:#17181d; --card:#1d1f25; --card2:#252830; --line:#2e313a;
+  --tx:#f1f1f3; --tx2:#a6a8b3; --tx3:#6f7280;
+  --acc:#ffd84d; --acc2:#f5b81c; --acc-tx:#1b1c22;
+  --ok:#4fd18b; --warn:#ffb547; --bad:#ff6b6b; --info:#6aa8ff;
+  --r:16px; --r2:12px;
+  --shadow:0 8px 30px rgba(0,0,0,.35);
+  --img:#ffffff;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f4f4f6; --bg2:#ffffff; --card:#ffffff; --card2:#f0f0f3; --line:#e2e3e8;
+    --tx:#17181d; --tx2:#5d606b; --tx3:#9295a0;
+    --acc:#ffcf1f; --acc2:#e8a400; --acc-tx:#1b1c22;
+    --shadow:0 6px 24px rgba(0,0,0,.08);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f4f4f6; --bg2:#ffffff; --card:#ffffff; --card2:#f0f0f3; --line:#e2e3e8;
+  --tx:#17181d; --tx2:#5d606b; --tx3:#9295a0;
+  --acc:#ffcf1f; --acc2:#e8a400; --acc-tx:#1b1c22;
+  --shadow:0 6px 24px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{padding-bottom:calc(76px + env(safe-area-inset-bottom));min-height:100vh;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+input,select,textarea{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--acc2)}
+textarea{min-height:70px;resize:vertical}
+h1,h2,h3{margin:0}
+.hidden{display:none!important}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);padding:14px 16px 10px;display:flex;align-items:center;gap:10px;border-bottom:1px solid transparent}
+.top.scrolled{border-bottom-color:var(--line)}
+.colbtn{display:flex;align-items:center;gap:10px;min-width:0;flex:1;text-align:left}
+.colicon{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-size:20px;flex:none}
+.coltitle{min-width:0}
+.coltitle b{display:block;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.coltitle small{color:var(--tx2);font-size:12px}
+.chev{color:var(--tx3);font-size:12px;margin-left:2px}
+
+main{padding:4px 16px 24px;max-width:760px;margin:0 auto}
+.view{animation:fade .18s ease}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+
+/* nav */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg2);border-top:1px solid var(--line);display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+nav.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--tx3);font-size:11px;border-radius:12px}
+nav.tabs button svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav.tabs button.on{color:var(--tx)}
+nav.tabs button.on svg{stroke:var(--acc2)}
+
+/* cards & stats */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.sec{margin:18px 0 8px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.sec h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2);font-weight:600}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:12px}
+.stat b{display:block;font-size:22px;line-height:1.1}
+.stat span{font-size:12px;color:var(--tx2)}
+.stat.acc b{color:var(--acc2)}
+.hero{display:flex;align-items:center;gap:16px}
+.ring{width:96px;height:96px;flex:none;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .v{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;font-size:22px}
+.hero .t b{font-size:18px;display:block}
+.hero .t span{color:var(--tx2);font-size:13px}
+.loccard{display:flex;align-items:center;gap:12px}
+.loccard .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--card2);font-size:19px;flex:none}
+.loccard .m{flex:1;min-width:0}
+.loccard .m b{display:block}
+.loccard .m span{font-size:12px;color:var(--tx2)}
+.loccard .q{font-size:22px;font-weight:700}
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:var(--card2);color:var(--tx2);font-weight:600;vertical-align:middle}
+.pill.sell{background:rgba(79,209,139,.15);color:var(--ok)}
+.pill.store{background:rgba(106,168,255,.15);color:var(--info)}
+.pill.warn{background:rgba(255,181,71,.15);color:var(--warn)}
+.pill.bad{background:rgba(255,107,107,.15);color:var(--bad)}
+
+/* list rows */
+.list{display:flex;flex-direction:column;gap:8px}
+.row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:10px 12px;text-align:left;width:100%}
+.row .m{flex:1;min-width:0}
+.row .m b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .m span{display:block;font-size:12px;color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .m span.pill{display:inline-block;font-size:11px}
+.row .r{text-align:right;font-size:13px;color:var(--tx2);flex:none}
+.row .r b{display:block;color:var(--tx);font-size:15px}
+.bar{height:6px;border-radius:99px;background:var(--card2);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc2),var(--acc));border-radius:99px}
+.bar i.full{background:var(--ok)}
+
+/* thumbnails */
+.th{width:52px;height:52px;border-radius:10px;background:var(--img);flex:none;display:grid;place-items:center;overflow:hidden;position:relative;border:1px solid var(--line)}
+.th img,.gimg img,.bigimg img{width:100%;height:100%;object-fit:contain}
+.ph{width:100%;height:100%;display:grid;place-items:center;background:var(--card2);color:var(--tx3);font-size:11px;text-align:center;line-height:1.1;padding:4px}
+.ph svg{width:26px;height:26px;fill:currentColor;opacity:.6}
+
+/* grid of items */
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.gi{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:6px 6px 8px;text-align:left;position:relative;min-width:0}
+.gi.zero .gimg{opacity:.35;filter:grayscale(1)}
+.gimg{aspect-ratio:1;border-radius:9px;background:var(--img);overflow:hidden;display:grid;place-items:center}
+.gi b{display:block;font-size:13px;margin-top:6px}
+.gi span{display:block;font-size:11px;color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gi .badge{position:absolute;top:10px;right:10px;background:var(--acc);color:var(--acc-tx);font-weight:700;font-size:12px;min-width:22px;height:22px;border-radius:99px;display:grid;place-items:center;padding:0 6px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.gi .sub{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
+.gi .sub em{font-style:normal;font-size:10px;padding:1px 6px;border-radius:99px;background:var(--card2);color:var(--tx2)}
+.gi .sub em.s{background:rgba(79,209,139,.15);color:var(--ok)}
+.gi .dmg{position:absolute;top:10px;left:10px;width:10px;height:10px;border-radius:99px;background:var(--warn);border:2px solid var(--card)}
+
+/* chips & segmented */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none;margin:0 -16px;padding-left:16px;padding-right:16px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:13px;color:var(--tx2);white-space:nowrap}
+.chip.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.seg{display:flex;background:var(--card2);border-radius:12px;padding:3px;gap:3px}
+.seg button{flex:1;padding:9px 6px;border-radius:9px;font-size:14px;color:var(--tx2);font-weight:600}
+.seg button.on{background:var(--card);color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.seg.acc button.on{background:var(--acc);color:var(--acc-tx)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:12px;background:var(--card2);border:1px solid var(--line);font-weight:600;font-size:14px}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:var(--acc-tx)}
+.btn.danger{color:var(--bad)}
+.btn.block{width:100%}
+.btn.sm{padding:7px 12px;font-size:13px;border-radius:10px}
+.btn:disabled{opacity:.45}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btns>.btn{flex:1}
+.fab{position:fixed;right:18px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:25;width:56px;height:56px;border-radius:18px;background:var(--acc);color:var(--acc-tx);font-size:28px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.link{color:var(--acc2);font-weight:600;font-size:13px}
+.iconbtn{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);flex:none}
+.iconbtn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* stepper */
+.step{display:flex;align-items:center;gap:0;flex:none;background:var(--card2);border-radius:12px;border:1px solid var(--line)}
+.step button{width:42px;height:42px;font-size:22px;font-weight:600;display:grid;place-items:center;border-radius:11px}
+.step button:active{background:var(--line)}
+.step button.plus{color:var(--acc2)}
+.step input{width:46px;text-align:center;border:0;background:transparent;padding:0;font-weight:700;font-size:17px}
+.step.sm button{width:34px;height:34px;font-size:18px}
+.step.sm input{width:34px;font-size:15px}
+
+/* count rows */
+.crow{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:8px 8px 8px 8px}
+.crow .m{flex:1;min-width:0}
+.crow .m b{display:block;font-size:15px}
+.crow .m span{display:block;font-size:12px;color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crow .m small{display:block;font-size:11px;color:var(--tx3)}
+.crow.has{border-color:color-mix(in srgb,var(--acc2) 45%,var(--line))}
+
+.search{position:relative;margin:4px 0 10px}
+.search input{padding-left:38px;border-radius:12px;background:var(--card)}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--tx3);fill:none;stroke-width:2}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;background:var(--bg2);border-radius:22px 22px 0 0;max-height:92vh;overflow-y:auto;transform:translateY(105%);transition:transform .25s cubic-bezier(.2,.8,.2,1);padding:10px 16px calc(20px + env(safe-area-inset-bottom));max-width:760px;margin:0 auto;overscroll-behavior:contain}
+.sheet.on{transform:none}
+.sheet:not(.on){visibility:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),visibility 0s .25s}
+.grab{width:40px;height:5px;border-radius:99px;background:var(--line);margin:0 auto 12px}
+.sheet h3{font-size:19px;margin-bottom:4px}
+.sheet .sub{color:var(--tx2);font-size:13px;margin-bottom:12px}
+.field{margin:12px 0}
+.field label{display:block;font-size:12px;color:var(--tx2);margin-bottom:5px;font-weight:600}
+.frow{display:flex;gap:8px}
+.frow>*{flex:1;min-width:0}
+.bigimg{width:100%;max-width:260px;aspect-ratio:1;margin:0 auto 12px;border-radius:16px;background:var(--img);overflow:hidden;display:grid;place-items:center}
+.kv{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);gap:10px;font-size:14px}
+.kv:last-child{border-bottom:0}
+.kv span{color:var(--tx2)}
+.locblk{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:10px 12px;margin:8px 0}
+.locblk .h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.condrow{display:flex;align-items:center;justify-content:space-between;padding:4px 0;gap:8px}
+.condrow span{font-size:14px;color:var(--tx2)}
+.tpl{display:flex;gap:12px;align-items:center;text-align:left;width:100%;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.tpl .e{font-size:28px;width:48px;height:48px;border-radius:14px;background:var(--card2);display:grid;place-items:center;flex:none}
+.tpl.rec{border-color:var(--acc2);background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 14%,var(--card)),var(--card))}
+.tpl b{display:block;font-size:16px}
+.tpl span{font-size:13px;color:var(--tx2)}
+.check{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.check input{width:20px;height:20px;accent-color:var(--acc2);flex:none}
+.check:last-child{border-bottom:0}
+.muted{color:var(--tx2);font-size:13px}
+.empty{text-align:center;color:var(--tx2);padding:36px 12px}
+.empty .e{font-size:40px;margin-bottom:8px}
+.welcome h1{font-size:28px;margin:10px 0 4px}
+.welcome p{color:var(--tx2);margin:0 0 18px}
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:12px;z-index:60;opacity:0;transition:.2s;font-size:14px;display:flex;gap:14px;align-items:center;max-width:calc(100% - 32px);box-shadow:var(--shadow)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast button{color:var(--acc2);font-weight:700}
+.money{font-variant-numeric:tabular-nums}
+.pos{color:var(--ok)} .neg{color:var(--bad)}
+.hr{height:1px;background:var(--line);margin:14px 0}
+.progress{height:4px;background:var(--card2);border-radius:99px;overflow:hidden;margin-top:8px}
+.progress i{display:block;height:100%;background:var(--acc2);width:0;transition:width .2s}
+table.map{width:100%;border-collapse:collapse;font-size:13px}
+table.map td{padding:6px 4px;border-bottom:1px solid var(--line)}
+table.map td:first-child{color:var(--tx2);width:42%}
+.stickybar{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom));background:var(--bg);padding:10px 0 4px;z-index:5}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <button class="colbtn" data-act="colMenu">
+    <span class="colicon" id="colIcon">🧱</span>
+    <span class="coltitle"><b id="colName">Collectr</b><small id="colSub"></small></span>
+    <span class="chev">▼</span>
+  </button>
+  <button class="iconbtn" data-act="search" aria-label="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+</header>
+
+<main>
+  <section id="tab-home" class="view"></section>
+  <section id="tab-count" class="view hidden"></section>
+  <section id="tab-sale" class="view hidden"></section>
+  <section id="tab-move" class="view hidden"></section>
+  <section id="tab-set" class="view hidden"></section>
+</main>
+
+<nav class="tabs" id="tabs">
+  <button data-act="tab" data-tab="home" class="on"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg><span data-t="tabHome"></span></button>
+  <button data-act="tab" data-tab="count"><svg viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10M3.5 6l1.5 1.5L7.5 5M3.5 12l1.5 1.5 2.5-2.5M3.5 18l1.5 1.5 2.5-2.5"/></svg><span data-t="tabCount"></span></button>
+  <button data-act="tab" data-tab="sale"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8" r="1.5"/></svg><span data-t="tabSale"></span></button>
+  <button data-act="tab" data-tab="move"><svg viewBox="0 0 24 24"><path d="M4 8h15l-4-4M20 16H5l4 4"/></svg><span data-t="tabMove"></span></button>
+  <button data-act="tab" data-tab="set"><svg viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg><span data-t="tabSet"></span></button>
+</nav>
+
+<div class="scrim" id="scrim" data-act="closeSheet"></div>
+<div class="sheet" id="sheet"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+/* =========================================================================
+   Collectr — collection & stock tracker (LEGO foil packs first).
+   Data lives on the device: localStorage (records) + IndexedDB (own photos).
+   ========================================================================= */
+
+const APP = window.CollectrAndroid || null;
+const REPO = 'kosmet-crypto/Collectr';
+const CAT_REMOTE = 'https://raw.githubusercontent.com/' + REPO + '/main/catalog/lego-foil.json';
+const CAT_LOCAL = 'catalog/lego-foil.json';
+const KEY = 'collectr.v1', CATKEY = 'collectr.catalog', UIKEY = 'collectr.ui';
+const CONDS = ['mint', 'opened', 'damaged'];        // best first: the collection keeps the best ones
+const MOVE_ORDER = ['damaged', 'opened', 'mint'];   // surplus (worst first) moves and sells first
+const CURS = ['NOK', 'EUR', 'RSD', 'USD', 'SEK', 'DKK', 'GBP', 'CHF'];
+/* Units of each currency per 1 NOK; used until the first online rate update. */
+const FALLBACK_RATES = {NOK: 1, EUR: 0.0855, RSD: 10.02, USD: 0.094, SEK: 0.99, DKK: 0.638, GBP: 0.073, CHF: 0.079};
+
+/* ---------------- i18n ---------------- */
+const L = {
+  tabHome: ['Преглед', 'Overview'], tabCount: ['Попис', 'Count'], tabSale: ['Продаја', 'Sell'], tabMove: ['Пренос', 'Move'], tabSet: ['Подешавања', 'Settings'],
+  oslo: ['Осло', 'Oslo'], bgd: ['Београд', 'Belgrade'],
+  mint: ['Минт', 'Mint'], opened: ['Отворена', 'Opened'], damaged: ['Оштећена кесица', 'Damaged pack'],
+  mintS: ['минт', 'mint'], openedS: ['отвор.', 'opened'], damagedS: ['оштећ.', 'damaged'],
+  welcomeT: ['Добродошао у Collectr', 'Welcome to Collectr'],
+  welcomeP: ['Изабери шта скупљаш. Касније можеш додати још колекција.', 'Pick what you collect. You can add more collections later.'],
+  recommended: ['Препорука', 'Recommended'],
+  completion: ['Попуњеност', 'Completion'],
+  ofDistinct: ['{0} од {1} различитих', '{0} of {1} different'],
+  pieces: ['Укупно комада', 'Total pieces'], forCollection: ['За колекцију', 'For collection'],
+  sellNow: ['Продаја одмах', 'Sell now'], waiting: ['Чека пренос', 'Waiting to move'],
+  missingForCol: ['Фали за колекцију', 'Missing for collection'],
+  spent: ['Набавна вредност', 'Purchase value'],
+  locations: ['Локације', 'Locations'], series: ['Серије', 'Series'], seriesOne: ['Серија', 'Series'],
+  sellLoc: ['продаја', 'selling'], storeLoc: ['складиште', 'storage'],
+  colSale: ['колекција {0} · продаја {1}', 'collection {0} · for sale {1}'],
+  addSeries: ['Нова серија', 'New series'], addItem: ['Додај шифру', 'Add number'],
+  all: ['Све', 'All'], have: ['Имам', 'Have'], missing: ['Недостаје', 'Missing'], surplus: ['Вишак', 'Surplus'],
+  back: ['Назад', 'Back'], hiddenCodes: ['Обрисане шифре ({0})', 'Removed numbers ({0})'],
+  dlImages: ['Преузми слике', 'Download pictures'], rename: ['Преименуј', 'Rename'],
+  deleteSeries: ['Обриши серију', 'Delete series'], hideSeries: ['Сакриј серију', 'Hide series'],
+  noItems: ['Нема ставки', 'No items'],
+  kShort: ['кол.', 'keep'], sShort: ['прод.', 'sell'],
+  total: ['Укупно', 'Total'], collection: ['Колекција', 'Collection'], forSale: ['За продају', 'For sale'],
+  keepTarget: ['Циљ за колекцију', 'Collection target'], keepDefault: ['подразумевано ({0})', 'default ({0})'],
+  keepWhere: ['Колекцијски примерци стоје', 'Collection copies are kept in'], auto: ['Аутоматски', 'Automatic'],
+  purchases: ['Куповине', 'Purchases'], addPurchase: ['Додај куповину', 'Add purchase'],
+  avgCost: ['Просечна набавна', 'Average cost'], sell: ['Продај', 'Sell'], sold: ['Продато', 'Sold'],
+  photo: ['Слика', 'Picture'], takePhoto: ['Сликај / изабери', 'Take / choose'], removePhoto: ['Уклони своју слику', 'Remove my picture'],
+  imgUrl: ['Адреса слике (URL, опционо)', 'Picture address (URL, optional)'],
+  note: ['Напомена', 'Note'], name: ['Назив', 'Name'], code: ['Шифра', 'Number'],
+  deleteItem: ['Обриши шифру из колекције', 'Remove number from collection'],
+  deleteItemQ: ['Обрисати {0}? Неће се враћати ни при ажурирању каталога (можеш је вратити из „Обрисане шифре“).', 'Remove {0}? It will not come back with catalog updates (restore it from “Removed numbers”).'],
+  deleteItemStockQ: ['{0} има {1} ком. на стању. Ипак обрисати?', '{0} has {1} pieces in stock. Remove anyway?'],
+  restore: ['Врати', 'Restore'],
+  qty: ['Количина', 'Quantity'], location: ['Локација', 'Location'], condition: ['Стање', 'Condition'],
+  pricePer: ['Цена по комаду', 'Price per piece'], currency: ['Валута', 'Currency'], date: ['Датум', 'Date'],
+  save: ['Сачувај', 'Save'], cancel: ['Откажи', 'Cancel'], ok: ['У реду', 'OK'], del: ['Обриши', 'Delete'], close: ['Затвори', 'Close'],
+  platform: ['Где', 'Where'], soldFor: ['Продајна цена по комаду', 'Sale price per piece'],
+  profit: ['Зарада', 'Profit'], revenue: ['Приход', 'Revenue'],
+  nothingToSell: ['Нема вишка за продају', 'Nothing to sell'],
+  nothingToSellP: ['Кад имаш више од циља за колекцију, вишак се појави овде.', 'When you have more than your collection target, the surplus shows up here.'],
+  toSell: ['За продају', 'To sell'], soldList: ['Продато', 'Sold'],
+  onlyNow: ['Одмах', 'Now'], onlyWaiting: ['Чека пренос', 'Waiting'],
+  copyList: ['Копирај списак за оглас', 'Copy list for an ad'], copied: ['Копирано', 'Copied'],
+  undo: ['Поништи', 'Undo'], saved: ['Сачувано', 'Saved'],
+  from: ['Са', 'From'], to: ['На', 'To'], moveN: ['Премести ({0})', 'Move ({0})'],
+  pickSurplus: ['Изабери сав вишак', 'Pick all surplus'], pickAll: ['Изабери све', 'Pick all'], clearSel: ['Поништи избор', 'Clear'],
+  moved: ['Премештено {0} ком.', 'Moved {0} pcs'], history: ['Историја', 'History'],
+  nothingHere: ['Овде нема ничега', 'Nothing here'],
+  sameLoc: ['Изабери две различите локације', 'Pick two different locations'],
+  counting: ['Пописујем у', 'Counting in'], countCond: ['+ додаје као', '+ adds as'],
+  countedHere: ['{0} ком. овде', '{0} pcs here'],
+  allSeries: ['Све серије', 'All series'],
+  searchPh: ['Шифра или назив…', 'Number or name…'],
+  language: ['Језик', 'Language'], mainCur: ['Главна валута', 'Main currency'],
+  defKeep: ['Подразумевано за колекцију', 'Default kept for collection'],
+  defKeepP: ['По фигури: ако имаш мање, иде колико имаш', 'Per figure: if you have fewer, all you have'],
+  defCond: ['Подразумевано стање', 'Default condition'],
+  keepFirst: ['Колекцију прво рачунај из', 'Count the collection first from'],
+  keepFirstP: ['Одатле се не продаје, па вишак у продајној локацији одмах иде у продају', 'Nothing sells from there, so surplus at the selling location is sellable right away'],
+  defPlatform: ['Подразумевано место продаје', 'Default place to sell'],
+  rates: ['Курс', 'Exchange rates'], ratesAuto: ['Аутоматски са интернета (једном дневно)', 'Automatic from the internet (daily)'],
+  ratesUpd: ['Ажурирано {0}', 'Updated {0}'], ratesOffline: ['Приближан курс (још није ажуриран)', 'Approximate rates (not updated yet)'],
+  updateNow: ['Ажурирај сада', 'Update now'],
+  catalog: ['Каталог foil packova', 'Foil pack catalog'], catSeries: ['Серије из каталога', 'Catalog series'],
+  catInfo: ['{0} кесица у {1} серија · {2}', '{0} packs in {1} series · {2}'],
+  catSeed: ['Почетни каталог (пун каталог стиже при првом ажурирању)', 'Starter catalog (the full one arrives with the first update)'],
+  catUpdated: ['Каталог ажуриран', 'Catalog updated'], catSame: ['Каталог је већ најновији', 'Catalog is up to date'],
+  catFail: ['Каталог није ажуриран. Има ли интернета?', 'Could not update the catalog. Are you online?'],
+  pictures: ['Слике', 'Pictures'], picsInfo: ['Слике се чувају на телефону после првог приказа', 'Pictures are kept on the phone after they first show'],
+  picsSize: ['Заузето: {0}', 'Used: {0}'], clearPics: ['Обриши сачуване слике', 'Clear saved pictures'],
+  dlProgress: ['Преузимам слике {0}/{1}', 'Downloading pictures {0}/{1}'], dlDone: ['Слике преузете', 'Pictures downloaded'],
+  data: ['Подаци', 'Data'], exportXlsx: ['Извоз у Excel', 'Export to Excel'], importXlsx: ['Увоз из Excel-а / CSV', 'Import from Excel / CSV'],
+  backup: ['Бекап', 'Backup'], restoreBk: ['Врати бекап', 'Restore backup'], lastBackup: ['Последњи бекап: {0}', 'Last backup: {0}'], never: ['никад', 'never'],
+  restoreQ: ['Вратити бекап од {0}? Тренутни подаци ће бити замењени.', 'Restore the backup from {0}? Current data will be replaced.'],
+  restored: ['Бекап враћен', 'Backup restored'], badFile: ['Фајл није препознат', 'File not recognised'],
+  app: ['Апликација', 'App'], checkUpd: ['Провери ажурирања', 'Check for updates'], version: ['Верзија', 'Version'],
+  theme: ['Тема', 'Theme'], themeAuto: ['Систем', 'System'], themeDark: ['Тамна', 'Dark'], themeLight: ['Светла', 'Light'],
+  addLoc: ['Додај локацију', 'Add location'], locName: ['Назив локације', 'Location name'], canSell: ['Одавде се продаје', 'Sells from here'],
+  locDelQ: ['Обрисати локацију {0}?', 'Delete location {0}?'], locNotEmpty: ['Локација није празна. Прво премести комаде.', 'The location is not empty. Move the pieces first.'],
+  collections: ['Колекције', 'Collections'], newCol: ['Нова колекција', 'New collection'], colName: ['Назив колекције', 'Collection name'],
+  delCol: ['Обриши колекцију', 'Delete collection'], delColQ: ['Обрисати колекцију „{0}“ са свим ставкама? Ово не може да се поништи.', 'Delete “{0}” with all its items? This cannot be undone.'],
+  pickSeries: ['Које серије скупљаш?', 'Which series do you collect?'], pickSeriesP: ['Можеш променити касније у подешавањима.', 'You can change this later in settings.'],
+  create: ['Направи', 'Create'],
+  seriesName: ['Назив серије', 'Series name'], newItemIn: ['Нова шифра у серији {0}', 'New number in {0}'],
+  exists: ['Шифра {0} већ постоји у колекцији', 'Number {0} is already in the collection'],
+  needCode: ['Упиши шифру', 'Enter a number'],
+  importTitle: ['Увоз', 'Import'], importP: ['Повежи колоне из фајла са пољима ({0} редова).', 'Match the file’s columns to fields ({0} rows).'],
+  none: ['— нема —', '— none —'], importMode: ['Количине', 'Quantities'], modeSet: ['Замени', 'Replace'], modeAdd: ['Додај', 'Add'],
+  importDone: ['Увезено: {0} нових, {1} ажурираних', 'Imported: {0} new, {1} updated'],
+  importInto: ['Увози се у „{0}“', 'Importing into “{0}”'],
+  qtyIn: ['Количина — {0}', 'Quantity — {0}'],
+  imported: ['Увезено', 'Imported'],
+  undoSale: ['Поништити продају и вратити {0} ком. на стање?', 'Undo the sale and put {0} pcs back in stock?'],
+  delPurchaseQ: ['Обрисати ову куповину? (Количина на стању се не мења.)', 'Delete this purchase? (Stock stays as it is.)'],
+  notEnough: ['Нема толико на стању', 'Not that many in stock'],
+  perPiece: ['/ком', '/pc'], pcs: ['ком.', 'pcs'],
+  addedToStock: ['Додато на стање', 'Added to stock'],
+  noCost: ['без набавне цене', 'no purchase price'],
+  seriesOff: ['сакривено', 'hidden'],
+  showSeries: ['Прикажи', 'Show'],
+  rateLine: ['1 {0} = {1} {2}', '1 {0} = {1} {2}'],
+  manualRate: ['Ручно', 'Manual'],
+  searchAll: ['Претрага', 'Search'],
+  noResults: ['Нема резултата', 'No results'],
+  setDefault: ['врати', 'reset'],
+  catalogHint: ['Бројеви из каталога. Шифре које нису део твоје колекције обриши у детаљима кесице.', 'Numbers from the catalog. Remove numbers that are not part of your collection from a pack’s details.'],
+  seriesPct: ['{0}/{1} · {2}%', '{0}/{1} · {2}%'],
+  moveHint: ['Изабери колико комада пребацујеш. „Вишак“ су комади који нису за колекцију.', 'Choose how many pieces to move. “Surplus” are pieces not kept for the collection.'],
+  saleHint: ['Колекција се чува прво из локације {0}.', 'The collection is counted first from {0}.'],
+  itemsCount: ['{0} шифара', '{0} numbers'],
+  colTplFoil: ['LEGO foil packs', 'LEGO foil packs'],
+  exportName: ['collectr', 'collectr'],
+  photoSaved: ['Слика сачувана', 'Picture saved'],
+  dataInfo: ['Све је сачувано само на овом телефону. Прави бекап повремено и чувај га на Drive-у или мејлу.', 'Everything is stored only on this phone. Make a backup now and then and keep it on Drive or email.'],
+};
+const TPLS = [
+  {id: 'lego-foil', icon: '🧱', rec: true, img: 'set', cat: true,
+    name: ['LEGO foil packs', 'LEGO foil packs'],
+    desc: ['Limited edition кесице (Ninjago, Star Wars, DC…) са готовим каталогом и сликама', 'Limited edition foil packs (Ninjago, Star Wars, DC…) with a ready catalog and pictures']},
+  {id: 'lego-fig', icon: '🧑‍🚀', img: 'fig',
+    name: ['LEGO минифигуре', 'LEGO minifigures'],
+    desc: ['Унос по BrickLink шифри (нпр. sw0001), слика стиже сама', 'Add by BrickLink number (e.g. sw0001); the picture loads itself']},
+  {id: 'lego-set', icon: '📦', img: 'set',
+    name: ['LEGO сетови', 'LEGO sets'],
+    desc: ['Унос по броју сета, слика стиже сама', 'Add by set number; the picture loads itself']},
+  {id: 'funko', icon: '🎁', name: ['Funko Pop', 'Funko Pop'], desc: ['Своји бројеви и фотографије', 'Your own numbers and photos']},
+  {id: 'cards', icon: '🃏', name: ['Картице', 'Trading cards'], desc: ['Покемон, спортске и друге картице', 'Pokémon, sports and other cards']},
+  {id: 'perfume', icon: '🧴', name: ['Парфеми', 'Perfumes'], desc: ['Бочице, узорци и декантови', 'Bottles, samples and decants']},
+  {id: 'custom', icon: '✨', name: ['Празна колекција', 'Empty collection'], desc: ['За било шта друго', 'For anything else']},
+];
+const TPL = Object.fromEntries(TPLS.map(t => [t.id, t]));
+const DEFAULT_CAT_SERIES = ['ninjago', 'starwars', 'dc'];
+
+let S;               // state
+let CAT = null;      // foil pack catalog {series:[{id,name,items:[{code,name,year,img}]}]}
+let photos = {};     // item id -> dataURL (own pictures)
+const ui = {tab: 'home', ser: null, filter: 'all', q: '', count: {loc: null, ser: 'all', cond: null, q: ''},
+  sale: {mode: 'list', filter: 'now'}, move: {from: null, to: null, sel: {}, filter: 'surplus'}, sheet: null};
+
+function lang() { return S && S.settings.lang === 'en' ? 1 : 0; }
+function t(k, ...a) {
+  const v = L[k] ? L[k][lang()] : k;
+  return a.length ? v.replace(/\{(\d)\}/g, (_, i) => a[i]) : v;
+}
+function tn(pair) { return Array.isArray(pair) ? pair[lang()] : pair; }
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const today = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
+const $ = s => document.querySelector(s);
+function num(v) { const n = parseFloat(String(v).replace(/\s/g, '').replace(',', '.')); return isFinite(n) ? n : 0; }
+function int(v) { return Math.max(0, Math.round(num(v))); }
+function locale() { return lang() ? 'en-GB' : 'sr-Latn-RS'; }
+function nf(v, d) { return Number(v || 0).toLocaleString(locale(), {maximumFractionDigits: d == null ? (Math.abs(v) < 100 ? 2 : 0) : d}); }
+function money(v, cur) { return nf(v) + ' ' + (cur || S.settings.cur); }
+function fdate(iso) { if (!iso) return ''; const [y, m, d] = iso.split('-'); return `${+d}.${+m}.${y}.`; }
+function bytes(n) { return n > 1048576 ? nf(n / 1048576, 1) + ' MB' : nf(n / 1024, 0) + ' KB'; }
+
+/* ---------------- state ---------------- */
+function freshState() {
+  const st = {
+    v: 1,
+    settings: {lang: 'sr', cur: 'NOK', keep: 2, cond: 'mint', keepFirst: 'bgd', platform: 'Finn', theme: 'auto',
+      rates: {date: null, r: Object.assign({}, FALLBACK_RATES), manual: false}},
+    locations: [{id: 'osl', name: 'Осло', sell: true}, {id: 'bgd', name: 'Београд', sell: false}],
+    collections: [], active: null, series: [], items: {}, hidden: {}, sales: [], moves: [],
+    meta: {created: today(), lastBackup: null},
+  };
+  return st;
+}
+function load() {
+  try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { S = null; }
+  if (!S || S.v !== 1) S = freshState();
+  const f = freshState();
+  S.settings = Object.assign(f.settings, S.settings || {});
+  S.settings.rates = Object.assign(f.settings.rates, S.settings.rates || {});
+  for (const k of ['locations', 'collections', 'series', 'sales', 'moves']) if (!Array.isArray(S[k])) S[k] = f[k];
+  for (const k of ['items', 'hidden', 'meta']) if (!S[k] || typeof S[k] !== 'object') S[k] = f[k];
+  try { Object.assign(ui, JSON.parse(localStorage.getItem(UIKEY) || '{}')); } catch (e) { /* ignore */ }
+  ui.sheet = null;
+}
+let saveTimer = null;
+function save(now) {
+  clearTimeout(saveTimer);
+  const doit = () => {
+    try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { toast('⚠ ' + e.message); }
+    try { localStorage.setItem(UIKEY, JSON.stringify({tab: ui.tab, count: ui.count, sale: ui.sale, move: {from: ui.move.from, to: ui.move.to, filter: ui.move.filter, sel: {}}})); } catch (e) { /* ignore */ }
+  };
+  if (now) doit(); else saveTimer = setTimeout(doit, 250);
+}
+window.addEventListener('pagehide', () => save(true));
+document.addEventListener('visibilitychange', () => { if (document.hidden) save(true); });
+
+/* ---------------- photos (IndexedDB) ---------------- */
+const DB = {
+  db: null,
+  open() {
+    return new Promise(res => {
+      try {
+        const r = indexedDB.open('collectr', 1);
+        r.onupgradeneeded = () => r.result.createObjectStore('photos');
+        r.onsuccess = () => { this.db = r.result; res(); };
+        r.onerror = () => res();
+      } catch (e) { res(); }
+    });
+  },
+  store(mode) { return this.db.transaction('photos', mode).objectStore('photos'); },
+  all() {
+    return new Promise(res => {
+      const out = {};
+      if (!this.db) return res(out);
+      const req = this.store('readonly').openCursor();
+      req.onsuccess = () => { const c = req.result; if (c) { out[c.key] = c.value; c.continue(); } else res(out); };
+      req.onerror = () => res(out);
+    });
+  },
+  put(k, v) { return new Promise(res => { if (!this.db) return res(); const r = this.store('readwrite').put(v, k); r.onsuccess = r.onerror = () => res(); }); },
+  del(k) { return new Promise(res => { if (!this.db) return res(); const r = this.store('readwrite').delete(k); r.onsuccess = r.onerror = () => res(); }); },
+  clear() { return new Promise(res => { if (!this.db) return res(); const r = this.store('readwrite').clear(); r.onsuccess = r.onerror = () => res(); }); },
+};
+function readPhoto(file) {
+  return new Promise((res, rej) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const m = 700, s = Math.min(1, m / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      const g = c.getContext('2d');
+      g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height);
+      g.drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      res(c.toDataURL('image/jpeg', 0.82));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('image')); };
+    img.src = url;
+  });
+}
+
+/* ---------------- lookups ---------------- */
+const colById = id => S.collections.find(c => c.id === id);
+const activeCol = () => colById(S.active) || S.collections[0] || null;
+const serById = id => S.series.find(s => s.id === id);
+const locById = id => S.locations.find(l => l.id === id);
+const locName = id => { const l = locById(id); return l ? l.name : id; };
+function colItems(colId, opts) {
+  const out = [];
+  for (const id in S.items) {
+    const it = S.items[id];
+    if (it.col !== colId) continue;
+    if (opts && opts.visibleOnly) { const s = serById(it.ser); if (s && s.off) continue; }
+    out.push(it);
+  }
+  return out;
+}
+function colSeries(colId, all) { return S.series.filter(s => s.col === colId && (all || !s.off)).sort((a, b) => (a.order || 0) - (b.order || 0) || a.name.localeCompare(b.name)); }
+function serItems(serId) { return Object.values(S.items).filter(i => i.ser === serId).sort(byCode); }
+function byCode(a, b) { return String(a.code).localeCompare(String(b.code), undefined, {numeric: true}); }
+function findByCode(colId, code) { code = String(code).trim().toLowerCase(); return Object.values(S.items).find(i => i.col === colId && String(i.code).toLowerCase() === code); }
+function itemName(it) { return it.name || (lang() ? 'Pack ' : 'Кесица ') + it.code; }
+
+/* ---------------- stock math ---------------- */
+function qtyAt(it, loc, cond) {
+  const s = it.stock && it.stock[loc];
+  if (!s) return 0;
+  if (cond) return s[cond] || 0;
+  return CONDS.reduce((a, c) => a + (s[c] || 0), 0);
+}
+function keepOrder(it) {
+  const first = it.keepLoc || S.settings.keepFirst;
+  return S.locations.slice().sort((a, b) => ((b.id === first) - (a.id === first)) || ((a.sell ? 1 : 0) - (b.sell ? 1 : 0)));
+}
+/** Totals for one item: how many are where, how many stay in the collection and how many can be sold. */
+function calc(it) {
+  const r = {total: 0, at: {}, keepAt: {}, saleAt: {}, sellNow: 0, waiting: 0};
+  for (const l of S.locations) { const q = qtyAt(it, l.id); r.at[l.id] = q; r.total += q; }
+  r.target = it.keep != null ? it.keep : S.settings.keep;
+  r.keep = Math.min(r.target, r.total);
+  r.missing = Math.max(0, r.target - r.total);
+  let rem = r.keep;
+  for (const l of keepOrder(it)) { const k = Math.min(rem, r.at[l.id]); r.keepAt[l.id] = k; rem -= k; }
+  for (const l of S.locations) {
+    const s = r.at[l.id] - (r.keepAt[l.id] || 0);
+    r.saleAt[l.id] = s;
+    if (l.sell) r.sellNow += s; else r.waiting += s;
+  }
+  r.sale = r.sellNow + r.waiting;
+  return r;
+}
+/** Conditions of the pieces for sale at a location (the collection keeps the best ones). */
+function saleConds(it, loc, keepN) {
+  const s = (it.stock && it.stock[loc]) || {};
+  let k = keepN; const sale = {};
+  for (const c of CONDS) { const q = s[c] || 0; const kk = Math.min(k, q); k -= kk; if (q - kk > 0) sale[c] = q - kk; }
+  return sale;
+}
+function condText(obj) { return CONDS.filter(c => obj[c]).map(c => obj[c] + ' ' + t(c + 'S')).join(', '); }
+function setQty(it, loc, cond, q) {
+  it.stock = it.stock || {};
+  it.stock[loc] = it.stock[loc] || {};
+  it.stock[loc][cond] = Math.max(0, q | 0);
+  if (!it.stock[loc][cond]) delete it.stock[loc][cond];
+}
+/** Adds (d>0) in the given condition or removes (d<0) starting from that condition. */
+function addQty(it, loc, cond, d) {
+  if (d > 0) { setQty(it, loc, cond, qtyAt(it, loc, cond) + d); return d; }
+  let need = -d, done = 0;
+  for (const c of [cond].concat(MOVE_ORDER.filter(x => x !== cond))) {
+    const q = qtyAt(it, loc, c), take = Math.min(q, need);
+    if (take) { setQty(it, loc, c, q - take); need -= take; done += take; }
+    if (!need) break;
+  }
+  return -done;
+}
+function takeQty(it, loc, n, order) {
+  const taken = {};
+  for (const c of order || MOVE_ORDER) {
+    const q = qtyAt(it, loc, c), k = Math.min(q, n);
+    if (k) { setQty(it, loc, c, q - k); taken[c] = k; n -= k; }
+    if (!n) break;
+  }
+  return taken;
+}
+function avgCost(it) {
+  let q = 0, v = 0;
+  for (const p of it.cost || []) { q += p.q; v += toBase(p.total, p.base); }
+  return q ? v / q : null;
+}
+function colStats(col) {
+  const items = colItems(col.id);
+  const vis = colItems(col.id, {visibleOnly: true});
+  const st = {distinct: vis.length, owned: 0, total: 0, keep: 0, sellNow: 0, waiting: 0, missingKeep: 0, spent: 0, loc: {}};
+  for (const l of S.locations) st.loc[l.id] = {q: 0, keep: 0, sale: 0};
+  const visSet = new Set(vis.map(i => i.id));
+  for (const it of items) {
+    const r = calc(it);
+    if (visSet.has(it.id) && r.total > 0) st.owned++;
+    if (visSet.has(it.id)) st.missingKeep += r.missing;
+    st.total += r.total; st.keep += r.keep; st.sellNow += r.sellNow; st.waiting += r.waiting;
+    for (const l of S.locations) { st.loc[l.id].q += r.at[l.id]; st.loc[l.id].keep += r.keepAt[l.id] || 0; st.loc[l.id].sale += r.saleAt[l.id]; }
+    for (const p of it.cost || []) st.spent += toBase(p.total, p.base);
+  }
+  st.pct = st.distinct ? Math.round(st.owned / st.distinct * 100) : 0;
+  return st;
+}
+function serStats(ser) {
+  const items = serItems(ser.id);
+  let owned = 0, total = 0;
+  for (const it of items) { const q = calc(it).total; if (q) owned++; total += q; }
+  return {n: items.length, owned, total, pct: items.length ? Math.round(owned / items.length * 100) : 0};
+}
+
+/* ---------------- currency ---------------- */
+function rate(cur) { return (S.settings.rates.r || FALLBACK_RATES)[cur] || FALLBACK_RATES[cur] || 1; }
+/** Converts an amount between currencies; rates are units per 1 NOK. */
+function conv(amt, from, to) { return amt / rate(from) * rate(to); }
+function toBase(amt, from) { return conv(amt, from || S.settings.cur, S.settings.cur); }
+async function updateRates(manual) {
+  const R = S.settings.rates;
+  if (R.manual && !manual) return;
+  if (!manual && R.date === today()) return;
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/NOK', {cache: 'no-store'});
+    const j = await res.json();
+    if (j.result !== 'success' || !j.rates) throw new Error('rates');
+    const r = {};
+    for (const c of CURS) if (j.rates[c]) r[c] = j.rates[c];
+    r.NOK = 1;
+    S.settings.rates = {date: today(), r, manual: false};
+    save();
+    if (manual) { toast(t('saved')); render(); }
+  } catch (e) { if (manual) toast(t('catFail')); }
+}
+
+/* ---------------- catalog ---------------- */
+function catItemCount(c) { return c ? c.series.reduce((a, s) => a + s.items.length, 0) : 0; }
+async function loadCatalog() {
+  try { CAT = JSON.parse(localStorage.getItem(CATKEY) || 'null'); } catch (e) { CAT = null; }
+  try {
+    const res = await fetch(CAT_LOCAL, {cache: 'no-store'});
+    if (res.ok) {
+      const local = await res.json();
+      // The bundled copy wins when it is newer than what we have (fresh install or new APK).
+      if (!CAT || (local.generated || '') > (CAT.generated || '') || (CAT.source === 'seed' && local.source !== 'seed')) CAT = local;
+    }
+  } catch (e) { /* offline web without cache */ }
+}
+async function updateCatalog(manual) {
+  const last = +(localStorage.getItem(CATKEY + '.checked') || 0);
+  if (!manual && Date.now() - last < 12 * 3600e3) return;
+  try {
+    const res = await fetch(CAT_REMOTE + '?t=' + Date.now(), {cache: 'no-store'});
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const j = await res.json();
+    if (!j || !Array.isArray(j.series) || !catItemCount(j)) throw new Error('empty');
+    localStorage.setItem(CATKEY + '.checked', String(Date.now()));
+    const changed = JSON.stringify(j) !== JSON.stringify(CAT);
+    if (changed) {
+      CAT = j;
+      try { localStorage.setItem(CATKEY, JSON.stringify(j)); } catch (e) { /* ignore */ }
+      S.collections.filter(c => TPL[c.tpl] && TPL[c.tpl].cat).forEach(syncCatalog);
+      save(); render();
+    }
+    if (manual) toast(changed ? t('catUpdated') : t('catSame'));
+  } catch (e) { if (manual) toast(t('catFail')); }
+}
+/** Adds catalog packs of the chosen series to a collection and refreshes names/pictures. */
+function syncCatalog(col) {
+  if (!CAT || !TPL[col.tpl] || !TPL[col.tpl].cat) return;
+  const enabled = col.catSeries || [];
+  const hidden = S.hidden[col.id] || {};
+  let order = colSeries(col.id, true).length;
+  for (const cs of CAT.series) {
+    let ser = S.series.find(s => s.col === col.id && s.cat === cs.id);
+    if (!enabled.includes(cs.id)) { if (ser) ser.off = true; continue; }
+    if (!ser) { ser = {id: uid(), col: col.id, name: cs.name, cat: cs.id, order: order++}; S.series.push(ser); }
+    ser.off = false;
+    for (const ci of cs.items) {
+      if (hidden[ci.code]) continue;
+      let it = findByCode(col.id, ci.code);
+      if (!it) {
+        it = newItem(col.id, ser.id, ci.code, ci.name);
+        it.cat = true;
+      }
+      if (it.cat) {
+        if (!it.nameEdited && ci.name) it.name = ci.name;
+        if (ci.img) it.img = ci.img;
+        if (ci.year) it.year = ci.year;
+      }
+    }
+  }
+}
+function newItem(colId, serId, code, name) {
+  const it = {id: uid(), col: colId, ser: serId, code: String(code).trim(), name: name || '', keep: null, keepLoc: null, stock: {}, cost: [], note: '', created: today()};
+  S.items[it.id] = it;
+  return it;
+}
+function catLookup(code) {
+  if (!CAT) return null;
+  for (const s of CAT.series) for (const i of s.items) if (i.code === String(code).trim()) return {series: s, item: i};
+  return null;
+}
+
+/* ---------------- pictures ---------------- */
+const PH = '<svg viewBox="0 0 24 24"><path d="M7 5h3v2h4V5h3v2h2a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h2z"/></svg>';
+function phHtml(it) { return `<div class="ph">${PH}${it && it.code ? '<br>' + esc(it.code) : ''}</div>`; }
+function imgSources(it) {
+  const col = colById(it.col), tpl = col && TPL[col.tpl];
+  const out = [];
+  if (it.imgUrl) out.push(it.imgUrl);
+  const code = String(it.code || '').trim();
+  if (tpl && tpl.img === 'set' && /^\d{3,8}$/.test(code)) {
+    if (it.img) out.push(it.img);
+    out.push(`https://img.bricklink.com/ItemImage/SN/0/${code}-1.png`);
+    out.push(`https://cdn.rebrickable.com/media/sets/${code}-1.jpg`);
+  } else if (tpl && tpl.img === 'fig' && code) {
+    out.push(`https://img.bricklink.com/ItemImage/MN/0/${encodeURIComponent(code)}.png`);
+  } else if (it.img) out.push(it.img);
+  return [...new Set(out)];
+}
+function hash(s) { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return (h >>> 0).toString(36); }
+function imgUrl(it) {
+  const src = imgSources(it);
+  if (!src.length) return null;
+  if (!APP) return src;
+  const col = colById(it.col);
+  const key = ((col ? col.tpl : 'x') + '-' + it.code).replace(/[^A-Za-z0-9._-]/g, '_').slice(0, 80) + (it.imgUrl ? '-' + hash(it.imgUrl) : '');
+  return ['/imgcache/' + key + '?' + src.map(u => 'u=' + encodeURIComponent(u)).join('&')];
+}
+function imgHtml(it) {
+  if (photos[it.id]) return `<img src="${photos[it.id]}" alt="">`;
+  const src = imgUrl(it);
+  if (!src) return phHtml(it);
+  return `<img loading="lazy" src="${esc(src[0])}" data-alt="${esc(JSON.stringify(src.slice(1)))}" data-code="${esc(it.code)}" onerror="imgFail(this)" alt="">`;
+}
+window.imgFail = function (el) {
+  let alt = [];
+  try { alt = JSON.parse(el.dataset.alt || '[]'); } catch (e) { /* ignore */ }
+  if (alt.length) { el.dataset.alt = JSON.stringify(alt.slice(1)); el.src = alt[0]; return; }
+  el.outerHTML = phHtml({code: el.dataset.code});
+};
+async function downloadPictures(items) {
+  const list = items.filter(i => !photos[i.id]).map(imgUrl).filter(Boolean);
+  if (!list.length) return;
+  let done = 0;
+  toast(t('dlProgress', 0, list.length), null, 60000);
+  const one = srcs => new Promise(res => {
+    const tryAt = k => {
+      if (k >= srcs.length) return res();
+      const im = new Image();
+      im.onload = res; im.onerror = () => tryAt(k + 1);
+      im.src = srcs[k];
+    };
+    tryAt(0);
+  });
+  const queue = list.slice();
+  const worker = async () => { while (queue.length) { await one(queue.shift()); done++; toast(t('dlProgress', done, list.length), null, 60000); } };
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  toast(t('dlDone'));
+  render();
+}
+
+/* ---------------- UI helpers ---------------- */
+let toastTimer;
+function toast(msg, undo, ms) {
+  const el = $('#toast');
+  el.innerHTML = `<span>${esc(msg)}</span>` + (undo ? `<button id="undoBtn">${t('undo')}</button>` : '');
+  el.classList.add('on');
+  if (undo) $('#undoBtn').onclick = () => { undo(); el.classList.remove('on'); };
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('on'), ms || (undo ? 4500 : 2200));
+}
+function openSheet(html) {
+  const sh = $('#sheet');
+  const keepScroll = ui.sheet && sh.classList.contains('on') ? sh.scrollTop : 0;
+  sh.innerHTML = '<div class="grab"></div>' + html;
+  sh.classList.add('on'); $('#scrim').classList.add('on');
+  sh.scrollTop = keepScroll;
+}
+function closeSheet() {
+  ui.sheet = null;
+  $('#sheet').classList.remove('on'); $('#scrim').classList.remove('on');
+}
+function confirmSheet(msg, okLabel, onOk, danger) {
+  const prev = ui.sheet;
+  ui.sheet = {type: 'confirm', onOk, prev};
+  openSheet(`<h3>${esc(msg)}</h3><div class="btns" style="margin-top:18px">
+    <button class="btn" data-act="confirmNo">${t('cancel')}</button>
+    <button class="btn ${danger ? 'danger' : 'pri'}" data-act="confirmYes">${esc(okLabel || t('ok'))}</button></div>`);
+}
+function reopenPrev(prev) {
+  if (prev && prev.type === 'item' && S.items[prev.id]) openItem(prev.id);
+  else closeSheet();
+}
+function stepper(act, attrs, val, sm) {
+  return `<div class="step${sm ? ' sm' : ''}"><button data-act="${act}" ${attrs} data-d="-1">−</button><input inputmode="numeric" data-ch="${act}Set" ${attrs} value="${val}"><button class="plus" data-act="${act}" ${attrs} data-d="1">+</button></div>`;
+}
+function chips(items, cur, act) {
+  return `<div class="chips">${items.map(([v, label]) => `<button class="chip${v === cur ? ' on' : ''}" data-act="${act}" data-v="${esc(v)}">${esc(label)}</button>`).join('')}</div>`;
+}
+function ring(pct) {
+  const r = 42, c = 2 * Math.PI * r, off = c * (1 - pct / 100);
+  return `<div class="ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--card2)" stroke-width="10"/>
+    <circle cx="50" cy="50" r="${r}" fill="none" stroke="${pct >= 100 ? 'var(--ok)' : 'var(--acc2)'}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}"/></svg><div class="v">${pct}%</div></div>`;
+}
+function searchBox(ch, val) {
+  return `<div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" data-ch="${ch}" value="${esc(val || '')}" placeholder="${t('searchPh')}"></div>`;
+}
+function matches(it, q) {
+  if (!q) return true;
+  q = q.toLowerCase();
+  return String(it.code).toLowerCase().includes(q) || (it.name || '').toLowerCase().includes(q);
+}
+function pickFile(accept) {
+  return new Promise(res => {
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = accept;
+    inp.onchange = () => res(inp.files && inp.files[0]);
+    inp.click();
+  });
+}
+function download(name, mime, data, base64) {
+  if (APP && APP.saveFile) { APP.saveFile(name, mime, data, !!base64); return; }
+  let blob;
+  if (base64) { const b = atob(data); const u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); blob = new Blob([u], {type: mime}); } else blob = new Blob([data], {type: mime});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+
+/* ---------------- render ---------------- */
+function applyTheme() {
+  const th = S.settings.theme;
+  if (th === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', th);
+  document.documentElement.lang = lang() ? 'en' : 'sr';
+}
+function render() {
+  applyTheme();
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
+  const col = activeCol();
+  if (col && S.active !== col.id) S.active = col.id;
+  $('#colName').textContent = col ? col.name : 'Collectr';
+  $('#colIcon').textContent = col ? (TPL[col.tpl] || TPL.custom).icon : '🧱';
+  $('#colSub').textContent = col ? t('itemsCount', colItems(col.id, {visibleOnly: true}).length) : '';
+  $('#tabs').classList.toggle('hidden', !col);
+  $('[data-act="search"]').classList.toggle('hidden', !col);
+  document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === ui.tab));
+  for (const tb of ['home', 'count', 'sale', 'move', 'set']) $('#tab-' + tb).classList.toggle('hidden', tb !== (col ? ui.tab : 'home'));
+  if (!col) { renderWelcome(); return; }
+  ({home: renderHome, count: renderCount, sale: renderSale, move: renderMove, set: renderSettings})[ui.tab]();
+  if (ui.sheet && ui.sheet.type === 'item') openItem(ui.sheet.id);
+}
+
+function renderWelcome() {
+  $('#tab-home').innerHTML = `<div class="welcome"><h1>${t('welcomeT')}</h1><p>${t('welcomeP')}</p>${tplList()}</div>`;
+}
+function tplList() {
+  return TPLS.map(tp => `<button class="tpl${tp.rec ? ' rec' : ''}" data-act="newColTpl" data-tpl="${tp.id}">
+    <span class="e">${tp.icon}</span><span><b>${esc(tn(tp.name))} ${tp.rec ? `<span class="pill sell">${t('recommended')}</span>` : ''}</b><span>${esc(tn(tp.desc))}</span></span></button>`).join('');
+}
+
+/* ---- overview ---- */
+function renderHome() {
+  const col = activeCol();
+  const el = $('#tab-home');
+  if (ui.ser && serById(ui.ser) && serById(ui.ser).col === col.id) { renderSeriesView(el, serById(ui.ser)); return; }
+  ui.ser = null;
+  const st = colStats(col);
+  let h = `<div class="card hero">${ring(st.pct)}<div class="t"><b>${t('completion')}</b><span>${t('ofDistinct', st.owned, st.distinct)}</span>
+    ${st.missingKeep ? `<div style="margin-top:6px"><span class="pill warn">${t('missingForCol')}: ${st.missingKeep}</span></div>` : ''}</div></div>
+  <div class="grid2" style="margin-top:10px">
+    <div class="stat"><b>${st.total}</b><span>${t('pieces')}</span></div>
+    <div class="stat"><b>${st.keep}</b><span>${t('forCollection')}</span></div>
+    <div class="stat acc"><b>${st.sellNow}</b><span>${t('sellNow')}</span></div>
+    <div class="stat"><b>${st.waiting}</b><span>${t('waiting')}</span></div>
+  </div>`;
+  if (st.spent) h += `<div class="row" style="margin-top:10px"><div class="m"><b>${t('spent')}</b></div><div class="r"><b class="money">${money(st.spent)}</b></div></div>`;
+  h += `<div class="sec"><h2>${t('locations')}</h2></div><div class="list">` + S.locations.map(l => {
+    const s = st.loc[l.id];
+    return `<div class="card loccard"><div class="ic">${l.sell ? '🏷️' : '📦'}</div><div class="m"><b>${esc(l.name)} <span class="pill ${l.sell ? 'sell' : 'store'}">${l.sell ? t('sellLoc') : t('storeLoc')}</span></b>
+      <span>${t('colSale', s.keep, s.sale)}</span></div><div class="q">${s.q}</div></div>`;
+  }).join('') + '</div>';
+  const sers = colSeries(col.id);
+  h += `<div class="sec"><h2>${t('series')}</h2><button class="link" data-act="addSeries">+ ${t('addSeries')}</button></div><div class="list">`;
+  h += sers.map(s => {
+    const ss = serStats(s);
+    return `<button class="row" data-act="openSer" data-id="${s.id}"><div class="m"><b>${esc(s.name)}</b><span>${t('seriesPct', ss.owned, ss.n, ss.pct)} · ${ss.total} ${t('pcs')}</span>
+      <div class="bar"><i class="${ss.pct >= 100 ? 'full' : ''}" style="width:${ss.pct}%"></i></div></div><div class="r">›</div></button>`;
+  }).join('') || `<div class="empty"><div class="e">🗂️</div>${t('noItems')}</div>`;
+  h += '</div>';
+  el.innerHTML = h;
+}
+function renderSeriesView(el, ser) {
+  const ss = serStats(ser);
+  let items = serItems(ser.id).filter(i => matches(i, ui.q));
+  const f = ui.filter;
+  items = items.filter(it => {
+    const r = calc(it);
+    return f === 'all' || (f === 'have' && r.total > 0) || (f === 'missing' && r.total === 0) || (f === 'surplus' && r.sale > 0);
+  });
+  const hiddenN = ser.cat ? Object.keys(S.hidden[ser.col] || {}).filter(c => { const l = catLookup(c); return l && l.series.id === ser.cat; }).length : 0;
+  let h = `<div style="display:flex;align-items:center;gap:10px;margin:4px 0 10px">
+      <button class="iconbtn" data-act="closeSer" aria-label="back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div style="flex:1;min-width:0"><h2 style="font-size:20px">${esc(ser.name)}</h2><span class="muted">${t('seriesPct', ss.owned, ss.n, ss.pct)} · ${ss.total} ${t('pcs')}</span></div>
+      <button class="iconbtn" data-act="serMenu" data-id="${ser.id}" aria-label="menu"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button></div>
+    <div class="bar" style="margin-bottom:12px"><i class="${ss.pct >= 100 ? 'full' : ''}" style="width:${ss.pct}%"></i></div>
+    ${searchBox('serQ', ui.q)}
+    ${chips([['all', t('all')], ['have', t('have')], ['missing', t('missing')], ['surplus', t('surplus')]], f, 'filter')}`;
+  if (ser.cat && ss.n && ss.owned === 0) h += `<p class="muted" style="margin:0 0 10px">${t('catalogHint')}</p>`;
+  h += `<div class="igrid">` + items.map(it => {
+    const r = calc(it);
+    const dmg = S.locations.some(l => qtyAt(it, l.id, 'damaged') || qtyAt(it, l.id, 'opened'));
+    return `<button class="gi${r.total ? '' : ' zero'}" data-act="item" data-id="${it.id}"><div class="gimg">${imgHtml(it)}</div>
+      ${r.total ? `<span class="badge">${r.total}</span>` : ''}${dmg ? '<span class="dmg"></span>' : ''}
+      <b>${esc(it.code)}</b><span>${esc(it.name || '')}</span>
+      ${r.total ? `<div class="sub"><em>${t('kShort')} ${r.keep}</em>${r.sale ? `<em class="s">${t('sShort')} ${r.sale}</em>` : ''}</div>` : ''}</button>`;
+  }).join('') + '</div>';
+  if (!items.length) h += `<div class="empty"><div class="e">🔍</div>${t('noResults')}</div>`;
+  h += `<div class="btns" style="margin-top:14px"><button class="btn" data-act="addItem" data-ser="${ser.id}">+ ${t('addItem')}</button>
+    ${hiddenN ? `<button class="btn" data-act="hiddenList" data-ser="${ser.id}">${t('hiddenCodes', hiddenN)}</button>` : ''}</div>`;
+  el.innerHTML = h;
+}
+
+/* ---- item sheet ---- */
+function openItem(id) {
+  const it = S.items[id];
+  if (!it) { closeSheet(); return; }
+  ui.sheet = {type: 'item', id};
+  const r = calc(it), ser = serById(it.ser), col = colById(it.col);
+  const ac = avgCost(it);
+  let h = `<div class="bigimg">${imgHtml(it)}</div>
+    <h3>${esc(it.code)} ${it.year ? `<span class="pill">${it.year}</span>` : ''}</h3>
+    <div class="sub">${[it.name, ser && ser.name].filter(Boolean).map(esc).join(' · ')}</div>
+    <div class="grid2" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><b>${r.total}</b><span>${t('total')}</span></div>
+      <div class="stat"><b>${r.keep}<small style="font-size:13px;color:var(--tx3)">/${r.target}</small></b><span>${t('collection')}</span></div>
+      <div class="stat acc"><b>${r.sale}</b><span>${t('forSale')}</span></div>
+    </div>`;
+  for (const l of S.locations) {
+    h += `<div class="locblk"><div class="h"><b>${esc(l.name)} <span class="pill ${l.sell ? 'sell' : 'store'}">${l.sell ? t('sellLoc') : t('storeLoc')}</span></b>
+      <span class="muted">${t('colSale', r.keepAt[l.id] || 0, r.saleAt[l.id])}</span></div>` +
+      CONDS.map(c => `<div class="condrow"><span>${t(c)}</span>${stepper('iq', `data-id="${it.id}" data-loc="${l.id}" data-cond="${c}"`, qtyAt(it, l.id, c), true)}</div>`).join('') + '</div>';
+  }
+  h += `<div class="locblk"><div class="condrow"><span>${t('keepTarget')}</span>${stepper('keep', `data-id="${it.id}"`, r.target, true)}</div>
+    ${it.keep != null ? `<div class="muted" style="text-align:right"><button class="link" data-act="keepReset" data-id="${it.id}">${t('setDefault')} → ${t('keepDefault', S.settings.keep)}</button></div>` : `<div class="muted" style="text-align:right">${t('keepDefault', S.settings.keep)}</div>`}
+    <div class="field"><label>${t('keepWhere')}</label><select data-ch="keepLoc" data-id="${it.id}"><option value="">${t('auto')}</option>
+      ${S.locations.map(l => `<option value="${l.id}"${it.keepLoc === l.id ? ' selected' : ''}>${esc(l.name)}</option>`).join('')}</select></div></div>`;
+  h += `<div class="btns" style="margin:12px 0"><button class="btn" data-act="buyForm" data-id="${it.id}">+ ${t('addPurchase')}</button>
+    <button class="btn pri" data-act="sellForm" data-id="${it.id}" ${r.sellNow ? '' : 'disabled'}>${t('sell')}</button></div>`;
+  h += `<div class="sec"><h2>${t('purchases')}</h2>${ac != null ? `<span class="muted">${t('avgCost')}: <b class="money">${money(ac)}</b></span>` : ''}</div>`;
+  h += (it.cost || []).length ? '<div class="list">' + it.cost.map(p => `<div class="row"><div class="m"><b>${p.q} × ${nf(p.amt)} ${p.cur}</b><span>${fdate(p.date)} · ${esc(locName(p.loc))}</span></div>
+      <div class="r"><b class="money">${money(toBase(p.total, p.base))}</b></div><button class="iconbtn" data-act="delCost" data-id="${it.id}" data-cid="${p.id}"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>`).join('') + '</div>' : `<p class="muted">${t('noCost')}</p>`;
+  h += `<div class="sec"><h2>${t('photo')}</h2></div><div class="btns"><button class="btn" data-act="photo" data-id="${it.id}">📷 ${t('takePhoto')}</button>
+    ${photos[it.id] ? `<button class="btn danger" data-act="photoDel" data-id="${it.id}">${t('removePhoto')}</button>` : ''}</div>
+    <div class="field"><label>${t('code')}</label><input data-ch="itCode" data-id="${it.id}" value="${esc(it.code)}"></div>
+    <div class="field"><label>${t('name')}</label><input data-ch="itName" data-id="${it.id}" value="${esc(it.name || '')}"></div>
+    <div class="field"><label>${t('seriesOne')}</label><select data-ch="itSer" data-id="${it.id}">${colSeries(col.id, true).map(s => `<option value="${s.id}"${s.id === it.ser ? ' selected' : ''}>${esc(s.name)}</option>`).join('')}</select></div>
+    <div class="field"><label>${t('imgUrl')}</label><input data-ch="itImg" data-id="${it.id}" value="${esc(it.imgUrl || '')}" placeholder="https://…"></div>
+    <div class="field"><label>${t('note')}</label><textarea data-ch="itNote" data-id="${it.id}">${esc(it.note || '')}</textarea></div>
+    <button class="btn danger block" data-act="delItem" data-id="${it.id}">${t('deleteItem')}</button>`;
+  openSheet(h);
+}
+
+/* ---- count ---- */
+function renderCount() {
+  const col = activeCol();
+  const c = ui.count;
+  if (!locById(c.loc)) c.loc = (S.locations[0] || {}).id;
+  if (!CONDS.includes(c.cond)) c.cond = S.settings.cond;
+  const sers = colSeries(col.id);
+  if (c.ser !== 'all' && !sers.find(s => s.id === c.ser)) c.ser = 'all';
+  const serOrder = new Map(sers.map((s, i) => [s.id, i]));
+  let items = (c.ser === 'all' ? colItems(col.id, {visibleOnly: true}) : serItems(c.ser)).filter(i => matches(i, c.q))
+    .sort((a, b) => (serOrder.get(a.ser) || 0) - (serOrder.get(b.ser) || 0) || byCode(a, b));
+  const here = items.reduce((a, i) => a + qtyAt(i, c.loc), 0);
+  let h = `<div class="muted" style="margin:2px 0 6px">${t('counting')}</div>
+    <div class="seg acc">${S.locations.map(l => `<button class="${l.id === c.loc ? 'on' : ''}" data-act="cLoc" data-v="${l.id}">${esc(l.name)}</button>`).join('')}</div>
+    <div style="display:flex;align-items:center;gap:8px;margin:10px 0"><span class="muted" style="flex:none">${t('countCond')}</span>
+      <div class="seg" style="flex:1">${CONDS.map(k => `<button class="${k === c.cond ? 'on' : ''}" data-act="cCond" data-v="${k}" style="font-size:12px">${t(k + 'S')}</button>`).join('')}</div></div>
+    ${chips([['all', t('allSeries')]].concat(sers.map(s => [s.id, s.name])), c.ser, 'cSer')}
+    ${searchBox('cQ', c.q)}
+    <div class="muted" id="cHere" style="margin:0 0 8px">${t('countedHere', here)}</div><div class="list" id="cList">`;
+  h += items.map(countRow).join('') + '</div>';
+  if (!items.length) h += `<div class="empty"><div class="e">🔍</div>${t('noResults')}</div>`;
+  $('#tab-count').innerHTML = h;
+}
+function countRow(it) {
+  const c = ui.count, q = qtyAt(it, c.loc), r = calc(it);
+  const other = S.locations.filter(l => l.id !== c.loc && r.at[l.id]).map(l => `${l.name} ${r.at[l.id]}`).join(' · ');
+  const bad = qtyAt(it, c.loc, 'damaged') + qtyAt(it, c.loc, 'opened');
+  return `<div class="crow${q ? ' has' : ''}" data-row="${it.id}"><button class="th" data-act="item" data-id="${it.id}">${imgHtml(it)}</button>
+    <div class="m"><b>${esc(it.code)}</b><span>${esc(it.name || '')}</span><small>${t('total')} ${r.total}${other ? ' · ' + esc(other) : ''}${bad ? ` · <span style="color:var(--warn)">${condText({opened: qtyAt(it, c.loc, 'opened'), damaged: qtyAt(it, c.loc, 'damaged')})}</span>` : ''}</small></div>
+    ${stepper('cnt', `data-id="${it.id}"`, q)}</div>`;
+}
+function refreshCountRow(id) {
+  const row = document.querySelector(`[data-row="${id}"]`);
+  if (row) row.outerHTML = countRow(S.items[id]);
+  const col = activeCol(), c = ui.count;
+  const items = (c.ser === 'all' ? colItems(col.id, {visibleOnly: true}) : serItems(c.ser)).filter(i => matches(i, c.q));
+  const el = $('#cHere');
+  if (el) el.textContent = t('countedHere', items.reduce((a, i) => a + qtyAt(i, c.loc), 0));
+}
+
+/* ---- sell ---- */
+function renderSale() {
+  const col = activeCol();
+  const s = ui.sale;
+  let h = `<div class="seg" style="margin:4px 0 12px"><button class="${s.mode === 'list' ? 'on' : ''}" data-act="saleMode" data-v="list">${t('toSell')}</button>
+    <button class="${s.mode === 'sold' ? 'on' : ''}" data-act="saleMode" data-v="sold">${t('soldList')}</button></div>`;
+  if (s.mode === 'sold') { $('#tab-sale').innerHTML = h + soldHtml(col); return; }
+  const rows = colItems(col.id).map(it => ({it, r: calc(it)})).filter(x => x.r.sale > 0)
+    .filter(x => s.filter === 'all' || (s.filter === 'now' && x.r.sellNow > 0) || (s.filter === 'waiting' && x.r.waiting > 0))
+    .sort((a, b) => byCode(a.it, b.it));
+  const st = colStats(col);
+  h += `<div class="grid2"><div class="stat acc"><b>${st.sellNow}</b><span>${t('sellNow')}</span></div><div class="stat"><b>${st.waiting}</b><span>${t('waiting')}</span></div></div>
+    <p class="muted">${t('saleHint', esc(locName(S.settings.keepFirst)))}</p>
+    ${chips([['now', t('onlyNow')], ['waiting', t('onlyWaiting')], ['all', t('all')]], s.filter, 'saleFilter')}`;
+  if (!rows.length) h += `<div class="empty"><div class="e">🏷️</div><b>${t('nothingToSell')}</b><br>${t('nothingToSellP')}</div>`;
+  h += '<div class="list">' + rows.map(({it, r}) => {
+    const where = S.locations.filter(l => r.saleAt[l.id] > 0).map(l => `${l.name} ${r.saleAt[l.id]}`).join(' · ');
+    const conds = {};
+    for (const l of S.locations) { const sc = saleConds(it, l.id, r.keepAt[l.id] || 0); for (const k in sc) conds[k] = (conds[k] || 0) + sc[k]; }
+    const ac = avgCost(it);
+    return `<div class="row"><button class="th" data-act="item" data-id="${it.id}">${imgHtml(it)}</button>
+      <div class="m"><b>${esc(it.code)} <span class="pill sell">${r.sale}</span></b><span>${esc(it.name || '')}</span><span>${esc(where)} · ${condText(conds)}${ac != null ? ' · ' + money(ac) + t('perPiece') : ''}</span></div>
+      <button class="btn sm pri" data-act="sellForm" data-id="${it.id}" ${r.sellNow ? '' : 'disabled'}>${t('sell')}</button></div>`;
+  }).join('') + '</div>';
+  if (rows.length) h += `<div style="margin-top:14px"><button class="btn block" data-act="copyList">📋 ${t('copyList')}</button></div>`;
+  $('#tab-sale').innerHTML = h;
+}
+function soldHtml(col) {
+  const sales = S.sales.filter(x => x.col === col.id).sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.id > a.id ? 1 : -1));
+  let rev = 0, prof = 0, known = false;
+  for (const x of sales) { rev += toBase(x.total, x.base); if (x.cost != null) { prof += toBase(x.total - x.cost, x.base); known = true; } }
+  let h = `<div class="grid2"><div class="stat"><b class="money">${money(rev)}</b><span>${t('revenue')}</span></div>
+    <div class="stat"><b class="money ${prof >= 0 ? 'pos' : 'neg'}">${known ? money(prof) : '—'}</b><span>${t('profit')}</span></div></div><div class="list" style="margin-top:10px">`;
+  h += sales.map(x => {
+    const it = S.items[x.item];
+    const p = x.cost != null ? x.total - x.cost : null;
+    return `<div class="row">${it ? `<button class="th" data-act="item" data-id="${it.id}">${imgHtml(it)}</button>` : ''}
+      <div class="m"><b>${x.q} × ${esc(x.code)}</b><span>${esc(x.name || '')}</span><span>${fdate(x.date)} · ${esc(x.platform || '')} · ${esc(locName(x.loc))}</span></div>
+      <div class="r"><b class="money">${money(x.total, x.base)}</b>${p != null ? `<span class="${p >= 0 ? 'pos' : 'neg'}">${p >= 0 ? '+' : ''}${money(p, x.base)}</span>` : ''}</div>
+      <button class="iconbtn" data-act="undoSale" data-id="${x.id}"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5M4 9h11a5 5 0 0 1 0 10h-3"/></svg></button></div>`;
+  }).join('') + '</div>';
+  if (!sales.length) h += `<div class="empty"><div class="e">🧾</div>${t('nothingHere')}</div>`;
+  return h;
+}
+
+/* ---- move ---- */
+function renderMove() {
+  const col = activeCol();
+  const m = ui.move;
+  if (!locById(m.from)) m.from = (S.locations.find(l => !l.sell) || S.locations[0]).id;
+  if (!locById(m.to) || m.to === m.from) m.to = (S.locations.find(l => l.id !== m.from) || {}).id;
+  const opt = sel => S.locations.map(l => `<option value="${l.id}"${l.id === sel ? ' selected' : ''}>${esc(l.name)}</option>`).join('');
+  let h = `<div class="frow" style="align-items:end;margin-top:4px"><div class="field" style="margin:0"><label>${t('from')}</label><select data-ch="mFrom">${opt(m.from)}</select></div>
+    <button class="iconbtn" data-act="mSwap" style="flex:none;margin-bottom:2px"><svg viewBox="0 0 24 24"><path d="M4 8h15l-4-4M20 16H5l4 4"/></svg></button>
+    <div class="field" style="margin:0"><label>${t('to')}</label><select data-ch="mTo">${opt(m.to)}</select></div></div>
+    <p class="muted">${t('moveHint')}</p>
+    ${chips([['surplus', t('surplus')], ['all', t('all')]], m.filter, 'mFilter')}`;
+  const rows = colItems(col.id).map(it => ({it, r: calc(it)})).filter(x => x.r.at[m.from] > 0 && (m.filter === 'all' || x.r.saleAt[m.from] > 0)).sort((a, b) => byCode(a.it, b.it));
+  let selTotal = 0;
+  for (const k in m.sel) if (S.items[k]) selTotal += m.sel[k]; else delete m.sel[k];
+  h += `<div class="btns" style="margin-bottom:10px"><button class="btn sm" data-act="mPick" data-v="surplus">${t('pickSurplus')}</button><button class="btn sm" data-act="mPick" data-v="all">${t('pickAll')}</button><button class="btn sm" data-act="mPick" data-v="none">${t('clearSel')}</button></div>`;
+  h += '<div class="list">' + rows.map(({it, r}) => `<div class="crow${m.sel[it.id] ? ' has' : ''}"><button class="th" data-act="item" data-id="${it.id}">${imgHtml(it)}</button>
+    <div class="m"><b>${esc(it.code)}</b><span>${esc(it.name || '')}</span><small>${esc(locName(m.from))}: ${r.at[m.from]} (${t('surplus').toLowerCase()} ${r.saleAt[m.from]})</small></div>
+    ${stepper('mq', `data-id="${it.id}"`, m.sel[it.id] || 0)}</div>`).join('') + '</div>';
+  if (!rows.length) h += `<div class="empty"><div class="e">📦</div>${t('nothingHere')}</div>`;
+  h += `<div class="stickybar"><button class="btn pri block" data-act="doMove" ${selTotal ? '' : 'disabled'}>${t('moveN', selTotal)}: ${esc(locName(m.from))} → ${esc(locName(m.to))}</button></div>`;
+  const moves = S.moves.filter(x => x.col === col.id).slice(-30).reverse();
+  if (moves.length) {
+    h += `<div class="sec"><h2>${t('history')}</h2></div><div class="list">` + moves.map(x => `<div class="row"><div class="m"><b>${x.q} × ${esc(x.code)}</b><span>${fdate(x.date)} · ${esc(locName(x.from))} → ${esc(locName(x.to))}</span></div></div>`).join('') + '</div>';
+  }
+  $('#tab-move').innerHTML = h;
+}
+
+/* ---- settings ---- */
+function renderSettings() {
+  const col = activeCol();
+  const s = S.settings, R = s.rates;
+  const cats = CAT ? CAT.series : [];
+  const sel = (ch, opts, v) => `<select data-ch="${ch}">${opts.map(([k, l]) => `<option value="${k}"${k === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+  let h = `<div class="sec"><h2>${t('collections')}</h2><button class="link" data-act="newCol">+ ${t('newCol')}</button></div><div class="list">` +
+    S.collections.map(c => `<div class="row"><span style="font-size:22px">${(TPL[c.tpl] || TPL.custom).icon}</span><div class="m"><b>${esc(c.name)}</b><span>${tn((TPL[c.tpl] || TPL.custom).name)} · ${t('itemsCount', colItems(c.id).length)}</span></div>
+      <button class="btn sm" data-act="renCol" data-id="${c.id}">${t('rename')}</button></div>`).join('') + '</div>';
+  if (col && TPL[col.tpl] && TPL[col.tpl].cat) {
+    h += `<div class="sec"><h2>${t('catalog')}</h2><button class="link" data-act="catUpd">${t('updateNow')}</button></div><div class="card">
+      <div class="muted">${CAT && CAT.source === 'seed' ? t('catSeed') : t('catInfo', catItemCount(CAT), cats.length, CAT ? fdate(CAT.generated) : '')}</div>
+      <div style="margin-top:6px"><b style="font-size:13px">${t('catSeries')} — ${esc(col.name)}</b></div>` +
+      cats.map(cs => `<label class="check"><input type="checkbox" data-ch="catSer" data-v="${cs.id}" ${(col.catSeries || []).includes(cs.id) ? 'checked' : ''}><span style="flex:1">${esc(cs.name)}</span><span class="muted">${cs.items.length}</span></label>`).join('') + '</div>';
+  }
+  h += `<div class="sec"><h2>${t('locations')}</h2><button class="link" data-act="addLoc">+ ${t('addLoc')}</button></div><div class="list">` +
+    S.locations.map(l => `<div class="row"><div class="ic" style="font-size:20px">${l.sell ? '🏷️' : '📦'}</div><div class="m"><b>${esc(l.name)}</b><span>${l.sell ? t('sellLoc') : t('storeLoc')}</span></div>
+      <button class="btn sm" data-act="editLoc" data-id="${l.id}">${t('rename')}</button></div>`).join('') + '</div>';
+  h += `<div class="sec"><h2>${t('collection')}</h2></div><div class="card">
+    <div class="condrow"><span>${t('defKeep')}<br><small class="muted">${t('defKeepP')}</small></span>${stepper('defKeep', '', s.keep, true)}</div>
+    <div class="field"><label>${t('keepFirst')}</label>${sel('keepFirst', S.locations.map(l => [l.id, l.name]), s.keepFirst)}<div class="muted" style="margin-top:4px">${t('keepFirstP')}</div></div>
+    <div class="field"><label>${t('defCond')}</label>${sel('defCond', CONDS.map(c => [c, t(c)]), s.cond)}</div>
+    <div class="field"><label>${t('defPlatform')}</label><input data-ch="defPlatform" value="${esc(s.platform)}"></div></div>`;
+  const others = CURS.filter(c => c !== s.cur);
+  h += `<div class="sec"><h2>${t('rates')}</h2><button class="link" data-act="ratesUpd">${t('updateNow')}</button></div><div class="card">
+    <div class="field" style="margin-top:0"><label>${t('mainCur')}</label>${sel('mainCur', CURS.map(c => [c, c]), s.cur)}</div>
+    <div class="muted">${R.manual ? t('manualRate') : (R.date ? t('ratesUpd', fdate(R.date)) : t('ratesOffline'))}</div>` +
+    ['EUR', 'RSD'].concat(others.filter(c => c !== 'EUR' && c !== 'RSD')).filter(c => c !== s.cur).slice(0, 4).map(c => `<div class="condrow"><span>1 ${c} =</span>
+      <input style="width:120px;text-align:right" inputmode="decimal" data-ch="rate" data-cur="${c}" value="${nf(conv(1, c, s.cur), 4)}"><span>${s.cur}</span></div>`).join('') +
+    `${R.manual ? `<button class="link" data-act="ratesAuto">${t('ratesAuto')}</button>` : ''}</div>`;
+  h += `<div class="sec"><h2>${t('data')}</h2></div><div class="card"><p class="muted" style="margin-top:0">${t('dataInfo')}</p>
+    <div class="btns"><button class="btn" data-act="backup">💾 ${t('backup')}</button><button class="btn" data-act="restore">↩ ${t('restoreBk')}</button></div>
+    <div class="muted" style="margin:6px 0 12px">${t('lastBackup', S.meta.lastBackup ? fdate(S.meta.lastBackup) : t('never'))}</div>
+    <div class="btns"><button class="btn" data-act="exportX">📤 ${t('exportXlsx')}</button><button class="btn" data-act="importX">📥 ${t('importXlsx')}</button></div></div>`;
+  h += `<div class="sec"><h2>${t('pictures')}</h2></div><div class="card"><p class="muted" style="margin-top:0">${t('picsInfo')}${APP && APP.imagesSize ? ' · ' + t('picsSize', bytes(APP.imagesSize())) : ''}</p>
+    <div class="btns"><button class="btn" data-act="dlAll">⬇ ${t('dlImages')}</button>${APP && APP.clearImages ? `<button class="btn" data-act="clearPics">${t('clearPics')}</button>` : ''}</div></div>`;
+  h += `<div class="sec"><h2>${t('app')}</h2></div><div class="card">
+    <div class="field" style="margin-top:0"><label>${t('language')}</label>${sel('lang', [['sr', 'Српски'], ['en', 'English']], s.lang)}</div>
+    <div class="field"><label>${t('theme')}</label>${sel('theme', [['auto', t('themeAuto')], ['dark', t('themeDark')], ['light', t('themeLight')]], s.theme)}</div>
+    ${APP ? `<button class="btn block" data-act="checkUpd">🔄 ${t('checkUpd')}</button>` : ''}
+    <div class="muted" style="margin-top:10px">${t('version')}: ${esc(APP && APP.getVersion ? APP.getVersion() : 'web')}</div></div>`;
+  if (col) h += `<div style="margin-top:18px"><button class="btn danger block" data-act="delCol" data-id="${col.id}">${t('delCol')}: ${esc(col.name)}</button></div>`;
+  $('#tab-set').innerHTML = h;
+}
+
+/* ---------------- actions ---------------- */
+function snapshot(ids) { return ids.map(id => JSON.parse(JSON.stringify(S.items[id]))); }
+function restoreSnap(snap) { for (const it of snap) S.items[it.id] = it; save(); render(); }
+
+const ACT = {
+  tab(b) {
+    // Tapping Overview again goes back from a series to the overview.
+    if (b.dataset.tab === 'home' && ui.tab === 'home') ui.ser = null;
+    ui.tab = b.dataset.tab; closeSheet(); save(); render(); window.scrollTo(0, 0);
+  },
+  closeSheet() { closeSheet(); render(); },
+  confirmNo() { const p = ui.sheet && ui.sheet.prev; reopenPrev(p); },
+  confirmYes() { const s = ui.sheet; if (!s) return; const p = s.prev; closeSheet(); if (p) ui.sheet = p; s.onOk(); if (ui.sheet === p) reopenPrev(p); },
+  colMenu() {
+    ui.sheet = {type: 'cols'};
+    openSheet(`<h3>${t('collections')}</h3><div class="list" style="margin-top:10px">` + S.collections.map(c => `<button class="row" data-act="pickCol" data-id="${c.id}">
+      <span style="font-size:22px">${(TPL[c.tpl] || TPL.custom).icon}</span><div class="m"><b>${esc(c.name)}</b><span>${t('itemsCount', colItems(c.id).length)}</span></div>${c.id === S.active ? '✓' : ''}</button>`).join('') +
+      `</div><div style="margin-top:12px"><button class="btn block" data-act="newCol">+ ${t('newCol')}</button></div>`);
+  },
+  pickCol(b) { S.active = b.dataset.id; ui.ser = null; ui.count.ser = 'all'; closeSheet(); save(); render(); },
+  newCol() { ui.sheet = {type: 'newcol'}; openSheet(`<h3>${t('newCol')}</h3><div style="margin-top:12px">${tplList()}</div>`); },
+  newColTpl(b) {
+    const tp = TPL[b.dataset.tpl];
+    ui.sheet = {type: 'newcol2', tpl: tp.id};
+    let h = `<h3>${tp.icon} ${esc(tn(tp.name))}</h3><div class="field"><label>${t('colName')}</label><input id="ncName" value="${esc(tn(tp.name))}"></div>`;
+    if (tp.cat) {
+      h += `<div class="sec"><h2>${t('pickSeries')}</h2></div><p class="muted">${t('pickSeriesP')}</p>` +
+        (CAT ? CAT.series : []).map(cs => `<label class="check"><input type="checkbox" class="ncSer" value="${cs.id}" ${DEFAULT_CAT_SERIES.includes(cs.id) ? 'checked' : ''}><span style="flex:1">${esc(cs.name)}</span><span class="muted">${cs.items.length}</span></label>`).join('');
+    }
+    h += `<div style="margin-top:16px"><button class="btn pri block" data-act="createCol">${t('create')}</button></div>`;
+    openSheet(h);
+  },
+  createCol() {
+    const tpl = ui.sheet.tpl, tp = TPL[tpl];
+    const col = {id: uid(), name: ($('#ncName').value || '').trim() || tn(tp.name), tpl, created: today()};
+    if (tp.cat) col.catSeries = [...document.querySelectorAll('.ncSer:checked')].map(x => x.value);
+    S.collections.push(col); S.active = col.id; ui.ser = null; ui.tab = 'home';
+    if (tp.cat) syncCatalog(col);
+    else { S.series.push({id: uid(), col: col.id, name: lang() ? 'General' : 'Опште', order: 0}); }
+    closeSheet(); save(); render();
+  },
+  renCol(b) {
+    const c = colById(b.dataset.id);
+    ui.sheet = {type: 'rencol', id: c.id};
+    openSheet(`<h3>${t('rename')}</h3><div class="field"><input id="rcName" value="${esc(c.name)}"></div><button class="btn pri block" data-act="renColOk">${t('save')}</button>`);
+  },
+  renColOk() { const c = colById(ui.sheet.id); c.name = $('#rcName').value.trim() || c.name; closeSheet(); save(); render(); },
+  delCol(b) {
+    const c = colById(b.dataset.id);
+    confirmSheet(t('delColQ', c.name), t('del'), () => {
+      for (const id in S.items) if (S.items[id].col === c.id) { DB.del(id); delete photos[id]; delete S.items[id]; }
+      S.series = S.series.filter(s => s.col !== c.id);
+      S.sales = S.sales.filter(s => s.col !== c.id);
+      S.moves = S.moves.filter(s => s.col !== c.id);
+      delete S.hidden[c.id];
+      S.collections = S.collections.filter(x => x.id !== c.id);
+      S.active = S.collections[0] ? S.collections[0].id : null;
+      ui.tab = 'home'; ui.ser = null;
+      save(); render();
+    }, true);
+  },
+  search() {
+    ui.sheet = {type: 'search'};
+    openSheet(`<h3>${t('searchAll')}</h3>${searchBox('gQ', '')}<div class="list" id="gRes"></div>`);
+    setTimeout(() => { const i = $('#sheet input'); if (i) i.focus(); }, 250);
+  },
+  openSer(b) { ui.ser = b.dataset.id; ui.filter = 'all'; ui.q = ''; render(); window.scrollTo(0, 0); },
+  closeSer() { ui.ser = null; render(); },
+  filter(b) { ui.filter = b.dataset.v; render(); },
+  item(b) { openItem(b.dataset.id); },
+  serMenu(b) {
+    const s = serById(b.dataset.id);
+    ui.sheet = {type: 'sermenu', id: s.id};
+    openSheet(`<h3>${esc(s.name)}</h3><div class="list" style="margin-top:10px">
+      <button class="row" data-act="dlSer" data-id="${s.id}"><div class="m"><b>⬇ ${t('dlImages')}</b></div></button>
+      <button class="row" data-act="renSer" data-id="${s.id}"><div class="m"><b>✏️ ${t('rename')}</b></div></button>
+      ${s.cat ? `<button class="row" data-act="hideSer" data-id="${s.id}"><div class="m"><b>🙈 ${t('hideSeries')}</b></div></button>` : `<button class="row" data-act="delSer" data-id="${s.id}"><div class="m"><b style="color:var(--bad)">🗑 ${t('deleteSeries')}</b></div></button>`}</div>`);
+  },
+  dlSer(b) { closeSheet(); downloadPictures(serItems(b.dataset.id)); },
+  dlAll() { const col = activeCol(); downloadPictures(colItems(col.id, {visibleOnly: true})); },
+  clearPics() { if (APP && APP.clearImages) APP.clearImages(''); toast(t('saved')); render(); },
+  renSer(b) {
+    const s = serById(b.dataset.id);
+    ui.sheet = {type: 'renser', id: s.id};
+    openSheet(`<h3>${t('rename')}</h3><div class="field"><input id="rsName" value="${esc(s.name)}"></div><button class="btn pri block" data-act="renSerOk">${t('save')}</button>`);
+  },
+  renSerOk() { const s = serById(ui.sheet.id); s.name = $('#rsName').value.trim() || s.name; closeSheet(); save(); render(); },
+  hideSer(b) {
+    const s = serById(b.dataset.id), col = colById(s.col);
+    col.catSeries = (col.catSeries || []).filter(x => x !== s.cat);
+    s.off = true; ui.ser = null; closeSheet(); save(); render();
+  },
+  delSer(b) {
+    const s = serById(b.dataset.id);
+    const n = serItems(s.id).length;
+    confirmSheet(t('deleteSeries') + ` „${s.name}“ (${t('itemsCount', n)})?`, t('del'), () => {
+      for (const it of serItems(s.id)) { DB.del(it.id); delete photos[it.id]; delete S.items[it.id]; }
+      S.series = S.series.filter(x => x.id !== s.id);
+      ui.ser = null; save(); render();
+    }, true);
+  },
+  addSeries() {
+    ui.sheet = {type: 'addser'};
+    openSheet(`<h3>${t('addSeries')}</h3><div class="field"><label>${t('seriesName')}</label><input id="asName"></div><button class="btn pri block" data-act="addSeriesOk">${t('create')}</button>`);
+    setTimeout(() => $('#asName') && $('#asName').focus(), 250);
+  },
+  addSeriesOk() {
+    const name = $('#asName').value.trim(); if (!name) return;
+    const col = activeCol();
+    const s = {id: uid(), col: col.id, name, order: colSeries(col.id, true).length};
+    S.series.push(s); closeSheet(); ui.ser = s.id; save(); render();
+  },
+  addItem(b) {
+    const s = serById(b.dataset.ser);
+    ui.sheet = {type: 'additem', ser: s.id};
+    openSheet(`<h3>${t('newItemIn', esc(s.name))}</h3>
+      <div class="field"><label>${t('code')}</label><input id="aiCode" autocapitalize="off"></div>
+      <div class="field"><label>${t('name')}</label><input id="aiName"></div>
+      <div class="field"><label>${t('imgUrl')}</label><input id="aiImg" placeholder="https://…"></div>
+      <button class="btn pri block" data-act="addItemOk">${t('create')}</button>`);
+    setTimeout(() => $('#aiCode') && $('#aiCode').focus(), 250);
+  },
+  addItemOk() {
+    const code = $('#aiCode').value.trim();
+    if (!code) { toast(t('needCode')); return; }
+    const s = serById(ui.sheet.ser);
+    if (findByCode(s.col, code)) { toast(t('exists', code)); return; }
+    const it = newItem(s.col, s.id, code, $('#aiName').value.trim());
+    const img = $('#aiImg').value.trim(); if (img) it.imgUrl = img;
+    const hit = catLookup(code);
+    if (hit && TPL[colById(s.col).tpl].cat) { it.cat = true; it.name = it.name || hit.item.name; it.img = hit.item.img; it.year = hit.item.year; if (it.name !== hit.item.name) it.nameEdited = true; }
+    if (S.hidden[s.col]) delete S.hidden[s.col][code];
+    save(); render(); openItem(it.id);
+  },
+  hiddenList(b) {
+    const s = serById(b.dataset.ser);
+    const codes = Object.keys(S.hidden[s.col] || {}).filter(c => { const l = catLookup(c); return l && l.series.id === s.cat; }).sort();
+    ui.sheet = {type: 'hidden', ser: s.id};
+    openSheet(`<h3>${t('hiddenCodes', codes.length)}</h3><div class="list" style="margin-top:10px">` + codes.map(c => {
+      const l = catLookup(c);
+      return `<div class="row"><div class="m"><b>${esc(c)}</b><span>${esc(l ? l.item.name : '')}</span></div><button class="btn sm" data-act="unhide" data-code="${esc(c)}" data-ser="${s.id}">${t('restore')}</button></div>`;
+    }).join('') + '</div>');
+  },
+  unhide(b) {
+    const s = serById(b.dataset.ser), col = colById(s.col);
+    delete (S.hidden[col.id] || {})[b.dataset.code];
+    syncCatalog(col); save(); render();
+    ACT.hiddenList({dataset: {ser: s.id}});
+  },
+  iq(b) {
+    const it = S.items[b.dataset.id];
+    const d = +b.dataset.d;
+    setQty(it, b.dataset.loc, b.dataset.cond, qtyAt(it, b.dataset.loc, b.dataset.cond) + d);
+    save(); render();
+  },
+  keep(b) {
+    const it = S.items[b.dataset.id];
+    const cur = it.keep != null ? it.keep : S.settings.keep;
+    it.keep = Math.max(0, cur + (+b.dataset.d));
+    save(); render();
+  },
+  keepReset(b) { S.items[b.dataset.id].keep = null; save(); render(); },
+  delItem(b) {
+    const it = S.items[b.dataset.id];
+    const r = calc(it);
+    const doDel = () => {
+      const snap = snapshot([it.id]);
+      if (it.cat) { S.hidden[it.col] = S.hidden[it.col] || {}; S.hidden[it.col][it.code] = true; }
+      delete S.items[it.id];
+      closeSheet(); save(); render();
+      toast(t('del') + ': ' + it.code, () => { if (S.hidden[it.col]) delete S.hidden[it.col][it.code]; restoreSnap(snap); });
+      DB.del(it.id); delete photos[it.id];
+    };
+    confirmSheet(r.total ? t('deleteItemStockQ', it.code, r.total) : t('deleteItemQ', it.code), t('del'), doDel, true);
+  },
+  async photo(b) {
+    const id = b.dataset.id;
+    const f = await pickFile('image/*');
+    if (!f) return;
+    try {
+      const data = await readPhoto(f);
+      photos[id] = data; await DB.put(id, data);
+      toast(t('photoSaved')); render();
+    } catch (e) { toast(t('badFile')); }
+  },
+  photoDel(b) { const id = b.dataset.id; delete photos[id]; DB.del(id); render(); },
+  delCost(b) {
+    const it = S.items[b.dataset.id];
+    confirmSheet(t('delPurchaseQ'), t('del'), () => { it.cost = (it.cost || []).filter(p => p.id !== b.dataset.cid); save(); render(); }, true);
+  },
+  buyForm(b) {
+    const it = S.items[b.dataset.id];
+    ui.sheet = {type: 'buy', id: it.id};
+    const lastCur = localStorage.getItem('collectr.lastCur') || S.settings.cur;
+    openSheet(`<h3>${t('addPurchase')}</h3><div class="sub">${esc(it.code)} ${esc(it.name || '')}</div>
+      <div class="frow"><div class="field"><label>${t('qty')}</label><input id="bQ" inputmode="numeric" value="1"></div>
+        <div class="field"><label>${t('location')}</label><select id="bLoc">${S.locations.map(l => `<option value="${l.id}"${l.id === (ui.count.loc || S.locations[0].id) ? ' selected' : ''}>${esc(l.name)}</option>`).join('')}</select></div></div>
+      <div class="frow"><div class="field"><label>${t('pricePer')}</label><input id="bP" inputmode="decimal" placeholder="0"></div>
+        <div class="field"><label>${t('currency')}</label><select id="bC">${CURS.map(c => `<option${c === lastCur ? ' selected' : ''}>${c}</option>`).join('')}</select></div></div>
+      <div class="muted" id="bConv"></div>
+      <div class="frow"><div class="field"><label>${t('condition')}</label><select id="bCond">${CONDS.map(c => `<option value="${c}"${c === S.settings.cond ? ' selected' : ''}>${t(c)}</option>`).join('')}</select></div>
+        <div class="field"><label>${t('date')}</label><input id="bD" type="date" value="${today()}"></div></div>
+      <div class="btns" style="margin-top:8px"><button class="btn" data-act="backToItem">${t('cancel')}</button><button class="btn pri" data-act="buyOk">${t('save')}</button></div>`);
+  },
+  backToItem() { openItem(ui.sheet.id); },
+  buyOk() {
+    const it = S.items[ui.sheet.id];
+    const q = int($('#bQ').value); if (!q) return;
+    const amt = num($('#bP').value), cur = $('#bC').value, loc = $('#bLoc').value, cond = $('#bCond').value, date = $('#bD').value || today();
+    localStorage.setItem('collectr.lastCur', cur);
+    const snap = snapshot([it.id]);
+    addQty(it, loc, cond, q);
+    if (amt > 0) { it.cost = it.cost || []; it.cost.push({id: uid(), q, amt, cur, base: S.settings.cur, total: conv(amt * q, cur, S.settings.cur), date, loc}); }
+    save(); openItem(it.id); render();
+    toast(t('addedToStock'), () => restoreSnap(snap));
+  },
+  sellForm(b) {
+    const it = S.items[b.dataset.id];
+    const r = calc(it);
+    const locs = S.locations.filter(l => l.sell && r.saleAt[l.id] > 0);
+    if (!locs.length) return;
+    ui.sheet = {type: 'sell', id: it.id};
+    const ac = avgCost(it);
+    openSheet(`<h3>${t('sell')}</h3><div class="sub">${esc(it.code)} ${esc(it.name || '')} · ${t('sellNow')}: ${r.sellNow}</div>
+      <div class="frow"><div class="field"><label>${t('qty')}</label><input id="sQ" inputmode="numeric" value="1"></div>
+        <div class="field"><label>${t('location')}</label><select id="sLoc">${locs.map(l => `<option value="${l.id}">${esc(l.name)} (${r.saleAt[l.id]})</option>`).join('')}</select></div></div>
+      <div class="frow"><div class="field"><label>${t('soldFor')}</label><input id="sP" inputmode="decimal" placeholder="0"></div>
+        <div class="field"><label>${t('currency')}</label><select id="sC">${CURS.map(c => `<option${c === S.settings.cur ? ' selected' : ''}>${c}</option>`).join('')}</select></div></div>
+      ${ac != null ? `<div class="muted">${t('avgCost')}: ${money(ac)}${t('perPiece')}</div>` : ''}
+      <div class="frow"><div class="field"><label>${t('platform')}</label><input id="sW" value="${esc(S.settings.platform)}"></div>
+        <div class="field"><label>${t('date')}</label><input id="sD" type="date" value="${today()}"></div></div>
+      <div class="btns" style="margin-top:8px"><button class="btn" data-act="backToItem">${t('cancel')}</button><button class="btn pri" data-act="sellOk">${t('sell')}</button></div>`);
+  },
+  sellOk() {
+    const it = S.items[ui.sheet.id];
+    const r = calc(it);
+    const loc = $('#sLoc').value, q = int($('#sQ').value);
+    if (!q) return;
+    if (q > r.saleAt[loc]) { toast(t('notEnough')); return; }
+    const price = num($('#sP').value), cur = $('#sC').value;
+    const ac = avgCost(it);
+    // Sell the surplus pieces: the collection keeps the best condition, so take the worst first.
+    const taken = takeQty(it, loc, q, MOVE_ORDER);
+    const total = conv(price * q, cur, S.settings.cur);
+    S.sales.push({id: uid(), col: it.col, item: it.id, code: it.code, name: it.name, q, price, cur, base: S.settings.cur, total,
+      cost: ac != null ? ac * q : null, date: $('#sD').value || today(), platform: $('#sW').value.trim(), loc, taken});
+    save(); closeSheet(); render(); toast(t('sold') + ': ' + q + ' × ' + it.code);
+  },
+  undoSale(b) {
+    const x = S.sales.find(s => s.id === b.dataset.id);
+    confirmSheet(t('undoSale', x.q), t('ok'), () => {
+      const it = S.items[x.item];
+      if (it) { const tk = x.taken || {mint: x.q}; for (const c in tk) setQty(it, x.loc, c, qtyAt(it, x.loc, c) + tk[c]); }
+      S.sales = S.sales.filter(s => s.id !== x.id);
+      save(); render();
+    });
+  },
+  saleMode(b) { ui.sale.mode = b.dataset.v; save(); render(); },
+  saleFilter(b) { ui.sale.filter = b.dataset.v; save(); render(); },
+  copyList() {
+    const col = activeCol();
+    const lines = colItems(col.id).map(it => ({it, r: calc(it)})).filter(x => x.r.sellNow > 0).sort((a, b) => byCode(a.it, b.it))
+      .map(({it, r}) => `${it.code}${it.name ? ' ' + it.name : ''} — ${r.sellNow} ${t('pcs')}`);
+    const text = lines.join('\n');
+    const done = () => toast(t('copied'));
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
+    else fallbackCopy(text, done);
+  },
+  cLoc(b) { ui.count.loc = b.dataset.v; save(); render(); },
+  cCond(b) { ui.count.cond = b.dataset.v; save(); render(); },
+  cSer(b) { ui.count.ser = b.dataset.v; save(); render(); },
+  cnt(b) {
+    const it = S.items[b.dataset.id], c = ui.count;
+    const snap = snapshot([it.id]);
+    const done = addQty(it, c.loc, c.cond, +b.dataset.d);
+    if (!done) return;
+    save(); refreshCountRow(it.id);
+    if (done < 0) toast(`${it.code}: −1`, () => { restoreSnap(snap); }, 2500);
+  },
+  mSwap() { const m = ui.move; [m.from, m.to] = [m.to, m.from]; m.sel = {}; save(); render(); },
+  mFilter(b) { ui.move.filter = b.dataset.v; save(); render(); },
+  mPick(b) {
+    const m = ui.move, col = activeCol();
+    m.sel = {};
+    if (b.dataset.v !== 'none') for (const it of colItems(col.id)) { const r = calc(it); const n = b.dataset.v === 'all' ? r.at[m.from] : r.saleAt[m.from]; if (n > 0) m.sel[it.id] = n; }
+    render();
+  },
+  mq(b) {
+    const m = ui.move, it = S.items[b.dataset.id];
+    const max = qtyAt(it, m.from);
+    m.sel[it.id] = Math.min(max, Math.max(0, (m.sel[it.id] || 0) + (+b.dataset.d)));
+    if (!m.sel[it.id]) delete m.sel[it.id];
+    render();
+  },
+  doMove() {
+    const m = ui.move;
+    if (m.from === m.to) { toast(t('sameLoc')); return; }
+    const ids = Object.keys(m.sel);
+    const snap = snapshot(ids), movesBefore = S.moves.length;
+    let n = 0;
+    for (const id of ids) {
+      const it = S.items[id]; const q = Math.min(m.sel[id], qtyAt(it, m.from));
+      if (!q) continue;
+      const taken = takeQty(it, m.from, q, MOVE_ORDER);
+      for (const c in taken) setQty(it, m.to, c, qtyAt(it, m.to, c) + taken[c]);
+      S.moves.push({id: uid(), col: it.col, item: it.id, code: it.code, q, from: m.from, to: m.to, date: today()});
+      n += q;
+    }
+    m.sel = {};
+    save(); render();
+    toast(t('moved', n), () => { S.moves.length = movesBefore; restoreSnap(snap); });
+  },
+  defKeep(b) { S.settings.keep = Math.max(0, S.settings.keep + (+b.dataset.d)); save(); render(); },
+  catUpd() { updateCatalog(true); },
+  ratesUpd() { updateRates(true); },
+  ratesAuto() { S.settings.rates.manual = false; S.settings.rates.date = null; updateRates(true); },
+  addLoc() { editLoc(null); },
+  editLoc(b) { editLoc(b.dataset.id); },
+  locOk() {
+    const name = $('#lName').value.trim(); if (!name) return;
+    const sell = $('#lSell').checked;
+    if (ui.sheet.id) { const l = locById(ui.sheet.id); l.name = name; l.sell = sell; } else S.locations.push({id: uid(), name, sell});
+    closeSheet(); save(); render();
+  },
+  locDel() {
+    const l = locById(ui.sheet.id);
+    const used = Object.values(S.items).some(it => qtyAt(it, l.id) > 0);
+    if (used) { toast(t('locNotEmpty')); return; }
+    if (S.locations.length < 2) return;
+    confirmSheet(t('locDelQ', l.name), t('del'), () => {
+      S.locations = S.locations.filter(x => x.id !== l.id);
+      for (const it of Object.values(S.items)) if (it.stock) delete it.stock[l.id];
+      if (S.settings.keepFirst === l.id) S.settings.keepFirst = S.locations[0].id;
+      save(); render();
+    }, true);
+  },
+  checkUpd() { if (APP && APP.checkForUpdate) APP.checkForUpdate(); },
+  backup() { doBackup(); },
+  restore() { doRestore(); },
+  exportX() { doExport(); },
+  importX() { doImport(); },
+  importOk() { runImport(); },
+};
+function editLoc(id) {
+  const l = id ? locById(id) : {name: '', sell: false};
+  ui.sheet = {type: 'loc', id};
+  openSheet(`<h3>${id ? esc(l.name) : t('addLoc')}</h3><div class="field"><label>${t('locName')}</label><input id="lName" value="${esc(l.name)}"></div>
+    <label class="check"><input type="checkbox" id="lSell" ${l.sell ? 'checked' : ''}><span>${t('canSell')}</span></label>
+    <div class="btns" style="margin-top:12px">${id && S.locations.length > 1 ? `<button class="btn danger" data-act="locDel">${t('del')}</button>` : ''}<button class="btn pri" data-act="locOk">${t('save')}</button></div>`);
+}
+function fallbackCopy(text, done) {
+  const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) { /* ignore */ }
+  ta.remove();
+}
+
+/* input / change handlers (data-ch) */
+const CH = {
+  serQ(el) { ui.q = el.value; const pos = el.selectionStart; renderHome(); const n = document.querySelector('[data-ch="serQ"]'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } },
+  cQ(el) { ui.count.q = el.value; const pos = el.selectionStart; renderCount(); const n = document.querySelector('[data-ch="cQ"]'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } },
+  gQ(el) {
+    const q = el.value.trim(); const col = activeCol();
+    const res = q ? colItems(col.id).filter(i => matches(i, q)).sort(byCode).slice(0, 40) : [];
+    $('#gRes').innerHTML = res.map(it => { const r = calc(it); const s = serById(it.ser); return `<button class="row" data-act="item" data-id="${it.id}"><span class="th">${imgHtml(it)}</span><div class="m"><b>${esc(it.code)}</b><span>${esc(it.name || '')}${s ? ' · ' + esc(s.name) : ''}</span></div><div class="r"><b>${r.total}</b></div></button>`; }).join('') || (q ? `<div class="empty">${t('noResults')}</div>` : '');
+  },
+  cntSet(el) {
+    const it = S.items[el.dataset.id], c = ui.count;
+    const v = int(el.value), cur = qtyAt(it, c.loc);
+    if (v !== cur) { addQty(it, c.loc, c.cond, v - cur); save(); }
+    refreshCountRow(it.id);
+  },
+  iqSet(el) { const it = S.items[el.dataset.id]; setQty(it, el.dataset.loc, el.dataset.cond, int(el.value)); save(); render(); },
+  keepSet(el) { S.items[el.dataset.id].keep = int(el.value); save(); render(); },
+  mqSet(el) { const it = S.items[el.dataset.id]; const v = Math.min(qtyAt(it, ui.move.from), int(el.value)); if (v) ui.move.sel[it.id] = v; else delete ui.move.sel[it.id]; render(); },
+  defKeepSet(el) { S.settings.keep = int(el.value); save(); render(); },
+  keepLoc(el) { S.items[el.dataset.id].keepLoc = el.value || null; save(); render(); },
+  itCode(el) {
+    const it = S.items[el.dataset.id], v = el.value.trim();
+    if (!v || v === it.code) return;
+    if (findByCode(it.col, v)) { toast(t('exists', v)); el.value = it.code; return; }
+    it.code = v; it.cat = false; save(); render();
+  },
+  itName(el) { const it = S.items[el.dataset.id]; it.name = el.value.trim(); it.nameEdited = true; save(); },
+  itSer(el) { S.items[el.dataset.id].ser = el.value; save(); render(); },
+  itImg(el) { S.items[el.dataset.id].imgUrl = el.value.trim(); save(); render(); },
+  itNote(el) { S.items[el.dataset.id].note = el.value; save(); },
+  mFrom(el) { ui.move.from = el.value; ui.move.sel = {}; save(); render(); },
+  mTo(el) { ui.move.to = el.value; save(); render(); },
+  catSer(el) {
+    const col = activeCol();
+    const set = new Set(col.catSeries || []);
+    if (el.checked) set.add(el.dataset.v); else set.delete(el.dataset.v);
+    col.catSeries = [...set];
+    syncCatalog(col); save(); render();
+  },
+  keepFirst(el) { S.settings.keepFirst = el.value; save(); render(); },
+  defCond(el) { S.settings.cond = el.value; ui.count.cond = el.value; save(); },
+  defPlatform(el) { S.settings.platform = el.value.trim(); save(); },
+  mainCur(el) { S.settings.cur = el.value; save(); render(); },
+  rate(el) {
+    const v = num(el.value); if (!(v > 0)) return;
+    const R = S.settings.rates, c = el.dataset.cur;
+    // v = how many main-currency units one unit of c costs.
+    R.r = Object.assign({}, R.r); R.r[c] = rate(S.settings.cur) / v; R.manual = true;
+    save(); render();
+  },
+  lang(el) { S.settings.lang = el.value; if (APP && APP.setLang) APP.setLang(el.value); save(); render(); },
+  theme(el) { S.settings.theme = el.value; save(); render(); },
+};
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]');
+  if (!b || b.disabled) return;
+  const f = ACT[b.dataset.act];
+  if (f) { e.preventDefault(); f(b, e); }
+});
+const LIVE = new Set(['serQ', 'cQ', 'gQ']);
+document.addEventListener('input', e => { const el = e.target.closest('[data-ch]'); if (el && LIVE.has(el.dataset.ch)) CH[el.dataset.ch](el); });
+document.addEventListener('change', e => { const el = e.target.closest('[data-ch]'); if (el && !LIVE.has(el.dataset.ch) && CH[el.dataset.ch]) CH[el.dataset.ch](el); });
+document.addEventListener('focusin', e => { if (e.target.matches('.step input')) setTimeout(() => e.target.select(), 0); });
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('.step input')) e.target.blur(); });
+window.addEventListener('scroll', () => $('#top').classList.toggle('scrolled', window.scrollY > 4), {passive: true});
+
+/* Android back button: close a sheet, leave a series, then go to the overview. */
+window.collectrBack = function () {
+  if (ui.sheet) {
+    const p = ui.sheet.prev || (['buy', 'sell'].includes(ui.sheet.type) ? {type: 'item', id: ui.sheet.id} : null);
+    if (p && p.type === 'item') { openItem(p.id); return true; }
+    closeSheet(); render(); return true;
+  }
+  if (ui.tab === 'home' && ui.ser) { ui.ser = null; render(); return true; }
+  if (ui.tab !== 'home' && activeCol()) { ui.tab = 'home'; render(); return true; }
+  return false;
+};
+
+/* ---------------- backup / restore ---------------- */
+async function doBackup() {
+  S.meta.lastBackup = today(); save(true);
+  const data = JSON.stringify({app: 'collectr', v: 1, date: new Date().toISOString(), state: S, photos, catalog: null});
+  download(`collectr-backup-${today()}.json`, 'application/json', data, false);
+  render();
+}
+async function doRestore() {
+  const f = await pickFile('.json,application/json');
+  if (!f) return;
+  let j;
+  try { j = JSON.parse(await f.text()); } catch (e) { toast(t('badFile')); return; }
+  if (!j || j.app !== 'collectr' || !j.state) { toast(t('badFile')); return; }
+  confirmSheet(t('restoreQ', fdate((j.date || '').slice(0, 10))), t('restoreBk'), async () => {
+    localStorage.setItem(KEY, JSON.stringify(j.state));
+    await DB.clear();
+    photos = j.photos || {};
+    for (const k in photos) await DB.put(k, photos[k]);
+    load(); ui.ser = null; ui.tab = 'home';
+    if (APP && APP.setLang) APP.setLang(S.settings.lang);
+    render(); toast(t('restored'));
+  });
+}
+
+/* ---------------- Excel ---------------- */
+function loadXLSX() {
+  if (window.XLSX) return Promise.resolve();
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = 'vendor/xlsx.full.min.js'; s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+function exportRows(col) {
+  const head = [t('code'), t('name'), t('seriesOne')].concat(S.locations.map(l => l.name), [t('total'), t('keepTarget'), t('collection'), t('forSale'), t('sellNow'), t('condition'), t('avgCost') + ' (' + S.settings.cur + ')', t('note')]);
+  const rows = [head];
+  const sers = colSeries(col.id, true);
+  const order = new Map(sers.map((s, i) => [s.id, i]));
+  const items = colItems(col.id).sort((a, b) => (order.get(a.ser) || 0) - (order.get(b.ser) || 0) || byCode(a, b));
+  for (const it of items) {
+    const r = calc(it);
+    const conds = {};
+    for (const l of S.locations) for (const c of CONDS) conds[c] = (conds[c] || 0) + qtyAt(it, l.id, c);
+    const ac = avgCost(it);
+    rows.push([it.code, it.name || '', (serById(it.ser) || {}).name || ''].concat(S.locations.map(l => r.at[l.id]),
+      [r.total, r.target, r.keep, r.sale, r.sellNow, condText(conds), ac != null ? Math.round(ac * 100) / 100 : '', it.note || '']));
+  }
+  return rows;
+}
+async function doExport() {
+  const col = activeCol();
+  try { await loadXLSX(); } catch (e) { toast('Excel?'); return; }
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(exportRows(col));
+  ws['!cols'] = [{wch: 10}, {wch: 34}, {wch: 14}];
+  XLSX.utils.book_append_sheet(wb, ws, lang() ? 'Inventory' : 'Инвентар');
+  const sales = S.sales.filter(x => x.col === col.id);
+  if (sales.length) {
+    const sr = [[t('date'), t('code'), t('name'), t('qty'), t('soldFor'), t('currency'), t('total') + ' (' + S.settings.cur + ')', t('profit'), t('platform'), t('location')]];
+    for (const x of sales) sr.push([x.date, x.code, x.name || '', x.q, x.price, x.cur, Math.round(toBase(x.total, x.base) * 100) / 100, x.cost != null ? Math.round(toBase(x.total - x.cost, x.base) * 100) / 100 : '', x.platform || '', locName(x.loc)]);
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(sr), lang() ? 'Sales' : 'Продаја');
+  }
+  const b64 = XLSX.write(wb, {type: 'base64', bookType: 'xlsx'});
+  const safe = col.name.replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '') || 'collectr';
+  download(`${safe}-${today()}.xlsx`, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', b64, true);
+}
+const GUESS = {
+  code: /^(šifra|sifra|шифра|code|number|broj|број|set|set ?num|item|no\.?|#)$/i,
+  name: /^(naziv|назив|name|ime|име|figura|фигура|opis|опис)$/i,
+  series: /^(serija|serije|серија|серије|series|theme|tema|тема)$/i,
+  cond: /^(stanje|стање|condition|cond)$/i,
+  keep: /(циљ|cilj|target|keep|за колекцију|za kolekciju)/i,
+  price: /^(cena|цена|price|nabavna cena|набавна цена|purchase price)$/i,
+  currency: /^(valuta|валута|currency|cur)$/i,
+  note: /^(napomena|напомена|note|notes)$/i,
+};
+function parseCond(v) {
+  v = String(v || '').toLowerCase();
+  if (/\d/.test(v)) return null;  // a breakdown like "3 mint, 1 damaged" (our own export): use the default
+  if (/ošte|oste|оште|damag|rup|рупи/.test(v)) return 'damaged';
+  if (/otvor|отвор|open/.test(v)) return 'opened';
+  if (/mint|минт|nov|нов|sealed/.test(v)) return 'mint';
+  return null;
+}
+async function doImport() {
+  const f = await pickFile('.xlsx,.xls,.csv,.ods,.json');
+  if (!f) return;
+  if (/\.json$/i.test(f.name)) { toast(t('badFile')); return; }
+  try { await loadXLSX(); } catch (e) { toast('Excel?'); return; }
+  let rows;
+  try {
+    const wb = XLSX.read(await f.arrayBuffer(), {type: 'array'});
+    rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header: 1, defval: '', raw: false});
+  } catch (e) { toast(t('badFile')); return; }
+  rows = rows.filter(r => r.some(c => String(c).trim() !== ''));
+  if (rows.length < 2) { toast(t('badFile')); return; }
+  const head = rows[0].map(h => String(h).trim());
+  const map = {};
+  const used = new Set();
+  const guess = (field, re) => { const i = head.findIndex((h, k) => !used.has(k) && re.test(h)); if (i >= 0) { map[field] = i; used.add(i); } };
+  guess('code', GUESS.code);
+  if (map.code == null) { map.code = 0; used.add(0); }
+  for (const l of S.locations) guess('loc:' + l.id, new RegExp('^' + l.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$', 'i'));
+  for (const k of ['name', 'series', 'cond', 'keep', 'price', 'currency', 'note']) guess(k, GUESS[k]);
+  ui.sheet = {type: 'import', rows, head, map, mode: 'set'};
+  const col = activeCol();
+  const fields = [['code', t('code')], ['name', t('name')], ['series', t('seriesOne')]].concat(S.locations.map(l => ['loc:' + l.id, t('qtyIn', l.name)]),
+    [['cond', t('condition')], ['keep', t('keepTarget')], ['price', t('pricePer')], ['currency', t('currency')], ['note', t('note')]]);
+  const opts = v => `<option value="">${t('none')}</option>` + head.map((h, i) => `<option value="${i}"${v === i ? ' selected' : ''}>${esc(h || '#' + (i + 1))}</option>`).join('');
+  openSheet(`<h3>${t('importTitle')}</h3><div class="sub">${t('importInto', esc(col.name))}. ${t('importP', rows.length - 1)}</div>
+    <table class="map">${fields.map(([k, label]) => `<tr><td>${esc(label)}</td><td><select class="imMap" data-k="${k}">${opts(map[k])}</select></td></tr>`).join('')}</table>
+    <div class="field"><label>${t('importMode')}</label><div class="seg"><button class="on" id="imSet" onclick="imMode(this,'set')">${t('modeSet')}</button><button id="imAdd" onclick="imMode(this,'add')">${t('modeAdd')}</button></div></div>
+    <button class="btn pri block" data-act="importOk">${t('importTitle')}</button>`);
+}
+window.imMode = function (b, m) { ui.sheet.mode = m; document.querySelectorAll('#imSet,#imAdd').forEach(x => x.classList.toggle('on', x === b)); };
+function runImport() {
+  const s = ui.sheet, col = activeCol();
+  const map = {};
+  document.querySelectorAll('.imMap').forEach(el => { if (el.value !== '') map[el.dataset.k] = +el.value; });
+  if (map.code == null) { toast(t('needCode')); return; }
+  const cell = (row, k) => map[k] == null ? '' : String(row[map[k]] == null ? '' : row[map[k]]).trim();
+  let added = 0, updated = 0;
+  const isCat = TPL[col.tpl] && TPL[col.tpl].cat;
+  for (const row of s.rows.slice(1)) {
+    const code = cell(row, 'code').replace(/-1$/, '');
+    if (!code) continue;
+    let it = findByCode(col.id, code);
+    if (!it) {
+      let ser = null;
+      const hit = isCat ? catLookup(code) : null;
+      if (hit) {
+        ser = S.series.find(x => x.col === col.id && x.cat === hit.series.id);
+        if (!ser) { col.catSeries = [...new Set((col.catSeries || []).concat(hit.series.id))]; syncCatalog(col); ser = S.series.find(x => x.col === col.id && x.cat === hit.series.id); }
+        if (S.hidden[col.id]) delete S.hidden[col.id][code];
+        it = findByCode(col.id, code);
+      }
+      if (!it) {
+        const sname = cell(row, 'series') || t('imported');
+        ser = ser || S.series.find(x => x.col === col.id && x.name.toLowerCase() === sname.toLowerCase());
+        if (!ser) { ser = {id: uid(), col: col.id, name: sname, order: colSeries(col.id, true).length}; S.series.push(ser); }
+        it = newItem(col.id, ser.id, code, cell(row, 'name'));
+        if (hit) { it.cat = true; it.name = it.name || hit.item.name; it.img = hit.item.img; }
+      }
+      added++;
+    } else updated++;
+    const nm = cell(row, 'name'); if (nm && nm !== it.name) { it.name = nm; it.nameEdited = true; }
+    const cond = parseCond(cell(row, 'cond')) || S.settings.cond;
+    let qsum = 0, lastLoc = null;
+    for (const l of S.locations) {
+      if (map['loc:' + l.id] == null) continue;
+      const raw = cell(row, 'loc:' + l.id);
+      if (raw === '' && s.mode === 'add') continue;
+      const q = int(raw);
+      // Replace: only the difference changes, so conditions already recorded stay as they are.
+      if (s.mode === 'set') { const cur = qtyAt(it, l.id); if (q !== cur) addQty(it, l.id, cond, q - cur); } else if (q) addQty(it, l.id, cond, q);
+      qsum += q; if (q) lastLoc = l.id;
+    }
+    const kp = cell(row, 'keep'); if (kp !== '') it.keep = int(kp);
+    const nt = cell(row, 'note'); if (nt) it.note = nt;
+    const pr = num(cell(row, 'price'));
+    if (pr > 0 && qsum > 0) {
+      const cur = (cell(row, 'currency') || S.settings.cur).toUpperCase();
+      const c = CURS.includes(cur) ? cur : S.settings.cur;
+      it.cost = it.cost || [];
+      it.cost.push({id: uid(), q: qsum, amt: pr, cur: c, base: S.settings.cur, total: conv(pr * qsum, c, S.settings.cur), date: today(), loc: lastLoc || S.locations[0].id});
+    }
+  }
+  closeSheet(); save(); render();
+  toast(t('importDone', added, updated), null, 4000);
+}
+
+/* ---------------- start ---------------- */
+async function start() {
+  load();
+  if (APP && APP.setLang) APP.setLang(S.settings.lang);
+  await Promise.all([DB.open().then(async () => { photos = await DB.all(); }), loadCatalog()]);
+  S.collections.filter(c => TPL[c.tpl] && TPL[c.tpl].cat).forEach(syncCatalog);
+  render();
+  if (APP && APP.ready) APP.ready();
+  setTimeout(() => { updateCatalog(false); updateRates(false); }, 1500);
+}
+start();
+
+if ('serviceWorker' in navigator && !APP && location.protocol === 'https:') {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>

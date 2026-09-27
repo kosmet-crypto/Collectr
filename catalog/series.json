@@ -1,0 +1,15 @@
+{
+  "_help": "Series of LEGO foil packs the catalog workflow collects. A set is included when its number is 6 digits, starts with one of the prefixes, its theme (or a parent theme) contains one of the theme words, and it has at most maxParts pieces. Leave prefixes empty to match by theme and a 'foil' name instead.",
+  "maxParts": 40,
+  "series": [
+    { "id": "ninjago",   "name": "Ninjago",        "prefixes": ["891", "892"], "themes": ["ninjago"] },
+    { "id": "starwars",  "name": "Star Wars",      "prefixes": ["911", "912"], "themes": ["star wars"] },
+    { "id": "dc",        "name": "DC",             "prefixes": ["211", "212"], "themes": ["dc", "batman", "super heroes", "superheroes"] },
+    { "id": "marvel",    "name": "Marvel",         "prefixes": ["242"],        "themes": ["marvel", "spider", "avengers", "super heroes", "superheroes"] },
+    { "id": "harrypotter", "name": "Harry Potter", "prefixes": [],             "themes": ["harry potter", "wizarding"] },
+    { "id": "jurassic",  "name": "Jurassic World", "prefixes": ["122"],        "themes": ["jurassic"] },
+    { "id": "minecraft", "name": "Minecraft",      "prefixes": ["662"],        "themes": ["minecraft"] },
+    { "id": "city",      "name": "City",           "prefixes": ["952"],        "themes": ["city"] },
+    { "id": "friends",   "name": "Friends",        "prefixes": ["562"],        "themes": ["friends"] }
+  ]
+}

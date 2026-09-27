@@ -1,0 +1,21 @@
+{
+ "source": "seed",
+ "generated": "2026-09-27",
+ "series": [
+  {"id": "ninjago", "name": "Ninjago", "items": [
+   {"code": "891725", "name": "", "year": null, "img": ""},
+   {"code": "891731", "name": "", "year": null, "img": ""},
+   {"code": "892070", "name": "", "year": null, "img": ""}
+  ]},
+  {"id": "starwars", "name": "Star Wars", "items": [
+   {"code": "911832", "name": "", "year": null, "img": ""},
+   {"code": "911839", "name": "", "year": null, "img": ""},
+   {"code": "911952", "name": "", "year": null, "img": ""}
+  ]},
+  {"id": "dc", "name": "DC", "items": [
+   {"code": "211223", "name": "", "year": null, "img": ""},
+   {"code": "211804", "name": "", "year": null, "img": ""},
+   {"code": "211902", "name": "", "year": null, "img": ""}
+  ]}
+ ]
+}

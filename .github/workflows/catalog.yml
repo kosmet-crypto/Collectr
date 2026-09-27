@@ -1,0 +1,48 @@
+name: Catalog
+
+# Rebuilds catalog/lego-foil.json (LEGO foil packs by series) from Rebrickable's public
+# data files. The app downloads the catalog from main, so new packs appear without an app update.
+
+on:
+  schedule:
+    - cron: '17 4 * * 1'   # every Monday
+  push:
+    branches: [main]
+    paths: ['catalog/series.json', 'scripts/build_catalog.py', '.github/workflows/catalog.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Rebrickable data
+        run: |
+          mkdir -p /tmp/rb
+          for f in sets themes; do
+            curl -fsSL --retry 3 -A "Mozilla/5.0 (Collectr catalog)" \
+              "https://cdn.rebrickable.com/media/downloads/$f.csv.gz" -o "/tmp/rb/$f.csv.gz"
+          done
+          ls -la /tmp/rb
+
+      - name: Build catalog
+        run: python3 scripts/build_catalog.py /tmp/rb catalog/series.json catalog/lego-foil.json
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- catalog/lego-foil.json; then
+            echo "Catalog unchanged"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog/lego-foil.json
+          git commit -m "Update foil pack catalog from Rebrickable"
+          git push
