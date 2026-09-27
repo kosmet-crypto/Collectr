@@ -506,7 +506,7 @@ function freshState() {
     // Rename them, add more or delete the second one in Settings.
     locations: [{id: 'l1', key: 'loc1', name: '', sell: true}, {id: 'l2', key: 'loc2', name: '', sell: false}],
     collections: [], active: null, series: [], items: {}, hidden: {}, sales: [], moves: [],
-    meta: {created: today(), lastBackup: null, langChosen: false},
+    meta: {created: today(), lastBackup: null, langChosen: false, locMigrated: true},
   };
   return st;
 }
@@ -520,10 +520,14 @@ function load() {
   for (const k of ['items', 'hidden', 'meta']) if (!S[k] || typeof S[k] !== 'object') S[k] = f[k];
   // Early versions created Oslo and Belgrade as default locations: they become the unnamed
   // Location 1 and 2 (the ids stay, so stock is kept). Names are only ever typed by the user.
-  const oldDefaults = {osl: ['loc1', 'Осло', 'Oslo'], bgd: ['loc2', 'Београд', 'Belgrade', 'Beograd']};
-  for (const l of S.locations) {
-    const d = oldDefaults[l.id];
-    if (d && (l.key === 'oslo' || l.key === 'bgd' || d.includes(l.name))) { l.key = d[0]; l.name = ''; }
+  // Runs once: after that, a location the user names Oslo or Belgrade keeps its name.
+  if (!S.meta.locMigrated) {
+    const oldDefaults = {osl: ['loc1', 'Осло', 'Oslo'], bgd: ['loc2', 'Београд', 'Belgrade', 'Beograd']};
+    for (const l of S.locations) {
+      const d = oldDefaults[l.id];
+      if (d && (l.key === 'oslo' || l.key === 'bgd' || d.includes(l.name))) { l.key = d[0]; l.name = ''; }
+    }
+    S.meta.locMigrated = true;
   }
   // The app opens in English until a language is picked (early versions started in Serbian).
   if (!S.meta.langChosen) S.settings.lang = 'en';
