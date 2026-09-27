@@ -268,7 +268,7 @@ const FALLBACK_RATES = {NOK: 1, EUR: 0.0855, RSD: 10.02, USD: 0.094, SEK: 0.99, 
 /* ---------------- i18n ---------------- */
 const L = {
   tabHome: ['Преглед', 'Overview'], tabCount: ['Попис', 'Count'], tabSale: ['Продаја', 'Sell'], tabMove: ['Пренос', 'Move'], tabSet: ['Подешавања', 'Settings'],
-  oslo: ['Осло', 'Oslo'], bgd: ['Београд', 'Belgrade'],
+  loc1: ['Локација 1', 'Location 1'], loc2: ['Локација 2', 'Location 2'],
   mint: ['Минт', 'Mint'], opened: ['Отворена', 'Opened'], damaged: ['Оштећена кесица', 'Damaged pack'],
   mintS: ['минт', 'mint'], openedS: ['отвор.', 'opened'], damagedS: ['оштећ.', 'damaged'],
   welcomeT: ['Добродошао у Collectr', 'Welcome to Collectr'],
@@ -382,13 +382,14 @@ const L = {
   colTplFoil: ['LEGO foil packs', 'LEGO foil packs'],
   exportName: ['collectr', 'collectr'],
   photoSaved: ['Слика сачувана', 'Picture saved'],
+  needTwoLocs: ['За пренос су потребне бар две локације. Додај још једну у подешавањима.', 'Moving needs at least two locations. Add another one in Settings.'],
   general: ['Опште', 'General'], sheetInv: ['Инвентар', 'Inventory'], sheetSales: ['Продаја', 'Sales'],
   dataInfo: ['Све је сачувано само на овом телефону. Прави бекап повремено и чувај га на Drive-у или мејлу.', 'Everything is stored only on this phone. Make a backup now and then and keep it on Drive or email.'],
 };
 /* Norwegian (bokmål). Missing keys fall back to English. */
 const NB = {
   tabHome: 'Oversikt', tabCount: 'Telling', tabSale: 'Salg', tabMove: 'Flytt', tabSet: 'Innstillinger',
-  oslo: 'Oslo', bgd: 'Beograd',
+  loc1: 'Sted 1', loc2: 'Sted 2',
   mint: 'Mint', opened: 'Åpnet', damaged: 'Skadet pose', mintS: 'mint', openedS: 'åpnet', damagedS: 'skadet',
   welcomeT: 'Velkommen til Collectr', welcomeP: 'Velg hva du samler på. Du kan legge til flere samlinger senere.',
   recommended: 'Anbefalt', completion: 'Fullført', ofDistinct: '{0} av {1} forskjellige',
@@ -446,6 +447,7 @@ const NB = {
   moveHint: 'Velg hvor mange du flytter. «Overskudd» er eksemplarer som ikke beholdes i samlingen.',
   saleHint: 'Samlingen telles først fra {0}.', itemsCount: '{0} numre', photoSaved: 'Bildet er lagret',
   dataInfo: 'Alt lagres bare på denne telefonen. Ta en sikkerhetskopi av og til og legg den på Drive eller e-post.',
+  needTwoLocs: 'Flytting krever minst to steder. Legg til et nytt i innstillingene.',
   general: 'Generelt',
 };
 const TPLS = [
@@ -496,12 +498,13 @@ function bytes(n) { return n > 1048576 ? nf(n / 1048576, 1) + ' MB' : nf(n / 102
 function freshState() {
   const st = {
     v: 1,
-    settings: {lang: 'en', cur: 'NOK', keep: 2, cond: 'mint', keepFirst: 'bgd', platform: 'Finn', theme: 'auto',
+    settings: {lang: 'en', cur: 'EUR', keep: 2, cond: 'mint', keepFirst: 'l2', platform: '', theme: 'auto',
       rates: {date: null, r: Object.assign({}, FALLBACK_RATES), manual: false}},
     // Default locations have no name of their own and show in the chosen language (see lname).
-    locations: [{id: 'osl', key: 'oslo', name: '', sell: true}, {id: 'bgd', key: 'bgd', name: '', sell: false}],
+    // Rename them, add more or delete the second one in Settings.
+    locations: [{id: 'l1', key: 'loc1', name: '', sell: true}, {id: 'l2', key: 'loc2', name: '', sell: false}],
     collections: [], active: null, series: [], items: {}, hidden: {}, sales: [], moves: [],
-    meta: {created: today(), lastBackup: null},
+    meta: {created: today(), lastBackup: null, langChosen: false},
   };
   return st;
 }
@@ -513,11 +516,15 @@ function load() {
   S.settings.rates = Object.assign(f.settings.rates, S.settings.rates || {});
   for (const k of ['locations', 'collections', 'series', 'sales', 'moves']) if (!Array.isArray(S[k])) S[k] = f[k];
   for (const k of ['items', 'hidden', 'meta']) if (!S[k] || typeof S[k] !== 'object') S[k] = f[k];
-  // Early versions stored the default location names in Serbian.
+  // Early versions created Oslo and Belgrade as default locations; they become ordinary named ones.
+  const oldNames = {oslo: 'Oslo', bgd: 'Belgrade'};
   for (const l of S.locations) {
-    if (l.id === 'osl' && l.name === 'Осло') { l.key = 'oslo'; l.name = ''; }
-    if (l.id === 'bgd' && l.name === 'Београд') { l.key = 'bgd'; l.name = ''; }
+    if (l.id === 'osl' && l.name === 'Осло') l.name = oldNames.oslo;
+    if (l.id === 'bgd' && l.name === 'Београд') l.name = oldNames.bgd;
+    if (oldNames[l.key]) { if (!l.name) l.name = oldNames[l.key]; delete l.key; }
   }
+  // The app opens in English until a language is picked (early versions started in Serbian).
+  if (!S.meta.langChosen) S.settings.lang = 'en';
   try { Object.assign(ui, JSON.parse(localStorage.getItem(UIKEY) || '{}')); } catch (e) { /* ignore */ }
   ui.sheet = null;
 }
@@ -1133,6 +1140,10 @@ function soldHtml(col) {
 function renderMove() {
   const col = activeCol();
   const m = ui.move;
+  if (S.locations.length < 2) {
+    $('#tab-move').innerHTML = `<div class="empty"><div class="e">📦</div>${t('needTwoLocs')}<div style="margin-top:14px"><button class="btn" data-act="addLoc">+ ${t('addLoc')}</button></div></div>`;
+    return;
+  }
   if (!locById(m.from)) m.from = (S.locations.find(l => !l.sell) || S.locations[0]).id;
   if (!locById(m.to) || m.to === m.from) m.to = (S.locations.find(l => l.id !== m.from) || {}).id;
   const opt = sel => S.locations.map(l => `<option value="${l.id}"${l.id === sel ? ' selected' : ''}>${esc(lname(l))}</option>`).join('');
@@ -1179,7 +1190,7 @@ function renderSettings() {
     <div class="condrow"><span>${t('defKeep')}<br><small class="muted">${t('defKeepP')}</small></span>${stepper('defKeep', '', s.keep, true)}</div>
     <div class="field"><label>${t('keepFirst')}</label>${sel('keepFirst', S.locations.map(l => [l.id, lname(l)]), s.keepFirst)}<div class="muted" style="margin-top:4px">${t('keepFirstP')}</div></div>
     <div class="field"><label>${t('defCond')}</label>${sel('defCond', CONDS.map(c => [c, t(c)]), s.cond)}</div>
-    <div class="field"><label>${t('defPlatform')}</label><input data-ch="defPlatform" value="${esc(s.platform)}"></div></div>`;
+    <div class="field"><label>${t('defPlatform')}</label><input data-ch="defPlatform" value="${esc(s.platform)}" placeholder="Finn, eBay…"></div></div>`;
   const others = CURS.filter(c => c !== s.cur);
   h += `<div class="sec"><h2>${t('rates')}</h2><button class="link" data-act="ratesUpd">${t('updateNow')}</button></div><div class="card">
     <div class="field" style="margin-top:0"><label>${t('mainCur')}</label>${sel('mainCur', CURS.map(c => [c, c]), s.cur)}</div>
@@ -1431,7 +1442,7 @@ const ACT = {
       <div class="frow"><div class="field"><label>${t('soldFor')}</label><input id="sP" inputmode="decimal" placeholder="0"></div>
         <div class="field"><label>${t('currency')}</label><select id="sC">${CURS.map(c => `<option${c === S.settings.cur ? ' selected' : ''}>${c}</option>`).join('')}</select></div></div>
       ${ac != null ? `<div class="muted">${t('avgCost')}: ${money(ac)}${t('perPiece')}</div>` : ''}
-      <div class="frow"><div class="field"><label>${t('platform')}</label><input id="sW" value="${esc(S.settings.platform)}"></div>
+      <div class="frow"><div class="field"><label>${t('platform')}</label><input id="sW" value="${esc(S.settings.platform)}" placeholder="Finn, eBay…"></div>
         <div class="field"><label>${t('date')}</label><input id="sD" type="date" value="${today()}"></div></div>
       <div class="btns" style="margin-top:8px"><button class="btn" data-act="backToItem">${t('cancel')}</button><button class="btn pri" data-act="sellOk">${t('sell')}</button></div>`);
   },
@@ -1546,7 +1557,7 @@ const ACT = {
   importX() { doImport(); },
   importOk() { runImport(); },
 };
-function setLang(v) { S.settings.lang = v; if (APP && APP.setLang) APP.setLang(v); save(); render(); }
+function setLang(v) { S.settings.lang = v; S.meta.langChosen = true; if (APP && APP.setLang) APP.setLang(v); save(); render(); }
 function editLoc(id) {
   const l = id ? locById(id) : {name: '', sell: false};
   ui.sheet = {type: 'loc', id};
@@ -1744,7 +1755,7 @@ async function doImport() {
   const reEsc = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   for (const l of S.locations) {
     // Default locations match their name in any language.
-    const names = [lname(l)].concat(l.key && L[l.key] ? L[l.key].concat(NB[l.key] || [], l.key === 'bgd' ? ['Beograd'] : []) : []);
+    const names = [lname(l)].concat(l.key && L[l.key] ? L[l.key].concat(NB[l.key] || []) : []);
     guess('loc:' + l.id, new RegExp('^(' + names.filter(Boolean).map(reEsc).join('|') + ')$', 'i'));
   }
   for (const k of ['name', 'series', 'cond', 'keep', 'price', 'currency', 'note']) guess(k, GUESS[k]);
