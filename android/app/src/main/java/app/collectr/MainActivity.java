@@ -136,7 +136,7 @@ public class MainActivity extends Activity {
                     Intent pick = new Intent(Intent.ACTION_GET_CONTENT);
                     pick.addCategory(Intent.CATEGORY_OPENABLE);
                     pick.setType("image/*");
-                    i = Intent.createChooser(pick, tr("Слика", "Picture"));
+                    i = Intent.createChooser(pick, tr("Слика", "Picture", "Bilde"));
                     Intent camera = cameraIntent();
                     if (camera != null) i.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{camera});
                 } else {
@@ -224,18 +224,36 @@ public class MainActivity extends Activity {
 
     /* ---------- language for native messages ---------- */
 
-    private boolean serbian() {
-        return !"en".equals(getSharedPreferences("ui", MODE_PRIVATE).getString("lang", "sr"));
+    /** "en" (default), "sr" or "nb", as chosen in the page. */
+    private String lang() {
+        return getSharedPreferences("ui", MODE_PRIVATE).getString("lang", "en");
     }
 
     private String tr(String sr, String en) {
-        return serbian() ? sr : en;
+        return tr(sr, en, null);
     }
 
-    /** Serbian versions of the English messages ApkInstaller reports. */
+    /** Text in the chosen language; Norwegian falls back to English when not given. */
+    private String tr(String sr, String en, String nb) {
+        switch (lang()) {
+            case "sr": return sr;
+            case "nb": return nb != null ? nb : en;
+            default: return en;
+        }
+    }
+
+    /** Serbian and Norwegian versions of the English messages ApkInstaller reports. */
     private static final Map<String, String> SR = new HashMap<>();
+    private static final Map<String, String> NB = new HashMap<>();
 
     static {
+        NB.put("Could not download the update. Are you online?", "Kunne ikke laste ned oppdateringen. Er du på nett?");
+        NB.put("Could not open the installer", "Kunne ikke åpne installasjonsprogrammet");
+        NB.put("Update installed", "Oppdateringen er installert");
+        NB.put("This update cannot replace the installed app (different signature)",
+                "Denne oppdateringen kan ikke erstatte appen (annen signatur)");
+        NB.put("Opening the installer…", "Åpner installasjonsprogrammet…");
+        NB.put("Update failed. Try again later.", "Oppdateringen mislyktes. Prøv igjen senere.");
         SR.put("Could not download the update. Are you online?", "Ажурирање није преузето. Има ли интернета?");
         SR.put("Could not open the installer", "Инсталер није могао да се отвори");
         SR.put("Update installed", "Ажурирање је инсталирано");
@@ -262,7 +280,7 @@ public class MainActivity extends Activity {
         long now = System.currentTimeMillis();
         final boolean checkApk = manual || now - prefs.getLong("lastCheck", 0) >= UPDATE_CHECK_INTERVAL;
         if (checkApk) prefs.edit().putLong("lastCheck", now).apply();
-        if (manual) toast(tr("Проверавам ажурирања…", "Checking for updates…"));
+        if (manual) toast(tr("Проверавам ажурирања…", "Checking for updates…", "Ser etter oppdateringer…"));
 
         new Thread(() -> {
             boolean newPage = false, pageChecked = false;
@@ -298,12 +316,12 @@ public class MainActivity extends Activity {
                 boolean sameNative = nat.find() && nat.group(1).equals(BuildConfig.NATIVE_HASH);
                 if (latest > installedVersionCode() && !sameNative) runOnUiThread(() -> showUpdateDialog(name));
                 else if (manual && pageUpdated) runOnUiThread(this::showPageUpdatedDialog);
-                else if (manual) toast(tr("Имаш најновију верзију", "You have the latest version"));
+                else if (manual) toast(tr("Имаш најновију верзију", "You have the latest version", "Du har nyeste versjon"));
             } catch (Exception e) {
                 // No network, rate limit or unexpected response: the automatic check tries again later.
                 if (manual && pageUpdated) runOnUiThread(this::showPageUpdatedDialog);
-                else if (manual && pageChecked) toast(tr("Имаш најновију верзију", "You have the latest version"));
-                else if (manual) toast(tr("Провера није успела. Има ли интернета?", "Could not check. Are you online?"));
+                else if (manual && pageChecked) toast(tr("Имаш најновију верзију", "You have the latest version", "Du har nyeste versjon"));
+                else if (manual) toast(tr("Провера није успела. Има ли интернета?", "Could not check. Are you online?", "Kunne ikke sjekke. Er du på nett?"));
             }
         }).start();
     }
@@ -311,15 +329,16 @@ public class MainActivity extends Activity {
     private void showPageUpdatedDialog() {
         if (isFinishing()) return;
         new AlertDialog.Builder(this)
-                .setTitle(tr("Ажурирање преузето", "Update downloaded"))
+                .setTitle(tr("Ажурирање преузето", "Update downloaded", "Oppdatering lastet ned"))
                 .setMessage(tr("Нова верзија Collectr-а је спремна. Поново покренути сада? Подаци остају.",
-                        "A new version of Collectr is ready. Restart now to use it? Your data stays in place."))
-                .setPositiveButton(tr("Покрени", "Restart"), (d, w) -> {
+                        "A new version of Collectr is ready. Restart now to use it? Your data stays in place.",
+                        "En ny versjon av Collectr er klar. Starte på nytt nå? Dataene dine beholdes."))
+                .setPositiveButton(tr("Покрени", "Restart", "Start på nytt"), (d, w) -> {
                     pageUpdatePending = false;
                     webView.loadUrl(START_URL);
                     watchPageStart();
                 })
-                .setNegativeButton(tr("Касније", "Later"), (d, w) -> pageUpdatePending = true)
+                .setNegativeButton(tr("Касније", "Later", "Senere"), (d, w) -> pageUpdatePending = true)
                 .show();
     }
 
@@ -327,15 +346,16 @@ public class MainActivity extends Activity {
         if (!ApkInstaller.ensureAllowed(this)) {
             installAfterPermission = true;
             Toast.makeText(this, tr("Дозволи Collectr-у да инсталира ажурирања, па се врати",
-                    "Allow Collectr to install updates, then go back"), Toast.LENGTH_LONG).show();
+                    "Allow Collectr to install updates, then go back", "Tillat Collectr å installere oppdateringer, og gå tilbake"), Toast.LENGTH_LONG).show();
             return;
         }
-        toast(tr("Преузимам ажурирање…", "Downloading update…"));
+        toast(tr("Преузимам ажурирање…", "Downloading update…", "Laster ned oppdatering…"));
         new Thread(() -> ApkInstaller.downloadAndInstall(this, this::toast)).start();
     }
 
     private void toast(final String msg) {
-        final String text = serbian() && SR.containsKey(msg) ? SR.get(msg) : msg;
+        Map<String, String> m = "sr".equals(lang()) ? SR : "nb".equals(lang()) ? NB : null;
+        final String text = m != null && m.containsKey(msg) ? m.get(msg) : msg;
         runOnUiThread(() -> Toast.makeText(this, text, Toast.LENGTH_SHORT).show());
     }
 
@@ -347,11 +367,12 @@ public class MainActivity extends Activity {
     private void showUpdateDialog(String version) {
         if (isFinishing()) return;
         new AlertDialog.Builder(this)
-                .setTitle(tr("Ажурирање доступно", "Update available"))
+                .setTitle(tr("Ажурирање доступно", "Update available", "Oppdatering tilgjengelig"))
                 .setMessage(tr("Collectr " + version + " је спреман. Инсталирати сада? Подаци остају.",
-                        "Collectr " + version + " is ready. Install it now? Your data stays in place."))
-                .setPositiveButton(tr("Ажурирај", "Update"), (d, w) -> startApkInstall())
-                .setNegativeButton(tr("Касније", "Later"), null)
+                        "Collectr " + version + " is ready. Install it now? Your data stays in place.",
+                        "Collectr " + version + " er klar. Installere nå? Dataene dine beholdes."))
+                .setPositiveButton(tr("Ажурирај", "Update", "Oppdater"), (d, w) -> startApkInstall())
+                .setNegativeButton(tr("Касније", "Later", "Senere"), null)
                 .show();
     }
 
@@ -374,7 +395,7 @@ public class MainActivity extends Activity {
             runOnUiThread(() -> MainActivity.this.checkForUpdate(true));
         }
 
-        /** "sr" or "en": language of native dialogs and messages. */
+        /** "en", "sr" or "nb": language of native dialogs and messages. */
         @JavascriptInterface
         public void setLang(String lang) {
             getSharedPreferences("ui", MODE_PRIVATE).edit().putString("lang", lang).apply();
@@ -394,7 +415,7 @@ public class MainActivity extends Activity {
                 } catch (ActivityNotFoundException e) {
                     pendingSaveBytes = null;
                     Toast.makeText(MainActivity.this, tr("Нема апликације за чување фајлова",
-                            "No app available to save files"), Toast.LENGTH_LONG).show();
+                            "No app available to save files", "Ingen app for å lagre filer"), Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -430,9 +451,9 @@ public class MainActivity extends Activity {
             if (uri == null || bytes == null) return;
             try (OutputStream out = getContentResolver().openOutputStream(uri)) {
                 out.write(bytes);
-                Toast.makeText(this, tr("Сачувано", "Saved"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, tr("Сачувано", "Saved", "Lagret"), Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                Toast.makeText(this, tr("Чување није успело", "Could not save"), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, tr("Чување није успело", "Could not save", "Kunne ikke lagre"), Toast.LENGTH_LONG).show();
             }
         }
     }

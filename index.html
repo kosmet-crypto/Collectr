@@ -382,22 +382,86 @@ const L = {
   colTplFoil: ['LEGO foil packs', 'LEGO foil packs'],
   exportName: ['collectr', 'collectr'],
   photoSaved: ['Слика сачувана', 'Picture saved'],
+  general: ['Опште', 'General'], sheetInv: ['Инвентар', 'Inventory'], sheetSales: ['Продаја', 'Sales'],
   dataInfo: ['Све је сачувано само на овом телефону. Прави бекап повремено и чувај га на Drive-у или мејлу.', 'Everything is stored only on this phone. Make a backup now and then and keep it on Drive or email.'],
+};
+/* Norwegian (bokmål). Missing keys fall back to English. */
+const NB = {
+  tabHome: 'Oversikt', tabCount: 'Telling', tabSale: 'Salg', tabMove: 'Flytt', tabSet: 'Innstillinger',
+  oslo: 'Oslo', bgd: 'Beograd',
+  mint: 'Mint', opened: 'Åpnet', damaged: 'Skadet pose', mintS: 'mint', openedS: 'åpnet', damagedS: 'skadet',
+  welcomeT: 'Velkommen til Collectr', welcomeP: 'Velg hva du samler på. Du kan legge til flere samlinger senere.',
+  recommended: 'Anbefalt', completion: 'Fullført', ofDistinct: '{0} av {1} forskjellige',
+  pieces: 'Totalt antall', forCollection: 'Til samlingen', sellNow: 'Selg nå', waiting: 'Venter på flytting',
+  missingForCol: 'Mangler til samlingen', spent: 'Innkjøpsverdi',
+  locations: 'Steder', series: 'Serier', seriesOne: 'Serie', sellLoc: 'salg', storeLoc: 'lager',
+  colSale: 'samling {0} · til salgs {1}', addSeries: 'Ny serie', addItem: 'Legg til nummer',
+  all: 'Alle', have: 'Har', missing: 'Mangler', surplus: 'Overskudd', back: 'Tilbake',
+  hiddenCodes: 'Fjernede numre ({0})', dlImages: 'Last ned bilder', rename: 'Gi nytt navn',
+  deleteSeries: 'Slett serie', hideSeries: 'Skjul serie', noItems: 'Ingen elementer',
+  kShort: 'saml.', sShort: 'salg', total: 'Totalt', collection: 'Samling', forSale: 'Til salgs',
+  keepTarget: 'Mål for samlingen', keepDefault: 'standard ({0})', keepWhere: 'Samlingseksemplarene ligger i', auto: 'Automatisk',
+  purchases: 'Innkjøp', addPurchase: 'Legg til innkjøp', avgCost: 'Snittpris innkjøp', sell: 'Selg', sold: 'Solgt',
+  photo: 'Bilde', takePhoto: 'Ta / velg bilde', removePhoto: 'Fjern mitt bilde', imgUrl: 'Bildeadresse (URL, valgfritt)',
+  note: 'Notat', name: 'Navn', code: 'Nummer', deleteItem: 'Fjern nummeret fra samlingen',
+  deleteItemQ: 'Fjerne {0}? Det kommer ikke tilbake ved katalogoppdateringer (gjenopprett under «Fjernede numre»).',
+  deleteItemStockQ: '{0} har {1} stk. på lager. Fjerne likevel?', restore: 'Gjenopprett',
+  qty: 'Antall', location: 'Sted', condition: 'Tilstand', pricePer: 'Pris per stk.', currency: 'Valuta', date: 'Dato',
+  save: 'Lagre', cancel: 'Avbryt', ok: 'OK', del: 'Slett', close: 'Lukk', platform: 'Hvor',
+  soldFor: 'Salgspris per stk.', profit: 'Fortjeneste', revenue: 'Inntekt',
+  nothingToSell: 'Ingenting å selge', nothingToSellP: 'Når du har flere enn målet for samlingen, vises overskuddet her.',
+  toSell: 'Til salgs', soldList: 'Solgt', onlyNow: 'Nå', onlyWaiting: 'Venter',
+  copyList: 'Kopier liste til annonse', copied: 'Kopiert', undo: 'Angre', saved: 'Lagret',
+  from: 'Fra', to: 'Til', moveN: 'Flytt ({0})', pickSurplus: 'Velg alt overskudd', pickAll: 'Velg alle', clearSel: 'Nullstill',
+  moved: 'Flyttet {0} stk.', history: 'Historikk', nothingHere: 'Ingenting her', sameLoc: 'Velg to forskjellige steder',
+  counting: 'Teller i', countCond: '+ legger til som', countedHere: '{0} stk. her', allSeries: 'Alle serier', searchPh: 'Nummer eller navn…',
+  language: 'Språk', mainCur: 'Hovedvaluta', defKeep: 'Standard antall til samlingen', defKeepP: 'Per figur: har du færre, beholdes alle',
+  defCond: 'Standard tilstand', keepFirst: 'Tell samlingen først fra',
+  keepFirstP: 'Derfra selges ingenting, så overskuddet på salgsstedet kan selges med en gang',
+  defPlatform: 'Standard salgssted', rates: 'Valutakurser', ratesAuto: 'Automatisk fra internett (daglig)',
+  ratesUpd: 'Oppdatert {0}', ratesOffline: 'Omtrentlige kurser (ikke oppdatert ennå)', updateNow: 'Oppdater nå',
+  catalog: 'Foil pack-katalog', catSeries: 'Serier fra katalogen', catInfo: '{0} poser i {1} serier · {2}',
+  catSeed: 'Startkatalog (hele katalogen kommer med første oppdatering)', catUpdated: 'Katalogen er oppdatert',
+  catSame: 'Katalogen er oppdatert fra før', catFail: 'Kunne ikke oppdatere katalogen. Er du på nett?',
+  pictures: 'Bilder', picsInfo: 'Bildene lagres på telefonen etter at de vises første gang', picsSize: 'Brukt: {0}',
+  clearPics: 'Slett lagrede bilder', dlProgress: 'Laster ned bilder {0}/{1}', dlDone: 'Bildene er lastet ned',
+  data: 'Data', exportXlsx: 'Eksporter til Excel', importXlsx: 'Importer fra Excel / CSV', backup: 'Sikkerhetskopi',
+  restoreBk: 'Gjenopprett kopi', lastBackup: 'Siste sikkerhetskopi: {0}', never: 'aldri',
+  restoreQ: 'Gjenopprette kopien fra {0}? Nåværende data blir erstattet.', restored: 'Sikkerhetskopien er gjenopprettet',
+  badFile: 'Filen ble ikke gjenkjent', app: 'App', checkUpd: 'Se etter oppdateringer', version: 'Versjon',
+  theme: 'Tema', themeAuto: 'System', themeDark: 'Mørkt', themeLight: 'Lyst',
+  addLoc: 'Legg til sted', locName: 'Navn på sted', canSell: 'Selger herfra', locDelQ: 'Slette stedet {0}?',
+  locNotEmpty: 'Stedet er ikke tomt. Flytt bitene først.', collections: 'Samlinger', newCol: 'Ny samling',
+  colName: 'Navn på samlingen', delCol: 'Slett samling', delColQ: 'Slette «{0}» med alt innhold? Dette kan ikke angres.',
+  pickSeries: 'Hvilke serier samler du på?', pickSeriesP: 'Du kan endre dette senere i innstillingene.', create: 'Opprett',
+  seriesName: 'Navn på serien', newItemIn: 'Nytt nummer i {0}', exists: 'Nummer {0} finnes allerede i samlingen',
+  needCode: 'Skriv inn et nummer', importTitle: 'Import', importP: 'Koble kolonnene i filen til feltene ({0} rader).',
+  none: '— ingen —', importMode: 'Antall', modeSet: 'Erstatt', modeAdd: 'Legg til',
+  importDone: 'Importert: {0} nye, {1} oppdatert', importInto: 'Importerer til «{0}»', qtyIn: 'Antall — {0}', imported: 'Importert',
+  undoSale: 'Angre salget og legge {0} stk. tilbake på lager?', delPurchaseQ: 'Slette dette innkjøpet? (Lageret endres ikke.)',
+  notEnough: 'Ikke så mange på lager', perPiece: '/stk.', pcs: 'stk.', addedToStock: 'Lagt til på lager',
+  noCost: 'ingen innkjøpspris', seriesOff: 'skjult', showSeries: 'Vis', manualRate: 'Manuelt', searchAll: 'Søk',
+  noResults: 'Ingen treff', setDefault: 'tilbakestill',
+  catalogHint: 'Numre fra katalogen. Fjern numre som ikke hører til samlingen din i detaljene for posen.',
+  moveHint: 'Velg hvor mange du flytter. «Overskudd» er eksemplarer som ikke beholdes i samlingen.',
+  saleHint: 'Samlingen telles først fra {0}.', itemsCount: '{0} numre', photoSaved: 'Bildet er lagret',
+  dataInfo: 'Alt lagres bare på denne telefonen. Ta en sikkerhetskopi av og til og legg den på Drive eller e-post.',
+  general: 'Generelt',
 };
 const TPLS = [
   {id: 'lego-foil', icon: '🧱', rec: true, img: 'set', cat: true,
     name: ['LEGO foil packs', 'LEGO foil packs'],
-    desc: ['Limited edition кесице (Ninjago, Star Wars, DC…) са готовим каталогом и сликама', 'Limited edition foil packs (Ninjago, Star Wars, DC…) with a ready catalog and pictures']},
+    desc: ['Limited edition кесице (Ninjago, Star Wars, DC…) са готовим каталогом и сликама', 'Limited edition foil packs (Ninjago, Star Wars, DC…) with a ready catalog and pictures', 'Limited edition foil packs (Ninjago, Star Wars, DC…) med ferdig katalog og bilder']},
   {id: 'lego-fig', icon: '🧑‍🚀', img: 'fig',
-    name: ['LEGO минифигуре', 'LEGO minifigures'],
-    desc: ['Унос по BrickLink шифри (нпр. sw0001), слика стиже сама', 'Add by BrickLink number (e.g. sw0001); the picture loads itself']},
+    name: ['LEGO минифигуре', 'LEGO minifigures', 'LEGO-minifigurer'],
+    desc: ['Унос по BrickLink шифри (нпр. sw0001), слика стиже сама', 'Add by BrickLink number (e.g. sw0001); the picture loads itself', 'Legg til med BrickLink-nummer (f.eks. sw0001); bildet hentes selv']},
   {id: 'lego-set', icon: '📦', img: 'set',
-    name: ['LEGO сетови', 'LEGO sets'],
-    desc: ['Унос по броју сета, слика стиже сама', 'Add by set number; the picture loads itself']},
-  {id: 'funko', icon: '🎁', name: ['Funko Pop', 'Funko Pop'], desc: ['Своји бројеви и фотографије', 'Your own numbers and photos']},
-  {id: 'cards', icon: '🃏', name: ['Картице', 'Trading cards'], desc: ['Покемон, спортске и друге картице', 'Pokémon, sports and other cards']},
-  {id: 'perfume', icon: '🧴', name: ['Парфеми', 'Perfumes'], desc: ['Бочице, узорци и декантови', 'Bottles, samples and decants']},
-  {id: 'custom', icon: '✨', name: ['Празна колекција', 'Empty collection'], desc: ['За било шта друго', 'For anything else']},
+    name: ['LEGO сетови', 'LEGO sets', 'LEGO-sett'],
+    desc: ['Унос по броју сета, слика стиже сама', 'Add by set number; the picture loads itself', 'Legg til med settnummer; bildet hentes selv']},
+  {id: 'funko', icon: '🎁', name: ['Funko Pop', 'Funko Pop'], desc: ['Своји бројеви и фотографије', 'Your own numbers and photos', 'Egne numre og bilder']},
+  {id: 'cards', icon: '🃏', name: ['Картице', 'Trading cards', 'Samlekort'], desc: ['Покемон, спортске и друге картице', 'Pokémon, sports and other cards', 'Pokémon-, sports- og andre kort']},
+  {id: 'perfume', icon: '🧴', name: ['Парфеми', 'Perfumes', 'Parfymer'], desc: ['Бочице, узорци и декантови', 'Bottles, samples and decants', 'Flasker, prøver og dekanter']},
+  {id: 'custom', icon: '✨', name: ['Празна колекција', 'Empty collection', 'Tom samling'], desc: ['За било шта друго', 'For anything else', 'For alt annet']},
 ];
 const TPL = Object.fromEntries(TPLS.map(t => [t.id, t]));
 const DEFAULT_CAT_SERIES = ['ninjago', 'starwars', 'dc'];
@@ -408,19 +472,21 @@ let photos = {};     // item id -> dataURL (own pictures)
 const ui = {tab: 'home', ser: null, filter: 'all', q: '', count: {loc: null, ser: 'all', cond: null, q: ''},
   sale: {mode: 'list', filter: 'now'}, move: {from: null, to: null, sel: {}, filter: 'surplus'}, sheet: null};
 
-function lang() { return S && S.settings.lang === 'en' ? 1 : 0; }
+const LANGS = [['en', 'English'], ['sr', 'Српски'], ['nb', 'Norsk']];
+/* Index into the [Serbian, English] pairs; Norwegian uses NB and falls back to English. */
+function lang() { const l = S ? S.settings.lang : 'en'; return l === 'sr' ? 0 : l === 'nb' ? 2 : 1; }
 function t(k, ...a) {
-  const v = L[k] ? L[k][lang()] : k;
+  const v = lang() === 2 && NB[k] ? NB[k] : L[k] ? L[k][Math.min(lang(), 1)] : k;
   return a.length ? v.replace(/\{(\d)\}/g, (_, i) => a[i]) : v;
 }
-function tn(pair) { return Array.isArray(pair) ? pair[lang()] : pair; }
+function tn(pair) { return Array.isArray(pair) ? (pair[lang()] || pair[1]) : pair; }
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 const today = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
 const $ = s => document.querySelector(s);
 function num(v) { const n = parseFloat(String(v).replace(/\s/g, '').replace(',', '.')); return isFinite(n) ? n : 0; }
 function int(v) { return Math.max(0, Math.round(num(v))); }
-function locale() { return lang() ? 'en-GB' : 'sr-Latn-RS'; }
+function locale() { return ['sr-Latn-RS', 'en-GB', 'nb-NO'][lang()]; }
 function nf(v, d) { return Number(v || 0).toLocaleString(locale(), {maximumFractionDigits: d == null ? (Math.abs(v) < 100 ? 2 : 0) : d}); }
 function money(v, cur) { return nf(v) + ' ' + (cur || S.settings.cur); }
 function fdate(iso) { if (!iso) return ''; const [y, m, d] = iso.split('-'); return `${+d}.${+m}.${y}.`; }
@@ -430,9 +496,10 @@ function bytes(n) { return n > 1048576 ? nf(n / 1048576, 1) + ' MB' : nf(n / 102
 function freshState() {
   const st = {
     v: 1,
-    settings: {lang: 'sr', cur: 'NOK', keep: 2, cond: 'mint', keepFirst: 'bgd', platform: 'Finn', theme: 'auto',
+    settings: {lang: 'en', cur: 'NOK', keep: 2, cond: 'mint', keepFirst: 'bgd', platform: 'Finn', theme: 'auto',
       rates: {date: null, r: Object.assign({}, FALLBACK_RATES), manual: false}},
-    locations: [{id: 'osl', name: 'Осло', sell: true}, {id: 'bgd', name: 'Београд', sell: false}],
+    // Default locations have no name of their own and show in the chosen language (see lname).
+    locations: [{id: 'osl', key: 'oslo', name: '', sell: true}, {id: 'bgd', key: 'bgd', name: '', sell: false}],
     collections: [], active: null, series: [], items: {}, hidden: {}, sales: [], moves: [],
     meta: {created: today(), lastBackup: null},
   };
@@ -446,6 +513,11 @@ function load() {
   S.settings.rates = Object.assign(f.settings.rates, S.settings.rates || {});
   for (const k of ['locations', 'collections', 'series', 'sales', 'moves']) if (!Array.isArray(S[k])) S[k] = f[k];
   for (const k of ['items', 'hidden', 'meta']) if (!S[k] || typeof S[k] !== 'object') S[k] = f[k];
+  // Early versions stored the default location names in Serbian.
+  for (const l of S.locations) {
+    if (l.id === 'osl' && l.name === 'Осло') { l.key = 'oslo'; l.name = ''; }
+    if (l.id === 'bgd' && l.name === 'Београд') { l.key = 'bgd'; l.name = ''; }
+  }
   try { Object.assign(ui, JSON.parse(localStorage.getItem(UIKEY) || '{}')); } catch (e) { /* ignore */ }
   ui.sheet = null;
 }
@@ -512,7 +584,8 @@ const colById = id => S.collections.find(c => c.id === id);
 const activeCol = () => colById(S.active) || S.collections[0] || null;
 const serById = id => S.series.find(s => s.id === id);
 const locById = id => S.locations.find(l => l.id === id);
-const locName = id => { const l = locById(id); return l ? l.name : id; };
+const lname = l => l.name || (l.key ? t(l.key) : '');
+const locName = id => { const l = locById(id); return l ? lname(l) : id; };
 function colItems(colId, opts) {
   const out = [];
   for (const id in S.items) {
@@ -527,7 +600,6 @@ function colSeries(colId, all) { return S.series.filter(s => s.col === colId && 
 function serItems(serId) { return Object.values(S.items).filter(i => i.ser === serId).sort(byCode); }
 function byCode(a, b) { return String(a.code).localeCompare(String(b.code), undefined, {numeric: true}); }
 function findByCode(colId, code) { code = String(code).trim().toLowerCase(); return Object.values(S.items).find(i => i.col === colId && String(i.code).toLowerCase() === code); }
-function itemName(it) { return it.name || (lang() ? 'Pack ' : 'Кесица ') + it.code; }
 
 /* ---------------- stock math ---------------- */
 function qtyAt(it, loc, cond) {
@@ -843,7 +915,7 @@ function download(name, mime, data, base64) {
 function applyTheme() {
   const th = S.settings.theme;
   if (th === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', th);
-  document.documentElement.lang = lang() ? 'en' : 'sr';
+  document.documentElement.lang = S.settings.lang;
 }
 function render() {
   applyTheme();
@@ -863,7 +935,7 @@ function render() {
 }
 
 function renderWelcome() {
-  $('#tab-home').innerHTML = `<div class="welcome"><h1>${t('welcomeT')}</h1><p>${t('welcomeP')}</p>${tplList()}</div>`;
+  $('#tab-home').innerHTML = `<div class="welcome">${chips(LANGS, S.settings.lang, 'setLang')}<h1>${t('welcomeT')}</h1><p>${t('welcomeP')}</p>${tplList()}</div>`;
 }
 function tplList() {
   return TPLS.map(tp => `<button class="tpl${tp.rec ? ' rec' : ''}" data-act="newColTpl" data-tpl="${tp.id}">
@@ -888,7 +960,7 @@ function renderHome() {
   if (st.spent) h += `<div class="row" style="margin-top:10px"><div class="m"><b>${t('spent')}</b></div><div class="r"><b class="money">${money(st.spent)}</b></div></div>`;
   h += `<div class="sec"><h2>${t('locations')}</h2></div><div class="list">` + S.locations.map(l => {
     const s = st.loc[l.id];
-    return `<div class="card loccard"><div class="ic">${l.sell ? '🏷️' : '📦'}</div><div class="m"><b>${esc(l.name)} <span class="pill ${l.sell ? 'sell' : 'store'}">${l.sell ? t('sellLoc') : t('storeLoc')}</span></b>
+    return `<div class="card loccard"><div class="ic">${l.sell ? '🏷️' : '📦'}</div><div class="m"><b>${esc(lname(l))} <span class="pill ${l.sell ? 'sell' : 'store'}">${l.sell ? t('sellLoc') : t('storeLoc')}</span></b>
       <span>${t('colSale', s.keep, s.sale)}</span></div><div class="q">${s.q}</div></div>`;
   }).join('') + '</div>';
   const sers = colSeries(col.id);
@@ -948,14 +1020,14 @@ function openItem(id) {
       <div class="stat acc"><b>${r.sale}</b><span>${t('forSale')}</span></div>
     </div>`;
   for (const l of S.locations) {
-    h += `<div class="locblk"><div class="h"><b>${esc(l.name)} <span class="pill ${l.sell ? 'sell' : 'store'}">${l.sell ? t('sellLoc') : t('storeLoc')}</span></b>
+    h += `<div class="locblk"><div class="h"><b>${esc(lname(l))} <span class="pill ${l.sell ? 'sell' : 'store'}">${l.sell ? t('sellLoc') : t('storeLoc')}</span></b>
       <span class="muted">${t('colSale', r.keepAt[l.id] || 0, r.saleAt[l.id])}</span></div>` +
       CONDS.map(c => `<div class="condrow"><span>${t(c)}</span>${stepper('iq', `data-id="${it.id}" data-loc="${l.id}" data-cond="${c}"`, qtyAt(it, l.id, c), true)}</div>`).join('') + '</div>';
   }
   h += `<div class="locblk"><div class="condrow"><span>${t('keepTarget')}</span>${stepper('keep', `data-id="${it.id}"`, r.target, true)}</div>
     ${it.keep != null ? `<div class="muted" style="text-align:right"><button class="link" data-act="keepReset" data-id="${it.id}">${t('setDefault')} → ${t('keepDefault', S.settings.keep)}</button></div>` : `<div class="muted" style="text-align:right">${t('keepDefault', S.settings.keep)}</div>`}
     <div class="field"><label>${t('keepWhere')}</label><select data-ch="keepLoc" data-id="${it.id}"><option value="">${t('auto')}</option>
-      ${S.locations.map(l => `<option value="${l.id}"${it.keepLoc === l.id ? ' selected' : ''}>${esc(l.name)}</option>`).join('')}</select></div></div>`;
+      ${S.locations.map(l => `<option value="${l.id}"${it.keepLoc === l.id ? ' selected' : ''}>${esc(lname(l))}</option>`).join('')}</select></div></div>`;
   h += `<div class="btns" style="margin:12px 0"><button class="btn" data-act="buyForm" data-id="${it.id}">+ ${t('addPurchase')}</button>
     <button class="btn pri" data-act="sellForm" data-id="${it.id}" ${r.sellNow ? '' : 'disabled'}>${t('sell')}</button></div>`;
   h += `<div class="sec"><h2>${t('purchases')}</h2>${ac != null ? `<span class="muted">${t('avgCost')}: <b class="money">${money(ac)}</b></span>` : ''}</div>`;
@@ -985,7 +1057,7 @@ function renderCount() {
     .sort((a, b) => (serOrder.get(a.ser) || 0) - (serOrder.get(b.ser) || 0) || byCode(a, b));
   const here = items.reduce((a, i) => a + qtyAt(i, c.loc), 0);
   let h = `<div class="muted" style="margin:2px 0 6px">${t('counting')}</div>
-    <div class="seg acc">${S.locations.map(l => `<button class="${l.id === c.loc ? 'on' : ''}" data-act="cLoc" data-v="${l.id}">${esc(l.name)}</button>`).join('')}</div>
+    <div class="seg acc">${S.locations.map(l => `<button class="${l.id === c.loc ? 'on' : ''}" data-act="cLoc" data-v="${l.id}">${esc(lname(l))}</button>`).join('')}</div>
     <div style="display:flex;align-items:center;gap:8px;margin:10px 0"><span class="muted" style="flex:none">${t('countCond')}</span>
       <div class="seg" style="flex:1">${CONDS.map(k => `<button class="${k === c.cond ? 'on' : ''}" data-act="cCond" data-v="${k}" style="font-size:12px">${t(k + 'S')}</button>`).join('')}</div></div>
     ${chips([['all', t('allSeries')]].concat(sers.map(s => [s.id, s.name])), c.ser, 'cSer')}
@@ -997,7 +1069,7 @@ function renderCount() {
 }
 function countRow(it) {
   const c = ui.count, q = qtyAt(it, c.loc), r = calc(it);
-  const other = S.locations.filter(l => l.id !== c.loc && r.at[l.id]).map(l => `${l.name} ${r.at[l.id]}`).join(' · ');
+  const other = S.locations.filter(l => l.id !== c.loc && r.at[l.id]).map(l => `${lname(l)} ${r.at[l.id]}`).join(' · ');
   const bad = qtyAt(it, c.loc, 'damaged') + qtyAt(it, c.loc, 'opened');
   return `<div class="crow${q ? ' has' : ''}" data-row="${it.id}"><button class="th" data-act="item" data-id="${it.id}">${imgHtml(it)}</button>
     <div class="m"><b>${esc(it.code)}</b><span>${esc(it.name || '')}</span><small>${t('total')} ${r.total}${other ? ' · ' + esc(other) : ''}${bad ? ` · <span style="color:var(--warn)">${condText({opened: qtyAt(it, c.loc, 'opened'), damaged: qtyAt(it, c.loc, 'damaged')})}</span>` : ''}</small></div>
@@ -1028,7 +1100,7 @@ function renderSale() {
     ${chips([['now', t('onlyNow')], ['waiting', t('onlyWaiting')], ['all', t('all')]], s.filter, 'saleFilter')}`;
   if (!rows.length) h += `<div class="empty"><div class="e">🏷️</div><b>${t('nothingToSell')}</b><br>${t('nothingToSellP')}</div>`;
   h += '<div class="list">' + rows.map(({it, r}) => {
-    const where = S.locations.filter(l => r.saleAt[l.id] > 0).map(l => `${l.name} ${r.saleAt[l.id]}`).join(' · ');
+    const where = S.locations.filter(l => r.saleAt[l.id] > 0).map(l => `${lname(l)} ${r.saleAt[l.id]}`).join(' · ');
     const conds = {};
     for (const l of S.locations) { const sc = saleConds(it, l.id, r.keepAt[l.id] || 0); for (const k in sc) conds[k] = (conds[k] || 0) + sc[k]; }
     const ac = avgCost(it);
@@ -1063,7 +1135,7 @@ function renderMove() {
   const m = ui.move;
   if (!locById(m.from)) m.from = (S.locations.find(l => !l.sell) || S.locations[0]).id;
   if (!locById(m.to) || m.to === m.from) m.to = (S.locations.find(l => l.id !== m.from) || {}).id;
-  const opt = sel => S.locations.map(l => `<option value="${l.id}"${l.id === sel ? ' selected' : ''}>${esc(l.name)}</option>`).join('');
+  const opt = sel => S.locations.map(l => `<option value="${l.id}"${l.id === sel ? ' selected' : ''}>${esc(lname(l))}</option>`).join('');
   let h = `<div class="frow" style="align-items:end;margin-top:4px"><div class="field" style="margin:0"><label>${t('from')}</label><select data-ch="mFrom">${opt(m.from)}</select></div>
     <button class="iconbtn" data-act="mSwap" style="flex:none;margin-bottom:2px"><svg viewBox="0 0 24 24"><path d="M4 8h15l-4-4M20 16H5l4 4"/></svg></button>
     <div class="field" style="margin:0"><label>${t('to')}</label><select data-ch="mTo">${opt(m.to)}</select></div></div>
@@ -1101,11 +1173,11 @@ function renderSettings() {
       cats.map(cs => `<label class="check"><input type="checkbox" data-ch="catSer" data-v="${cs.id}" ${(col.catSeries || []).includes(cs.id) ? 'checked' : ''}><span style="flex:1">${esc(cs.name)}</span><span class="muted">${cs.items.length}</span></label>`).join('') + '</div>';
   }
   h += `<div class="sec"><h2>${t('locations')}</h2><button class="link" data-act="addLoc">+ ${t('addLoc')}</button></div><div class="list">` +
-    S.locations.map(l => `<div class="row"><div class="ic" style="font-size:20px">${l.sell ? '🏷️' : '📦'}</div><div class="m"><b>${esc(l.name)}</b><span>${l.sell ? t('sellLoc') : t('storeLoc')}</span></div>
+    S.locations.map(l => `<div class="row"><div class="ic" style="font-size:20px">${l.sell ? '🏷️' : '📦'}</div><div class="m"><b>${esc(lname(l))}</b><span>${l.sell ? t('sellLoc') : t('storeLoc')}</span></div>
       <button class="btn sm" data-act="editLoc" data-id="${l.id}">${t('rename')}</button></div>`).join('') + '</div>';
   h += `<div class="sec"><h2>${t('collection')}</h2></div><div class="card">
     <div class="condrow"><span>${t('defKeep')}<br><small class="muted">${t('defKeepP')}</small></span>${stepper('defKeep', '', s.keep, true)}</div>
-    <div class="field"><label>${t('keepFirst')}</label>${sel('keepFirst', S.locations.map(l => [l.id, l.name]), s.keepFirst)}<div class="muted" style="margin-top:4px">${t('keepFirstP')}</div></div>
+    <div class="field"><label>${t('keepFirst')}</label>${sel('keepFirst', S.locations.map(l => [l.id, lname(l)]), s.keepFirst)}<div class="muted" style="margin-top:4px">${t('keepFirstP')}</div></div>
     <div class="field"><label>${t('defCond')}</label>${sel('defCond', CONDS.map(c => [c, t(c)]), s.cond)}</div>
     <div class="field"><label>${t('defPlatform')}</label><input data-ch="defPlatform" value="${esc(s.platform)}"></div></div>`;
   const others = CURS.filter(c => c !== s.cur);
@@ -1122,7 +1194,7 @@ function renderSettings() {
   h += `<div class="sec"><h2>${t('pictures')}</h2></div><div class="card"><p class="muted" style="margin-top:0">${t('picsInfo')}${APP && APP.imagesSize ? ' · ' + t('picsSize', bytes(APP.imagesSize())) : ''}</p>
     <div class="btns"><button class="btn" data-act="dlAll">⬇ ${t('dlImages')}</button>${APP && APP.clearImages ? `<button class="btn" data-act="clearPics">${t('clearPics')}</button>` : ''}</div></div>`;
   h += `<div class="sec"><h2>${t('app')}</h2></div><div class="card">
-    <div class="field" style="margin-top:0"><label>${t('language')}</label>${sel('lang', [['sr', 'Српски'], ['en', 'English']], s.lang)}</div>
+    <div class="field" style="margin-top:0"><label>${t('language')}</label>${sel('lang', LANGS, s.lang)}</div>
     <div class="field"><label>${t('theme')}</label>${sel('theme', [['auto', t('themeAuto')], ['dark', t('themeDark')], ['light', t('themeLight')]], s.theme)}</div>
     ${APP ? `<button class="btn block" data-act="checkUpd">🔄 ${t('checkUpd')}</button>` : ''}
     <div class="muted" style="margin-top:10px">${t('version')}: ${esc(APP && APP.getVersion ? APP.getVersion() : 'web')}</div></div>`;
@@ -1168,7 +1240,7 @@ const ACT = {
     if (tp.cat) col.catSeries = [...document.querySelectorAll('.ncSer:checked')].map(x => x.value);
     S.collections.push(col); S.active = col.id; ui.ser = null; ui.tab = 'home';
     if (tp.cat) syncCatalog(col);
-    else { S.series.push({id: uid(), col: col.id, name: lang() ? 'General' : 'Опште', order: 0}); }
+    else { S.series.push({id: uid(), col: col.id, name: t('general'), order: 0}); }
     closeSheet(); save(); render();
   },
   renCol(b) {
@@ -1326,7 +1398,7 @@ const ACT = {
     const lastCur = localStorage.getItem('collectr.lastCur') || S.settings.cur;
     openSheet(`<h3>${t('addPurchase')}</h3><div class="sub">${esc(it.code)} ${esc(it.name || '')}</div>
       <div class="frow"><div class="field"><label>${t('qty')}</label><input id="bQ" inputmode="numeric" value="1"></div>
-        <div class="field"><label>${t('location')}</label><select id="bLoc">${S.locations.map(l => `<option value="${l.id}"${l.id === (ui.count.loc || S.locations[0].id) ? ' selected' : ''}>${esc(l.name)}</option>`).join('')}</select></div></div>
+        <div class="field"><label>${t('location')}</label><select id="bLoc">${S.locations.map(l => `<option value="${l.id}"${l.id === (ui.count.loc || S.locations[0].id) ? ' selected' : ''}>${esc(lname(l))}</option>`).join('')}</select></div></div>
       <div class="frow"><div class="field"><label>${t('pricePer')}</label><input id="bP" inputmode="decimal" placeholder="0"></div>
         <div class="field"><label>${t('currency')}</label><select id="bC">${CURS.map(c => `<option${c === lastCur ? ' selected' : ''}>${c}</option>`).join('')}</select></div></div>
       <div class="muted" id="bConv"></div>
@@ -1355,7 +1427,7 @@ const ACT = {
     const ac = avgCost(it);
     openSheet(`<h3>${t('sell')}</h3><div class="sub">${esc(it.code)} ${esc(it.name || '')} · ${t('sellNow')}: ${r.sellNow}</div>
       <div class="frow"><div class="field"><label>${t('qty')}</label><input id="sQ" inputmode="numeric" value="1"></div>
-        <div class="field"><label>${t('location')}</label><select id="sLoc">${locs.map(l => `<option value="${l.id}">${esc(l.name)} (${r.saleAt[l.id]})</option>`).join('')}</select></div></div>
+        <div class="field"><label>${t('location')}</label><select id="sLoc">${locs.map(l => `<option value="${l.id}">${esc(lname(l))} (${r.saleAt[l.id]})</option>`).join('')}</select></div></div>
       <div class="frow"><div class="field"><label>${t('soldFor')}</label><input id="sP" inputmode="decimal" placeholder="0"></div>
         <div class="field"><label>${t('currency')}</label><select id="sC">${CURS.map(c => `<option${c === S.settings.cur ? ' selected' : ''}>${c}</option>`).join('')}</select></div></div>
       ${ac != null ? `<div class="muted">${t('avgCost')}: ${money(ac)}${t('perPiece')}</div>` : ''}
@@ -1398,6 +1470,7 @@ const ACT = {
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
     else fallbackCopy(text, done);
   },
+  setLang(b) { setLang(b.dataset.v); },
   cLoc(b) { ui.count.loc = b.dataset.v; save(); render(); },
   cCond(b) { ui.count.cond = b.dataset.v; save(); render(); },
   cSer(b) { ui.count.ser = b.dataset.v; save(); render(); },
@@ -1459,7 +1532,7 @@ const ACT = {
     const used = Object.values(S.items).some(it => qtyAt(it, l.id) > 0);
     if (used) { toast(t('locNotEmpty')); return; }
     if (S.locations.length < 2) return;
-    confirmSheet(t('locDelQ', l.name), t('del'), () => {
+    confirmSheet(t('locDelQ', lname(l)), t('del'), () => {
       S.locations = S.locations.filter(x => x.id !== l.id);
       for (const it of Object.values(S.items)) if (it.stock) delete it.stock[l.id];
       if (S.settings.keepFirst === l.id) S.settings.keepFirst = S.locations[0].id;
@@ -1473,10 +1546,11 @@ const ACT = {
   importX() { doImport(); },
   importOk() { runImport(); },
 };
+function setLang(v) { S.settings.lang = v; if (APP && APP.setLang) APP.setLang(v); save(); render(); }
 function editLoc(id) {
   const l = id ? locById(id) : {name: '', sell: false};
   ui.sheet = {type: 'loc', id};
-  openSheet(`<h3>${id ? esc(l.name) : t('addLoc')}</h3><div class="field"><label>${t('locName')}</label><input id="lName" value="${esc(l.name)}"></div>
+  openSheet(`<h3>${id ? esc(lname(l)) : t('addLoc')}</h3><div class="field"><label>${t('locName')}</label><input id="lName" value="${esc(lname(l))}"></div>
     <label class="check"><input type="checkbox" id="lSell" ${l.sell ? 'checked' : ''}><span>${t('canSell')}</span></label>
     <div class="btns" style="margin-top:12px">${id && S.locations.length > 1 ? `<button class="btn danger" data-act="locDel">${t('del')}</button>` : ''}<button class="btn pri" data-act="locOk">${t('save')}</button></div>`);
 }
@@ -1536,7 +1610,7 @@ const CH = {
     R.r = Object.assign({}, R.r); R.r[c] = rate(S.settings.cur) / v; R.manual = true;
     save(); render();
   },
-  lang(el) { S.settings.lang = el.value; if (APP && APP.setLang) APP.setLang(el.value); save(); render(); },
+  lang(el) { setLang(el.value); },
   theme(el) { S.settings.theme = el.value; save(); render(); },
 };
 
@@ -1599,7 +1673,7 @@ function loadXLSX() {
   });
 }
 function exportRows(col) {
-  const head = [t('code'), t('name'), t('seriesOne')].concat(S.locations.map(l => l.name), [t('total'), t('keepTarget'), t('collection'), t('forSale'), t('sellNow'), t('condition'), t('avgCost') + ' (' + S.settings.cur + ')', t('note')]);
+  const head = [t('code'), t('name'), t('seriesOne')].concat(S.locations.map(l => lname(l)), [t('total'), t('keepTarget'), t('collection'), t('forSale'), t('sellNow'), t('condition'), t('avgCost') + ' (' + S.settings.cur + ')', t('note')]);
   const rows = [head];
   const sers = colSeries(col.id, true);
   const order = new Map(sers.map((s, i) => [s.id, i]));
@@ -1620,12 +1694,12 @@ async function doExport() {
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.aoa_to_sheet(exportRows(col));
   ws['!cols'] = [{wch: 10}, {wch: 34}, {wch: 14}];
-  XLSX.utils.book_append_sheet(wb, ws, lang() ? 'Inventory' : 'Инвентар');
+  XLSX.utils.book_append_sheet(wb, ws, t('sheetInv'));
   const sales = S.sales.filter(x => x.col === col.id);
   if (sales.length) {
     const sr = [[t('date'), t('code'), t('name'), t('qty'), t('soldFor'), t('currency'), t('total') + ' (' + S.settings.cur + ')', t('profit'), t('platform'), t('location')]];
     for (const x of sales) sr.push([x.date, x.code, x.name || '', x.q, x.price, x.cur, Math.round(toBase(x.total, x.base) * 100) / 100, x.cost != null ? Math.round(toBase(x.total - x.cost, x.base) * 100) / 100 : '', x.platform || '', locName(x.loc)]);
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(sr), lang() ? 'Sales' : 'Продаја');
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(sr), t('sheetSales'));
   }
   const b64 = XLSX.write(wb, {type: 'base64', bookType: 'xlsx'});
   const safe = col.name.replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '') || 'collectr';
@@ -1667,11 +1741,16 @@ async function doImport() {
   const guess = (field, re) => { const i = head.findIndex((h, k) => !used.has(k) && re.test(h)); if (i >= 0) { map[field] = i; used.add(i); } };
   guess('code', GUESS.code);
   if (map.code == null) { map.code = 0; used.add(0); }
-  for (const l of S.locations) guess('loc:' + l.id, new RegExp('^' + l.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$', 'i'));
+  const reEsc = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  for (const l of S.locations) {
+    // Default locations match their name in any language.
+    const names = [lname(l)].concat(l.key && L[l.key] ? L[l.key].concat(NB[l.key] || [], l.key === 'bgd' ? ['Beograd'] : []) : []);
+    guess('loc:' + l.id, new RegExp('^(' + names.filter(Boolean).map(reEsc).join('|') + ')$', 'i'));
+  }
   for (const k of ['name', 'series', 'cond', 'keep', 'price', 'currency', 'note']) guess(k, GUESS[k]);
   ui.sheet = {type: 'import', rows, head, map, mode: 'set'};
   const col = activeCol();
-  const fields = [['code', t('code')], ['name', t('name')], ['series', t('seriesOne')]].concat(S.locations.map(l => ['loc:' + l.id, t('qtyIn', l.name)]),
+  const fields = [['code', t('code')], ['name', t('name')], ['series', t('seriesOne')]].concat(S.locations.map(l => ['loc:' + l.id, t('qtyIn', lname(l))]),
     [['cond', t('condition')], ['keep', t('keepTarget')], ['price', t('pricePer')], ['currency', t('currency')], ['note', t('note')]]);
   const opts = v => `<option value="">${t('none')}</option>` + head.map((h, i) => `<option value="${i}"${v === i ? ' selected' : ''}>${esc(h || '#' + (i + 1))}</option>`).join('');
   openSheet(`<h3>${t('importTitle')}</h3><div class="sub">${t('importInto', esc(col.name))}. ${t('importP', rows.length - 1)}</div>
