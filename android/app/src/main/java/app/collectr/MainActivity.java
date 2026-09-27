@@ -66,6 +66,9 @@ public class MainActivity extends Activity {
     private byte[] pendingSaveBytes;
     private boolean pageReady;
     private boolean pageUpdatePending;
+    /** Id of the page the WebView is running ("" = bundled); differs from web.activeId() while an update waits. */
+    private String runningPage = "";
+    private long startedAt;
     private boolean installAfterPermission;
     private long pausedAt;
 
@@ -156,6 +159,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        startedAt = System.currentTimeMillis();
         if (savedInstanceState != null) webView.restoreState(savedInstanceState);
         else webView.loadUrl(START_URL);
         watchPageStart();
@@ -185,6 +189,7 @@ public class MainActivity extends Activity {
     /** If a downloaded page never reports that it started, fall back to the bundled page. */
     private void watchPageStart() {
         pageReady = false;
+        runningPage = web.activeId();
         handler.removeCallbacks(pageStartCheck);
         if (web.isActive()) handler.postDelayed(pageStartCheck, PAGE_START_TIMEOUT);
     }
@@ -194,7 +199,15 @@ public class MainActivity extends Activity {
         web.rollBack();
         webView.loadUrl(START_URL);
         pageReady = false;
+        runningPage = "";
     };
+
+    /** Loads the newest stored page (after a download) and watches that it starts. */
+    private void reloadPage() {
+        pageUpdatePending = false;
+        webView.loadUrl(START_URL);
+        watchPageStart();
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -216,9 +229,7 @@ public class MainActivity extends Activity {
             startApkInstall();
         } else if (pageUpdatePending && pausedAt > 0
                 && System.currentTimeMillis() - pausedAt > RELOAD_AFTER_AWAY) {
-            pageUpdatePending = false;
-            webView.loadUrl(START_URL);
-            watchPageStart();
+            reloadPage();
         }
     }
 
@@ -266,10 +277,13 @@ public class MainActivity extends Activity {
     /* ---------- update check ---------- */
 
     private static final long UPDATE_CHECK_INTERVAL = 12 * 60 * 60 * 1000L;
+    /** A page downloaded within this time after launch is applied right away. */
+    private static final long APPLY_SOON_AFTER_START = 20000;
 
     /**
      * Two kinds of updates:
-     * 1. The web page (WebUpdater): downloaded silently and used from the next start.
+     * 1. The web page (WebUpdater): downloaded silently; applied right away when that happens just
+     *    after launch, otherwise on the next start (or after the app was away for a while).
      * 2. The APK: the latest GitHub Release (tagged v1.0.<versionCode>); offered in a dialog
      *    and installed from inside the app (ApkInstaller).
      * On launch the page is checked every time and the APK at most every 12 hours, silently;
@@ -290,8 +304,13 @@ public class MainActivity extends Activity {
             } catch (Exception ignored) {
                 // Offline or GitHub unreachable: keep the current page.
             }
-            final boolean pageUpdated = newPage;
-            if (pageUpdated && !manual) runOnUiThread(() -> pageUpdatePending = true);
+            // A page downloaded earlier that is not running yet counts as an update too.
+            final boolean pageUpdated = newPage || !web.activeId().equals(runningPage);
+            if (pageUpdated && !manual) runOnUiThread(() -> {
+                // Right after launch nobody is using the app yet: switch to the new page silently.
+                if (System.currentTimeMillis() - startedAt < APPLY_SOON_AFTER_START) reloadPage();
+                else pageUpdatePending = true;
+            });
             if (!checkApk) return;
             try {
                 URL api = new URL("https://api.github.com/repos/" + BuildConfig.UPDATE_REPO + "/releases/latest");
@@ -333,11 +352,7 @@ public class MainActivity extends Activity {
                 .setMessage(tr("Нова верзија Collectr-а је спремна. Поново покренути сада? Подаци остају.",
                         "A new version of Collectr is ready. Restart now to use it? Your data stays in place.",
                         "En ny versjon av Collectr er klar. Starte på nytt nå? Dataene dine beholdes."))
-                .setPositiveButton(tr("Покрени", "Restart", "Start på nytt"), (d, w) -> {
-                    pageUpdatePending = false;
-                    webView.loadUrl(START_URL);
-                    watchPageStart();
-                })
+                .setPositiveButton(tr("Покрени", "Restart", "Start på nytt"), (d, w) -> reloadPage())
                 .setNegativeButton(tr("Касније", "Later", "Senere"), (d, w) -> pageUpdatePending = true)
                 .show();
     }
@@ -380,8 +395,13 @@ public class MainActivity extends Activity {
     private class Bridge {
         @JavascriptInterface
         public String getVersion() {
-            String page = web.activeId();
-            return page.isEmpty() ? BuildConfig.VERSION_NAME : BuildConfig.VERSION_NAME + " · page " + page;
+            return runningPage.isEmpty() ? BuildConfig.VERSION_NAME : BuildConfig.VERSION_NAME + " · page " + runningPage;
+        }
+
+        /** Last page update check, for the settings screen. */
+        @JavascriptInterface
+        public String updateStatus() {
+            return web.status();
         }
 
         /** Called by index.html once it has rendered; proves a downloaded page works. */

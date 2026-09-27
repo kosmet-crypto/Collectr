@@ -383,6 +383,7 @@ const L = {
   exportName: ['collectr', 'collectr'],
   photoSaved: ['Слика сачувана', 'Picture saved'],
   needTwoLocs: ['За пренос су потребне бар две локације. Додај још једну у подешавањима.', 'Moving needs at least two locations. Add another one in Settings.'],
+  lastUpdCheck: ['Последња провера', 'Last check'],
   general: ['Опште', 'General'], sheetInv: ['Инвентар', 'Inventory'], sheetSales: ['Продаја', 'Sales'],
   dataInfo: ['Све је сачувано само на овом телефону. Прави бекап повремено и чувај га на Drive-у или мејлу.', 'Everything is stored only on this phone. Make a backup now and then and keep it on Drive or email.'],
 };
@@ -448,6 +449,7 @@ const NB = {
   saleHint: 'Samlingen telles først fra {0}.', itemsCount: '{0} numre', photoSaved: 'Bildet er lagret',
   dataInfo: 'Alt lagres bare på denne telefonen. Ta en sikkerhetskopi av og til og legg den på Drive eller e-post.',
   needTwoLocs: 'Flytting krever minst to steder. Legg til et nytt i innstillingene.',
+  lastUpdCheck: 'Siste sjekk',
   general: 'Generelt',
 };
 const TPLS = [
@@ -1208,7 +1210,8 @@ function renderSettings() {
     <div class="field" style="margin-top:0"><label>${t('language')}</label>${sel('lang', LANGS, s.lang)}</div>
     <div class="field"><label>${t('theme')}</label>${sel('theme', [['auto', t('themeAuto')], ['dark', t('themeDark')], ['light', t('themeLight')]], s.theme)}</div>
     ${APP ? `<button class="btn block" data-act="checkUpd">🔄 ${t('checkUpd')}</button>` : ''}
-    <div class="muted" style="margin-top:10px">${t('version')}: ${esc(APP && APP.getVersion ? APP.getVersion() : 'web')}</div></div>`;
+    <div class="muted" style="margin-top:10px">${t('version')}: ${esc(APP && APP.getVersion ? APP.getVersion() : 'web')}</div>
+    ${APP && APP.updateStatus ? `<div class="muted" style="font-size:12px">${t('lastUpdCheck')}: ${esc(APP.updateStatus())}</div>` : ''}</div>`;
   if (col) h += `<div style="margin-top:18px"><button class="btn danger block" data-act="delCol" data-id="${col.id}">${t('delCol')}: ${esc(col.name)}</button></div>`;
   $('#tab-set').innerHTML = h;
 }
@@ -1830,10 +1833,12 @@ function runImport() {
 async function start() {
   load();
   if (APP && APP.setLang) APP.setLang(S.settings.lang);
+  render();
+  // Tell the app right away that this page works (a downloaded page that stays silent is rolled back).
+  if (APP && APP.ready) APP.ready();
   await Promise.all([DB.open().then(async () => { photos = await DB.all(); }), loadCatalog()]);
   S.collections.filter(c => TPL[c.tpl] && TPL[c.tpl].cat).forEach(syncCatalog);
   render();
-  if (APP && APP.ready) APP.ready();
   setTimeout(() => { updateCatalog(false); updateRates(false); }, 1500);
 }
 start();

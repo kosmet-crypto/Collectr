@@ -55,7 +55,7 @@ final class WebUpdater {
         return page.isFile();
     }
 
-    /** Short id of the running page, shown next to the app version. */
+    /** Short id of the stored (downloaded) page, "" for the bundled one; it runs from the next page load. */
     String activeId() {
         String hash = isActive() ? prefs.getString("hash", "") : "";
         return hash.length() >= 7 ? hash.substring(0, 7) : "";
@@ -76,6 +76,31 @@ final class WebUpdater {
      * Runs on a background thread. Returns true when a new page was stored.
      */
     boolean check() throws Exception {
+        try {
+            boolean stored = download();
+            note(stored ? "downloaded" : "up to date");
+            return stored;
+        } catch (Exception e) {
+            note("error: " + e.getClass().getSimpleName() + (e.getMessage() != null ? " " + e.getMessage() : ""));
+            throw e;
+        }
+    }
+
+    /** Remembers the outcome of the last check, shown in the app's settings. */
+    private void note(String result) {
+        prefs.edit().putString("lastResult", result).putLong("lastCheck", System.currentTimeMillis()).apply();
+    }
+
+    /** Short status for the settings screen: last check, its result and whether a page was rolled back. */
+    String status() {
+        long at = prefs.getLong("lastCheck", 0);
+        String when = at == 0 ? "never" : android.text.format.DateFormat.format("yyyy-MM-dd HH:mm", at).toString();
+        String bad = prefs.getString("badHash", "");
+        return when + " · " + prefs.getString("lastResult", "-")
+                + (bad.length() >= 7 ? " · rolled back " + bad.substring(0, 7) : "");
+    }
+
+    private boolean download() throws Exception {
         String url = "https://raw.githubusercontent.com/" + BuildConfig.UPDATE_REPO + "/main/index.html";
         HttpURLConnection c = (HttpURLConnection) new URL(url).openConnection();
         c.setConnectTimeout(8000);
@@ -87,8 +112,9 @@ final class WebUpdater {
             body = readAll(in, MAX_PAGE_BYTES);
         }
         String hash = sha256(body);
-        if (hash.equals(activeHash()) || hash.equals(prefs.getString("badHash", ""))) return false;
-        if (!looksValid(new String(body, StandardCharsets.UTF_8))) return false;
+        if (hash.equals(activeHash())) return false;
+        if (hash.equals(prefs.getString("badHash", ""))) { note("skipped page that failed to start"); return false; }
+        if (!looksValid(new String(body, StandardCharsets.UTF_8))) throw new IllegalStateException("page not valid");
 
         File dir = page.getParentFile();
         if (dir != null && !dir.isDirectory() && !dir.mkdirs()) return false;
