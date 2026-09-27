@@ -516,12 +516,12 @@ function load() {
   S.settings.rates = Object.assign(f.settings.rates, S.settings.rates || {});
   for (const k of ['locations', 'collections', 'series', 'sales', 'moves']) if (!Array.isArray(S[k])) S[k] = f[k];
   for (const k of ['items', 'hidden', 'meta']) if (!S[k] || typeof S[k] !== 'object') S[k] = f[k];
-  // Early versions created Oslo and Belgrade as default locations; they become ordinary named ones.
-  const oldNames = {oslo: 'Oslo', bgd: 'Belgrade'};
+  // Early versions created Oslo and Belgrade as default locations: they become the unnamed
+  // Location 1 and 2 (the ids stay, so stock is kept). Names are only ever typed by the user.
+  const oldDefaults = {osl: ['loc1', 'Осло', 'Oslo'], bgd: ['loc2', 'Београд', 'Belgrade', 'Beograd']};
   for (const l of S.locations) {
-    if (l.id === 'osl' && l.name === 'Осло') l.name = oldNames.oslo;
-    if (l.id === 'bgd' && l.name === 'Београд') l.name = oldNames.bgd;
-    if (oldNames[l.key]) { if (!l.name) l.name = oldNames[l.key]; delete l.key; }
+    const d = oldDefaults[l.id];
+    if (d && (l.key === 'oslo' || l.key === 'bgd' || d.includes(l.name))) { l.key = d[0]; l.name = ''; }
   }
   // The app opens in English until a language is picked (early versions started in Serbian).
   if (!S.meta.langChosen) S.settings.lang = 'en';
